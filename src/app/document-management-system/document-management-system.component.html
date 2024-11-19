@@ -1,0 +1,124 @@
+<style>
+    table thead tr th {
+        color: white;
+    }
+
+    table tbody tr td {
+        color: white;
+    }
+</style>
+<br />
+
+
+
+
+
+<div>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+        </symbol>
+        <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+        </symbol>
+        <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+            <path
+                d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+        </symbol>
+    </svg>
+
+
+    <div class="alert alert-info d-flex" role="alert">
+        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Info:">
+            <use xlink:href="#info-fill" />
+        </svg>
+        <div>
+            <p style="color: white;">
+                This section is designed to add media against each training. This media can be of any type like audio
+                files,
+                video files, word documents, excel sheets or presentations.
+                Please click on “add document” button and select the training title against which media needs to be
+                added.
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="d-inline">
+    <button class="btn btn-secondary my-1" (click)="showScheduleModel(null)">
+        <i class="fa fa-plus"></i>
+        Add Non-Digitized Training Data
+    </button>
+    <div class="d-inline float-right">
+        <button class="btn btn-info mx-3 my-1" style="margin-left: 0px;" (click)="openFile()">
+            <i class="fa fa-info-circle"></i>
+            <!-- Downlaod -->
+        </button>
+        <app-back-button></app-back-button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-sm-12">
+        <!-- Previous from -->
+        <!-- <br />
+        <input type="text" class="form-control search-field col-md-3" placeholder="Search Here"
+            [(ngModel)]="searchText" />
+        <br /> -->
+        <!-- Till here-->
+            <div class="w-50 float-right">
+              <input type="text" class="form-control search-field float-right my-3 w-25" placeholder="Search" (keyup)="GetScheduleList($event)" />
+            </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="reportTable" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th colspan="1">Sr#</th>
+                        <th colspan="2">Title</th>
+                        <!-- <th colspan="1">Document Type</th> -->
+                        <th colspan="1">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of ScheduleList
+                                | paginate : config
+                            
+                                let i = index ">
+                        <td colspan="1">{{ i + 1 }}</td>
+
+                        <td colspan="2">{{ s.title }}</td>
+                        <!-- <td colspan="1">{{ s.venue }}</td> -->
+                        <td colspan="1">
+
+                            <button class="fa fa-eye btn btn-light btn-air-success btn-lg mx-3 my-1"
+                                (click)="showSchedule(s)"></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="d-flex">
+    <div class="mr-auto">
+      <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px; width: 5pc"
+        [(ngModel)]="config.itemsPerPage">
+        <option [value]="5000">All</option>
+        <option [value]="10" selected>10</option>
+        <option [value]="50">50</option>
+        <option [value]="100">100</option>
+        <option [value]="250">250</option>
+        <option [value]="500">500</option>
+        <option [value]="1000">1000</option>
+      </select>
+  
+    </div>
+    <div>
+      <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+        (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
+  
+    </div>
+  </div>

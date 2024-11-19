@@ -1,0 +1,298 @@
+<div class="container-fluid" >
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header bg-primary">
+          <h5>{{ this.fID.formName }} Indicator Details</h5>
+        </div>
+        <div class="card-body">
+          <div class="row" [hidden]="!(this.fID.category=='Technical' && this.fID.formName == 'Fixed Site Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Team No : </strong>{{ this.fID.teamNo }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Time : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Day of Work : </strong>{{ this.fID.dayofwork }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Site Name : </strong>{{ this.fID.siteName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>AIC Name : </strong>{{ this.fID.aicName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Hospital Type : </strong>{{ this.fID.healthCenterId }}
+              </span>
+            </div>
+          </div>
+          <div class="row" [hidden]="!(this.fID.category=='administrative' && this.fID.formName == 'Fixed Site Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Site Name : </strong>{{ this.fID.siteName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Hospital Type : </strong>{{ this.fID.healthCenterId }}
+              </span>
+            </div>
+          </div>
+      
+       
+
+          <div class="row" [hidden]="!(this.fID.category=='Technical' && this.fID.formName == 'Supervisor Monitoring Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Day of Work : </strong>{{ this.fID.dayofwork }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Supervisor Name : </strong>{{ this.fID.supervisorName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Designation : </strong>{{ this.fID.designationId }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Supervisor Agency : </strong>{{ this.fID.supervisorAgency }}
+              </span>
+            </div>
+          </div>
+          <div class="row" [hidden]="!(this.fID.category=='Administrative' && this.fID.formName == 'Supervisor Monitoring Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Supervisor Name : </strong>{{ this.fID.supervisorName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Designation : </strong>{{ this.fID.designationId }}
+              </span>
+            </div>
+          </div>
+          
+
+       
+          <div class="row" [hidden]="!(this.fID.category=='Technical' && this.fID.formName == 'Team Monitoring Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>AIC Name : </strong>{{ this.fID.aicName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Team No : </strong>{{ this.fID.teamNo }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Day of Work : </strong>{{ this.fID.dayofwork }}
+              </span>
+            </div>
+          </div>
+          <div class="row" [hidden]="!(this.fID.category=='Administrative' && this.fID.formName == 'Team Monitoring Form')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Tehsil : </strong>{{ this.fID.tehsilName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Team No : </strong>{{ this.fID.teamNo }}
+              </span>
+            </div>
+            </div>
+          
+              <div class="row" [hidden]="!(this.fID.category=='Technical' && this.fID.formName == 'SIA Transit Site Monitoring Checklist')">
+            
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Name : </strong>{{ this.fID.name }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Designation of Monitor : </strong>{{ this.fID.designationofmonitor }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>District/Town/Agency : </strong>{{ this.fID.districtName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Site Supervisor Name : </strong>{{ this.fID.supervisorName }}
+              </span>
+            </div>
+          </div>
+          <div class="row" [hidden]="!(this.fID.category=='Administrative' && this.fID.formName == 'SIA Transit Site Monitoring Checklist')">
+           
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Name : </strong>{{ this.fID.name }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Designation of Monitor : </strong>{{ this.fID.designationofmonitor }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>District/Town/Agency : </strong>{{ this.fID.districtName }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>UC/Area : </strong>{{ this.fID.area }}
+              </span>
+            </div>
+            <div class="col-md-4">
+              <span class="master-heading"
+                ><strong>Site Supervisor Name : </strong>{{ this.fID.supervisorName }}
+              </span>
+            </div>
+            </div>
+          
+           </div>
+
+          <div class="card-footer">
+          <div class="row">
+            <div class="col-md-12 table-responsive">
+              <table class="table table-bordered">
+                <thead class="thead-dark">
+                  <tr>
+                    <th>Sr#</th>
+                    <th>Indicator Name</th>
+                    <th>Answer</th>
+                    <th>Comments</th>
+                    <th>Sub Indicator Answers</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <!-- {{this.fID.formsIndicatorDetailDTOs}} -->
+                  <tr
+                    *ngFor="let itemA of this.fID.formsIndicatorDetailDTOs; let iA = index">
+                    <td>{{ iA + 1 }}</td>
+                    <td>{{ itemA.formsIndicatorName }}</td>
+                    <td><ul
+                      *ngFor="let itemAnswer of itemA.indicatorAnswers; let iAns = index">
+                      <li>
+                        {{ iAns + 1 }}:  {{ itemAnswer.answerDesc }} 
+                       
+                      </li>
+                      <li></li>
+                    </ul></td>
+                    <td>{{ itemA.comments }}</td>
+                    <td>
+                      <ul
+                        *ngFor="let itemB of itemA.subIndicatorDetailsDTOs; let iB = index">
+                        <li>
+                          {{ iB + 1 }}: {{ itemB.indicatorName }} 
+                          <ul
+                      *ngFor="let itemSubAns of itemB.indicatorAnswers; let iAnsSub = index">
+                      <li class="ml-2">
+                        -  {{ itemSubAns.answerDesc }} 
+                       
+                      </li>
+                      <li></li>
+                    </ul>
+                         
+                        </li>
+                        <li></li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

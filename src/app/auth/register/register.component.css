@@ -1,0 +1,42 @@
+#background {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  margin: 0 auto;
+  color: grey;
+  top: -13%;
+  left: 30%;
+}
+
+@media screen and (max-width: 479px) {
+  #background {
+    top: -15%;
+    left: 21%;
+  }
+}
+
+@media screen and (max-width: 1250px) and (min-width: 769px) {
+  #background {
+    top: -4%;
+    left: 30%;
+  }
+}
+
+@media screen and (max-width: 768px) and (min-width: 481px) {
+  #background {
+    top: -22%;
+    left: 37%;
+  }
+}
+
+#content-watermark {
+  position: relative;
+  z-index: 1;
+}
+
+#bg-text {
+  font-size: 150px;
+  font-weight: bold;
+  opacity: 0.6;
+}
+/*# sourceMappingURL=register.component.css.map */

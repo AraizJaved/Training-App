@@ -1,0 +1,80 @@
+<!-- Container-fluid starts -->
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-sm-12">
+          <div class="card" style="margin-top: 2%;">
+              <div class="card-header">
+                  <h5>Roles Management</h5>
+              </div>
+              <form [formGroup]="RoleForm"  class="form theme-form">
+                  <div class="card-body">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="Name">Role Name</label>
+                                  <input style="border: 1px solid #9eb7cf;" type="text" formControlName="Name" class="form-control " id="Name"
+                                  required  placeholder="">
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <button style="margin-top: 27px;  margin-left: 100px;" type="submit" class="btn btn-primary  mr-1" (click)="onSubmit()" >Add Role</button>
+                                
+                            </div>
+                        </div>
+                      </div>
+                    
+                  </div>
+
+              </form>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="card">
+                    <div class="card-body custom-datatable">
+                      <!-- <input 
+                        type="text"
+                        class="filter-ngx form-control"
+                        placeholder="Type to filter the name column..."
+                        
+                      /> -->
+                      <ngx-datatable
+                        
+                        [selectionType]="'checkbox'"
+                        #table
+                        class="bootstrap"
+                        [headerHeight]="50"
+                        [footerHeight]="50"
+                        rowHeight="auto"
+                        [limit]="10"
+                        [rows]="rows"
+                      >
+                      <ngx-datatable-column name="Sr#" [width]="100" [resizeable]="false">
+                        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            {{ rowIndex+1 }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                      <ngx-datatable-column name="Role" [width]="950" [resizeable]="false">
+                        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            {{ row.name }}
+                        </ng-template>
+                    </ngx-datatable-column>
+                      <ngx-datatable-column name="Action" [width]="200" [resizeable]="false">
+                        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                            <button class="fa fa-trash btn-danger btn btn-primary" (click)="onDelete(row.name)">
+                           </button>
+                        </ng-template>
+                      </ngx-datatable-column>
+                      </ngx-datatable>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+       
+            
+          </div>
+      </div>
+  </div>
+
+<!-- Container-fluid Ends -->

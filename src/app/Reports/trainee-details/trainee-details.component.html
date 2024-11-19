@@ -1,0 +1,146 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Trainee Details</h5>
+
+                </div>
+
+                <form class="form theme-form">
+
+                    <div class="mt-3">
+                        <button (click)="exportPDF(this.EventObj)" class="w-25 btn btn-success">
+                            Export to PDF
+                        </button>
+                        <button (click)="exportTableToExcel('tbl_exporttable_to_xls','details')"
+                            class="w-25 ml-2 btn btn-success">
+                            Export to Excel
+                        </button>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="row" id="tbl_exporttable_to_xls">
+                            <div class="row">
+                                <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                                    <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                                    <table class="table table-bordered mb-0" ng-init="loadPatient()">
+                                        <thead>
+
+                                            <tr>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="1"><strong>Name</strong></th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="5">{{this.EventObj?.employeeName}}</th>
+
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="1"><strong>CNIC</strong></th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="5">{{this.EventObj?.cnic}}</th>
+
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="1"><strong>Working Health Facility</strong>
+                                                </th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="5">{{this.EventObj?.workingHealthFacility}}
+                                                </th>
+
+                                            </tr>
+                                            <tr>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="1"><strong>Designation</strong></th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="5">{{this.EventObj?.designation_Name }}</th>
+
+                                            </tr>
+
+
+
+
+
+
+
+                                            <!-- <tr>
+                        
+                                            <th scope="col" colspan="1"><strong>Schedule</strong></th>
+                                          
+                                            <th scope="col"colspan="2"><button class="fa fa-edit  btn  btn-success btn-air-success btn-lg" (click)="showTaskDetailModelList(this.EventObj)">
+                                                Add Schedule
+                                                      </button> </th>
+                                        </tr> -->
+
+                                        </thead>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                            <div class="row">
+
+                                <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                                    <h4>Training Details</h4>
+                                    <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                                    <table class="table table-bordered mb-0">
+                                        <thead>
+
+                                            <tr>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="1"><strong>Sr No</strong></th>
+
+
+
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="5"><strong>Title</strong></th>
+
+
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="2"><strong>Training Type</strong></th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="2"><strong>Start Date</strong></th>
+                                                <th style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    scope="col" colspan="2"><strong>End Date</strong></th>
+
+
+
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let s of this.EventObj.trainingList;let i=index">
+                                                <td style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    colspan="1">{{i+1}}</td>
+                                                <td style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    colspan="5">{{s.title}}</td>
+                                                <td style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    colspan="2">{{s.trainingType}}</td>
+                                                <td style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    colspan="2">{{s.startDate | date :'short'}}</td>
+                                                <td style="border: 1px solid rgb(0, 0, 0); text-align: center;"
+                                                    colspan="2">{{s.endDate | date :'short'}}</td>
+
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

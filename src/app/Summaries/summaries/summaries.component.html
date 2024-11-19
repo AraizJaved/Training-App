@@ -1,0 +1,124 @@
+
+
+  <div class="row">
+    <div class="col-xl-12 col-sm-12">
+        <div class="card" style="height: 100%; margin-top: 20px;">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h5>Summaries</h5>
+
+                    </div>
+                    <div class="col-md-6" style="text-align-last: right;">
+                        <app-back-button></app-back-button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="card-body" style="padding: 0%;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+                                </ngx-loading>
+                                <form class="form theme-form" [formGroup]="Summaries">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="assignTo">Summaries Type<span style="color: red;">*</span></label>
+                                                <select (change)="SummariesType()" style="border: 1px solid #9eb7cf;" id="assignTo" required
+                                                    class="form-control " formControlName="assignTo">
+            
+                                                    <option *ngFor="let index of this.SummariesDDL" [ngValue]="index.name">
+                                                        {{ index.name }}
+            
+                                                    </option>
+                                                </select>
+                                               
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label for="To">To Date</label>
+                                                <input class="form-control " formControlName="To" type="date" name="To">
+                                            </div>
+                        
+                                        </div> -->
+                                        <!-- <div class="col-md-4">
+                                            <button class="btn btn-primary btn-success btn-air-success " type="submit"
+                                                style="margin-left: 60px; margin-top: 27px;" (click)="getCrrSummary()"><span><i
+                                                        class="fa fa-check text-white "></i></span>
+                                                Search</button>
+                                        </div> -->
+                        
+                        
+                                    </div>
+                                </form>
+                        
+                                <form id="searchForm">
+                                    <div class="row ">
+                                        <div class="col-md-8"> </div>
+                                        <div class="col-md-4 ">
+                                            <div class="form-group">
+                                                <div class="input-group float-right" id="filterAll">
+                                                    <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                                                    <input type="text" class="form-control" name="searchString"
+                                                        placeholder="Search any keyword..." [(ngModel)]="searchString">
+                                                </div>
+                                            </div>
+                                        </div>
+                        
+                                    </div>
+                        
+                                </form>
+                        
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <!-- <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                                            type="submit" (click)="exportexcel()"><span><i class="fa fa-download text-white "></i></span>
+                                            Export to Excel</button> -->
+                                    </div>
+                                    <div class="col-md-6 mt-2" style="text-align-last: right;">
+                                        <h5>
+                                            {{healthCouncil.length}} Records Total
+                                        </h5>
+                                    </div>
+                                </div>
+                        
+                                <div class="table-responsive" style="margin-top: 25px;  " [hidden]="healthCouncil.length == 0">
+                                    <table class="table table-bordered table-striped " id="reportTable" style="width: 100%;">
+                                        <thead>
+                                            <tr>
+                                                <th >Sr.</th>
+                                                <th>Title</th>
+                                                <th style="width:8pc">Created On</th>
+                                                <th>Download</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let s of healthCouncil  | filterAll: searchString let i = index">
+                                                <td>{{i+1}}</td>
+                                                <td>{{s.title}}</td>
+                                                <td style="width:8pc">{{s.createdOn | date}}</td>
+                                                <td><a class="btn btn-link " href="{{s.fileUrl}}" target="_blank"><i class="fa fa-download"></i></a></td>
+                                               
+                        
+                                            </tr>
+                        
+                                        </tbody>
+                        
+                                    </table>
+                        
+                                </div>
+                        
+                        
+                        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

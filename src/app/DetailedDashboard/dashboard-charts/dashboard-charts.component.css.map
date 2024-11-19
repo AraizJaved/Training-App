@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "dashboard-charts.component.scss"
+    ],
+    "names": [],
+    "file": "dashboard-charts.component.css"
+}

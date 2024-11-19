@@ -1,0 +1,390 @@
+<!-- Container-fluid starts -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z" />
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path
+            d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+    </symbol>
+</svg>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header">
+                    <h5>New User Registration</h5>
+                    <br>
+                    <!-- <h6>
+                        User privilege management will allow end-users to apply perimeter around the access of the
+                        training module. Each user can be given specific rights on the application according to their
+                        roles and responsibilities.
+                        Please add relevant information of the individual and check modules they are licensed to use.
+                        Only the modules selected will be visible to the given user.
+                    </h6> -->
+                    <div class="alert alert-info d-flex" role="alert">
+                        <svg class="bi flex-shrink-0 me-2 mr-3" width="24" height="24" role="img" aria-label="Info:">
+                            <use xlink:href="#info-fill" />
+                        </svg>
+                        <div>
+                            <p style="color: white;">
+                                User privilege management will allow end-users to apply perimeter around the access of
+                                the
+                                training module. Each user can be given specific rights on the application according to
+                                their
+                                roles and responsibilities.
+                                Please add relevant information of the individual and check modules they are licensed to
+                                use.
+                                Only the modules selected will be visible to the given user.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="fullName"
+                                        class="form-control" id="fullName" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.fullName.value==''"
+                                        class="text text-danger">
+                                        Full Name is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="userName">User Name<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text"
+                                        onkeyup="this.value=this.value.split(' ').join('');" pattern="^\S*$"
+                                        formControlName="userName" class="form-control" id="userName" required
+                                        placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.userName.value==''"
+                                        class="text text-danger">
+                                        User Name is required.
+                                    </div>
+                                    <!-- <div *ngIf="this.RegisterForm.controls.userName.errors?.pattern">
+                                        User name not valid.
+                                   </div>  -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="email">Email<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text"
+                                        pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$"
+                                        formControlName="email" class="form-control" id="email" required placeholder=""
+                                        required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.email.value==''"
+                                        class="text text-danger">
+                                        Email is required.
+                                    </div>
+                                    <div *ngIf="this.RegisterForm.controls.email.errors?.pattern" style="color: red;">
+                                        Incomplete Email Address.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="designation">Designation<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="designation"
+                                        class="form-control" id="designation" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.designation.value==''"
+                                        class="text text-danger">
+                                        Designation is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="phoneNumber">Phone Number<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text"
+                                        onkeyup="this.value=this.value.replace(/[^0-9]/g, '');" pattern="^[0-9]"
+                                        formControlName="phoneNumber" class="form-control" id="phoneNumber" required
+                                        placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.phoneNumber.value==''"
+                                        class="text text-danger">
+                                        Phone Number is required.
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="password">Password<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="password"
+                                        class="form-control" id="password" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.password.value==''"
+                                        class="text text-danger">
+                                        Password is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="confirmPassword">Confirm Password<span
+                                            style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text"
+                                        formControlName="confirmPassword" class="form-control" id="confirmPassword"
+                                        required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.confirmPassword.value==''"
+                                        class="text text-danger">
+                                        Confirm Password is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="ContactType">Modules
+                                    </label>
+
+                                    <!-- <select style="border: 1px solid #9eb7cf" id="meetingVenue" required
+                                        class="form-control" formControlName="role">
+                                        <option selected value="">
+                                            --Assign Role--
+                                        </option>
+
+                                        <option *ngFor="let index of this.roles" [ngValue]="index">
+                                            {{ index }}
+                                        </option>
+                                    </select> -->
+                                    <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Venue'"
+                                    [settings]="dropdownSettingsVenue"
+                                    [data]="MeetingVenue"
+                                    [formControl]="this.RegisterForm.controls.meetingVenue"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  >
+                                  </ng-multiselect-dropdown> -->
+                                    <ng-multiselect-dropdown [placeholder]="'--Assign Modules--'"
+                                        [settings]="dropdownSettingsOrg" [data]="this.roles"
+                                        [formControl]="this.RegisterForm.controls.role">
+                                    </ng-multiselect-dropdown>
+                                    <!-- <div *ngIf="
+                                      this.parentSubmitted &&
+                                      this.RegisterForm.controls.meetingOrganizer.value == ''
+                                    " class="text text-danger">
+                                    Under the Chairmanship of is required.
+                                  </div> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!-- <label for="ContactType">Modules
+                                    </label> -->
+                                    <div class="custom-control custom-checkbox mt-1 pl-0">
+                                        <label for="canDelete" style="padding-top: 3px; padding-right: 6px;">
+                                            Can Delete
+                                        </label>
+                                        <input type="checkbox" id="canDelete" style="
+                                        position: relative;
+                                        top: 5px;
+                                        width: 23px;
+                                        height: 21px;" formControlName="canDelete" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h6><b>Password must contain at least</b></h6>
+                            <li>One Capital Character</li>
+                            <li>One Special Character</li>
+                            <li>One Numeric Character</li>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 42%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="container bg-white">
+    <div class="text-center">
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <p><b>Diamond Enterprises USA, Inc. <br> (727} 302-1390</b></p>
+            </div>
+            <div class="col-md-6 text-center">
+                <h4><strong>CITY OF MADEIRA BEACH</strong></h4>
+                <h2><b>LOCAL BUSINESS TAX RECEIPT</b></h2>
+                <h5>for year October 1, 2020 ta September 30, 2021</h5>
+            </div>
+            <div class="col-md-3">
+                <p><b>No: 3037</b></p>
+                <p><b>Date: 10/01/2020</b></p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4 pull-left">
+                        <p><b>Business: </b></p>
+                    </div>
+                    <div class="col-md-7 text-justify">
+                        <p><b>HouseEscape, Inc 14955 Gulf Blvd, Suite 18 F4adeira Beach, FL 33708</b></p>
+                        <p><b>Administrative office <br> Parking Spaces: 0 <br> Alcohol Designation:</b></p>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+                <br>
+                <div class="row ">
+                    <div class="col-md-4 pull-left">
+                        <p><b>Issued To: </b></p>
+                    </div>
+                    <div class="col-md-7 text-justify">
+                        <p><b>Diamond Enterprises USA, Inc. 14955 Gulf Blvd, Suite 18 Nadeira Beach, FL 33708</b></p>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <p><strong>Set Image here</strong></p>
+            </div>
+            <div class="col-md-4 text-justify " >
+                <div class="container">
+                    <div id="background">
+                        <p id="bg-text">21</p>
+                          </div>
+                    <p id="content-watermark">A penalty will any per iling to post this certificate co uous pla ess or for not reviewing by
+                        Septembe Thi rt is trarisferrable only under condition in Chap , Nunicipal Code of Ordinances.
+                        usiness tax ipt does not constiMe an e ent approval pproval of the holder&rsquo;s skill e or for
+                        compliance or noncomplianr with othe s, regulations or standards.</p>
+                </div>
+                <br>
+                <p class="text-center">--------------------------------------------------</p>
+                <p class="text-center">Business Tax Official: </p>
+                <br>
+                <p class="text-center">--------------------------------------------------</p>
+                <p class="text-center">Fire Inspector: </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 pull-left">
+                <p><b>A</b></p>
+            </div>
+            <div class="col-md-10 text-center">
+                <p>SHALL BE POSTED CONSPICUOUSLY IN PLACE OF BUSINESS</p>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+                <p><b>Diamond Enterprises USA, Inc. <br> (727} 302-1390</b></p>
+            </div>
+            <div class="col-md-6 text-center">
+                <h4><strong>CITY OF MADEIRA BEACH</strong></h4>
+                <h2><b>LOCAL BUSINESS TAX RECEIPT</b></h2>
+                <h5>for year October 1, 2020 ta September 30, 2021</h5>
+            </div>
+            <div class="col-md-3">
+                <p><b>No: 3037</b></p>
+                <p><b>Date: 10/01/2020</b></p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4 pull-left">
+                        <p><b>Business: </b></p>
+                    </div>
+                    <div class="col-md-7 text-justify">
+                        <p><b>HouseEscape, Inc 14955 Gulf Blvd, Suite 18 F4adeira Beach, FL 33708</b></p>
+                        <p><b>Administrative office <br> Parking Spaces: 0 <br> Alcohol Designation:</b></p>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-4 pull-left">
+                        <p><b>Issued To: </b></p>
+                    </div>
+                    <div class="col-md-7 text-justify">
+                        <p><b>Diamond Enterprises USA, Inc. 14955 Gulf Blvd, Suite 18 Nadeira Beach, FL 33708</b></p>
+                    </div>
+                    <div class="col-md-1">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <p><strong>Set Image here</strong></p>
+            </div>
+            <div class="col-md-4 text-justify " >
+                <div class="container">
+                    <div id="background">
+                        <p id="bg-text">21</p>
+                          </div>
+                    <p id="content-watermark">A penalty will any per iling to post this certificate co uous pla ess or for not reviewing by
+                        Septembe Thi rt is trarisferrable only under condition in Chap , Nunicipal Code of Ordinances.
+                        usiness tax ipt does not constiMe an e ent approval pproval of the holder&rsquo;s skill e or for
+                        compliance or noncomplianr with othe s, regulations or standards.</p>
+                </div>
+               
+                <br>
+                <p class="text-center">--------------------------------------------------</p>
+                <p class="text-center">Business Tax Official: </p>
+                <br>
+                <p class="text-center">--------------------------------------------------</p>
+                <p class="text-center">Fire Inspector: </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-1 pull-left">
+                <p><b>B</b></p>
+            </div>
+            <div class="col-md-10 text-center">
+                <p>SHALL BE POSTED CONSPICUOUSLY IN PLACE OF BUSINESS</p>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+</div> -->
+
+
+
+
+<!-- Container-fluid Ends -->

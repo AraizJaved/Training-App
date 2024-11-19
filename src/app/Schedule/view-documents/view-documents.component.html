@@ -1,0 +1,65 @@
+<!-- Container-fluid starts -->
+<!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading> -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%">
+                <div class="card-header" style="border-bottom: 4px solid #229106">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <h5>{{title}}</h5>
+                        </div>
+                        <div class="col-md-1">
+                            <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="table-responsive" *ngIf="this.files.length > 0">
+                    <table class="table table-bordered table-striped" id="reportTable" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">SR#</th>
+                                <th style="text-align: center;">File Name</th>
+                                <th style="text-align: center;">File Type</th>
+                                <!-- <th style="text-align: center;">File</th> -->
+                                <!-- <th style="text-align: center;" *ngIf="this.isSharedFolderManager">Action</th> -->
+                                <th style="text-align: center;">Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let s of files; let i = index">
+                                <td style="text-align: center;">{{i+1}}</td>
+                                <td style="text-align: center;">
+                                    <p class="text-muted" style="color: #000;font-weight: 600;text-align: center;">
+                                        {{ s.name }}
+                                    </p>
+                                </td>
+                                <td style="text-align: center;">
+                                    <p class="text-muted" style="color: #000;font-weight: 600;text-align: center;">
+                                        {{ s.documentType }}
+                                    </p>
+                                </td>
+                                <td style="text-align: center;">
+                                    <button class="fa fa-download btn-Info btn  btn-primary btn-air-success mx-2 my-1 "
+                                        (click)="onDownloadFile(s.path)" target="_blank">&nbsp;
+                                    </button>
+                                    <button class="btn btn-danger fa fa-trash mx-2 my-1" (click)="onDeleteFile(s.pkCode)">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

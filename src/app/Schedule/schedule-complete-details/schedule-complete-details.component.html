@@ -1,0 +1,234 @@
+<div class="card" style="margin-top: 1%">
+    <div class="row">
+      <div class="col-xl-12 col-sm-12">
+        <div class="card" style="height: 100%">
+          <div class="card-header" style="border-bottom: 4px solid #229106">
+  
+            <div class="row">
+              <div class="col-md-11">
+                <h5>Schedule Report</h5>            
+              </div>
+  
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-3"></div>
+  
+  
+              <div class="col-md-6" *ngIf="this.ScheduleList.length>0">
+                <div class="form-group">
+                  <label for="ContactType">Training<span style="color: red">*</span>
+                  </label>
+                  <search-dropdown (ngModelChange)="dropdownValueChanged($event)" [items]="this.ScheduleList" [size]="'small'"
+                    [img]="'product'" [label]="'title'" [uid]="'id'" [(ngModel)]="data">
+                  </search-dropdown>
+  
+                </div>
+              </div>
+  
+  
+  
+  
+              <!-- <div class="col-md-6">
+                <div class="form-group">
+                  <label for="ContactType">Training<span style="color: red">*</span>
+                  </label>
+  
+                  <select style="border: 1px solid #9eb7cf" id="trainingId" required class="form-control"
+                    formControlName="trainingId" (change)="dropdownValueChanged($event)">
+                    <option selected [ngValue]="0">
+                      -- Select Training Schedule--
+                    </option>
+  
+                    <option *ngFor="let index of this.ScheduleList" [ngValue]="index.id">
+                      {{ index.title }}
+                    </option>
+                  </select>
+                </div>
+              </div> -->
+            </div>
+  
+            <div class="row" *ngIf="showBody">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table class="table table-bordered mb-0" ng-init="loadPatient()">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>Title</strong></th>
+                      <th scope="col" colspan="5">
+                        {{ this.ScheduleDto?.title }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>Venue</strong></th>
+                      <th scope="col" colspan="5">
+                        {{ this.ScheduleDto?.venue }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1">
+                        <strong>Start Date</strong>
+                      </th>
+                      <th scope="col" colspan="5">
+                        {{ this.ScheduleDto?.startDate | date : "short" }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>End Date</strong></th>
+                      <th scope="col" colspan="5">
+                        {{ this.ScheduleDto?.endDate | date : "short" }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1">
+                        <strong>Departments</strong>
+                      </th>
+                      <th scope="col" colspan="5">
+                        {{ this.ScheduleDto?.departments }}
+                      </th>
+                    </tr>
+  
+                    <tr>
+                      <th scope="col"><strong>Description</strong></th>
+                      <th colspan="5">{{ this.ScheduleDto?.description }}</th>
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <br />
+            <br />
+            <div class="row">
+  
+  
+            </div>
+  
+            <H4 style="color: green; margin-top: 5%" *ngIf="showBody">Trainer</H4>
+            <div class="row" *ngIf="showBody">
+  
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table class="table table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>Sr No</strong></th>
+                      <th scope="col" colspan="5"><strong>Name</strong></th>
+                      <th scope="col" colspan="3"><strong>CNIC</strong></th>  
+                      <th scope="col" colspan="5"><strong>Attendance Status</strong></th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="
+                          let s of this.ScheduleDto?.trainerList;
+                          let i = index
+                        ">
+                      <td colspan="1">{{ i + 1 }}</td>
+                      <td colspan="5">{{ s.name }}</td>
+                      <td colspan="3">{{ s.cnic }}</td>
+                      <td colspan="5"
+                        [ngStyle]="{'color':s.attendanceStatus == 'No Status' ? 'blue': s.attendanceStatus == 'Present' ? 'green':s.attendanceStatus == 'Absent' ? 'Red' :'Black'}">
+                        {{ s.attendanceStatus }}</td>
+  
+                     
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <H4 style="color: #4466f2; margin-top: 5%" *ngIf="showBody">Trainee</H4>
+            <div class="row" *ngIf="showBody">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table class="table table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>Sr No</strong></th>
+                      <th scope="col" colspan="5"><strong>Name</strong></th>
+                      <th scope="col" colspan="3"><strong>CNIC</strong></th>  
+                      <th scope="col" colspan="5"><strong>Attendance Status</strong></th>
+                      <th scope="col" colspan="5"><strong>Training Status</strong></th>
+                      <th scope="col" colspan="5"><strong>Pre-Training Score</strong></th>
+                      <th scope="col" colspan="5"><strong>Post-Training Score</strong></th>
+                      <th scope="col" colspan="5"><strong>Total Score</strong></th>
+                      <th scope="col" colspan="5"><strong>Current work place</strong></th>
+                      <th scope="col" colspan="5"><strong>Place	work place during training</strong></th>
+                   
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="
+                          let s of this.ScheduleDto?.traineeList;
+                          let i = index
+                        ">
+                      <td colspan="1">{{ i + 1 }}</td>
+                      <td colspan="5">{{ s.name }}</td>
+                      <td colspan="3">{{ s.cnic }}</td>
+                      <td colspan="5"
+                        [ngStyle]="{'color':s.attendanceStatus == 'No Status' ? 'blue': s.attendanceStatus == 'Present' ? 'green':s.attendanceStatus == 'Absent' ? 'Red' :'Black'}">
+                        {{ s.attendanceStatus }}</td>  
+                        <td colspan="5">{{ s.status }}</td>  
+                        <td colspan="5">{{ s.obtainMarksBeforeTrainig == null? 0 :  s.obtainMarksBeforeTrainig}}</td>
+                        <td colspan="5">{{ s.obtainMarksAfterTraining == null? 0 :  s.obtainMarksAfterTraining}}</td>
+                        <td colspan="5">{{ this.totalMarks == null? 0 :  this.totalMarks}}</td>
+                     
+                        <td colspan="5">{{ s.workingPlace }}</td>
+                     
+                        <td colspan="5">{{ s.workedPlaceAtTraining }}</td>
+                     
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+  
+            
+          <H4 style="color: #ff5370 ; margin-top: 5%" *ngIf="showBody">External Participant</H4>
+          <div class="row" *ngIf="showBody">
+            <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+              <table class="table table-bordered mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="1"><strong>Sr No</strong></th>
+                    <th scope="col" colspan="5"><strong>Name</strong></th>
+                    <th scope="col" colspan="3"><strong>CNIC</strong></th>
+                    <th scope="col" colspan="5"><strong>Attendance Status</strong></th>
+                    <th scope="col" colspan="5"><strong>Training Status</strong></th>
+                    <th scope="col" colspan="5"><strong>Pre-Training Score</strong></th>
+                    <th scope="col" colspan="5"><strong>Post-Training Score</strong></th>
+                    <th scope="col" colspan="5"><strong>Total Score</strong></th>
+                    <th scope="col" colspan="5"><strong>Current work place</strong></th>
+                    <th scope="col" colspan="5"><strong>Place	work place during training</strong></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                        let s of this.ScheduleDto?.externalParticipants;
+                        let i = index
+                      ">
+                    <td colspan="1">{{ i + 1 }}</td>
+                    <td colspan="5">{{ s.name }}</td>
+                    <td colspan="3">{{ s.cnic }}</td>
+                    <td colspan="5"
+                      [ngStyle]="{'color':s.attendanceStatus == 'No Status' ? 'blue': s.attendanceStatus == 'Present' ? 'green':s.attendanceStatus == 'Absent' ? 'Red' :'Black'}">
+                      {{ s.attendanceStatus }}</td>
+
+                      <td colspan="5">{{ s.participantTrainingStatus }}</td>  
+                      <td colspan="5">{{ s.obtainMarksBeforeTrainig == null? 0 :  s.obtainMarksBeforeTrainig}}</td>
+                      <td colspan="5">{{ s.obtainMarksAfterTraining == null? 0 :  s.obtainMarksAfterTraining}}</td>
+                      <td colspan="5">{{ this.totalMarks == null? 0 :  this.totalMarks}}</td>
+                   
+                      <td colspan="5">{{ s.workingPlace }}</td>
+                   
+                      <td colspan="5">{{ s.workedPlaceAtTraining }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

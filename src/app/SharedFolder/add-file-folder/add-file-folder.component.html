@@ -1,0 +1,82 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>{{this.title}}</h5>
+                </div>
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="title">Title<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="title"
+                                        class="form-control" id="title" required placeholder="" required>
+                                 
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                             
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description<span style="color: red;">*</span></label>
+                                <textarea  type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                                formControlName="description" class="form-control" id="description" required
+                                placeholder="" ></textarea>
+
+                               
+                                <!-- <div *ngIf="this.RegisterForm.controls.description.errors?.pattern">
+                                    User name not valid.
+                               </div>  -->
+                            </div>
+                        </div>
+                        </div>
+                      
+                        <div class="row" >
+                            
+                            <div class="col-md-12" *ngIf="this.title=='Add File'">
+                                <div class="form-group">
+                                    <label for="attachment">Attachment<span style="color: red;">*</span></label>
+                                    <input (change)="onFileChange($event)"  style="border: 1px solid #9eb7cf;"
+                                        type="file" multiple name="attachment" class="form-control" id="attachment" required
+                                        placeholder="" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6" *ngIf="this.title=='Create Folder'">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="Create()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12" *ngIf="this.title=='Add File'">
+                                <div class="progress" *ngIf="progress">
+                                    <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+                                </div>
+                                <br>
+                                <br>
+
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 43%;" type="submit" (click)="Upload()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

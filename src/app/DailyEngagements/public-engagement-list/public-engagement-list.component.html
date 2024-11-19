@@ -1,0 +1,84 @@
+
+<div class="card" style="margin-top: 1%">
+    <br>
+    <br>
+    <h3 style="text-align: center;">Daily Engagement List</h3>
+    
+     <div class="row" >
+        
+     </div>
+     <div class="row">
+         <div class="col-xl-12 col-sm-12">
+           <div class="card" style="height: 100%; ">
+           
+             <div class="card-body">
+             
+                 <div class="table-responsive"  >
+                     <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;">
+                         <thead>
+                             <tr>
+                               <th colspan="1">Sr#</th>
+     
+                                 <th colspan="1">Task Id</th>
+                                 
+                                 <th colspan="1">Engagement</th>
+                                 <th colspan="1">Location</th>
+                                 <th colspan="1">Date</th>
+                                 
+                             </tr>
+                         </thead>
+                         <tbody> 
+                             
+                             <tr *ngFor="let s of rows | paginate: config  let i = index"  >
+                               <td colspan="1">{{i+1}}</td>
+                                 <td colspan="1">{{s.id}}</td>
+                               
+                                 <td colspan="1">{{s.task }}</td>
+                            
+                                 <td colspan="1">{{s.venueIdName }}</td>
+                                 <td colspan="1">{{s.whenToGo | date :'short' }}</td>
+                                
+                              
+                             </tr>
+                         </tbody>
+         
+                     </table>
+         
+                 </div>
+               </div>
+     
+               <div class="row">
+                  <div  class="col-lg-2">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <label>Tasks Per Page</label>
+                 <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px;width: 5pc;"
+                   [(ngModel)]="config.itemsPerPage">
+              
+                   <option [value]="5000" >All</option>
+                   <option  [value]="10" selected>10</option>
+                   <option  [value]="50">50</option>
+                   <option  [value]="100">100</option>
+                   <option  [value]="250">250</option>
+                   <option  [value]="500">500</option>
+                   <option  [value]="1000">1000</option>
+                 </select>
+                 </div> 
+               </div> 
+             </div> 
+                 <div  class="col-lg-10">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+                   (pageBoundsCorrection)="onPageBoundsCorrection($event)"  style="letter-spacing: 5px;
+                   font-size: 20px;text-align: center;"></pagination-controls>
+                 </div>
+               </div>
+             </div>
+               </div>
+           </div>
+          
+         </div>
+       </div>
+     </div>
+     

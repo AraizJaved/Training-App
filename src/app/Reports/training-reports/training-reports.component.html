@@ -1,0 +1,604 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+
+<div class="card" style="margin-top: 35px">
+  <!-- <div class="card" style="margin-top: 35px" *ngIf="trainingBody"> -->
+  <br />
+  <br />
+
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-5">
+      <h2>Training Management Reporting Module</h2>
+    </div>
+    <!-- <div class="col-md-2">
+      <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; " type="submit"
+        (click)="exportToExcel(ReportDto?.trainingWiseReportList,'Training Wise Report')"><span><i class="fa fa-download text-white "></i></span>
+        Export to Excel</button>
+    </div> -->
+    <div class="col-md-2">
+      <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px" type="submit"
+        (click)="exportToExcel(this.FilterList, 'Training Report')">
+        <span><i class="fa fa-download text-white"></i></span> Export to Excel
+      </button>
+    </div>
+  </div>
+  <br />
+  <br />
+  <div class="row"></div>
+
+  <div class="row">
+    <div class="col-xl-12 col-sm-12">
+      <div class="card" style="height: 100%">
+        <div class="card-body">
+          <div>
+            <div class="col-md-12">
+              <label>Search</label>
+              <input type="text" class="form-control search-field" placeholder="Search Here" [(ngModel)]="searchText" />
+            </div>
+          </div>
+          <div class="row">
+            <!-- Ubaid -->
+
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="startDateTime"><strong style="color: white">Start Date</strong></label>
+                    <input style="border: 1px solid #9eb7cf" type="date" [(ngModel)]="startDate" class="form-control"
+                      id="startDateTime" required placeholder="" required />
+                  </div>
+                </div>
+                <div class="col-md-5">
+                  <div class="form-group">
+                    <label for="endDateTime"><strong style="color: white">End Date</strong></label>
+                    <input style="border: 1px solid #9eb7cf" type="date" [(ngModel)]="endDate" class="form-control"
+                      id="endDateTime" required placeholder="" required />
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="form-group">
+                    <button (click)="openModal()" class="btn btn-lg form-control" style="
+                        color: white;
+                        background-color: #273b3a;
+                        margin-top: 17%;
+                      ">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col">
+                  <label for="ContactType">Training </label>
+                  <search-dropdown (ngModelChange)="ValueChanged($event)" [items]="this.Trainings" [size]="'small'"
+                    [img]="'product'" [label]="'title'" [uid]="'id'" [(ngModel)]="data">
+                  </search-dropdown>
+                </div>
+                <div class="col">
+                  <label for="ContactType">Venue </label>
+
+                  <search-dropdown (ngModelChange)="VenueValueChanged($event)" [items]="this.Venues" [size]="'small'"
+                    [img]="'product'" [label]="'venue'" [uid]="'id'" [(ngModel)]="data">
+                  </search-dropdown>
+                </div>
+                <div class="col" *ngIf="this.Designations.length > 0">
+                  <div class="form-group">
+                    <label for="title">Cadre/Designation<span style="color: red">*</span></label>
+                    <search-dropdown (ngModelChange)="CadreChanged($event)" [items]="this.Designations" [size]="'small'"
+                      [img]="'product'" [label]="'designationName'" [uid]="'designationId'" [(ngModel)]="data">
+                    </search-dropdown>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="ContactType">Category </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      (change)="CategoryChanged($event.target.value)">
+                      <option selected value="">--Category--</option>
+
+                      <option *ngFor="let train of this.TrainigCategory" [value]="train.traingCategoryName">
+                        {{ train.traingCategoryName }}
+                      </option>
+                    </select>
+                    <!-- <ng-multiselect-dropdown
+                                      [placeholder]="'Select Chairmanship of'"
+                                      [settings]="dropdownSettingsOrg"
+                                      [data]="MeetingOrganizer"
+                                      [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                  
+                                    > 
+                                    </ng-multiselect-dropdown>-->
+                    <!-- <div *ngIf="
+                        this.parentSubmitted &&
+                        this.RegisterForm.controls.meetingOrganizer.value == ''
+                      " class="text text-danger">
+                      Under the Chairmanship of is required.
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="ContactType">Training Level </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="TrainingLevel" required class="form-control"
+                      formControlName="TrainingLevel" (change)="LevelChanged($event.target.value)">
+                      <option selected value="">
+                        --Select Training Level--
+                      </option>
+
+                      <option *ngFor="let index of this.TrainingLevels" [Value]="index.trainingLevel">
+                        {{ index.trainingLevel }}
+                      </option>
+                    </select>
+                    <!-- <ng-multiselect-dropdown
+                                      [placeholder]="'Select Chairmanship of'"
+                                      [settings]="dropdownSettingsOrg"
+                                      [data]="MeetingOrganizer"
+                                      [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                  
+                                    > 
+                                    </ng-multiselect-dropdown>-->
+                    <!-- <div *ngIf="
+                        this.parentSubmitted &&
+                        this.RegisterForm.controls.TrainingLevel.value == ''
+                      " class="text text-danger">
+                      Under the Chairmanship of is required.
+                    </div> -->
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="ContactType">Training Type </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="trainingType" (change)="TypeChanged($event.target.value)">
+                      <option selected value="">
+                        --Select Training Type--
+                      </option>
+
+                      <option *ngFor="let index of this.TrainingType" [Value]="index.trainingTypeName">
+                        {{ index.trainingTypeName }}
+                      </option>
+                    </select>
+                    <!-- <ng-multiselect-dropdown
+                                      [placeholder]="'Select Chairmanship of'"
+                                      [settings]="dropdownSettingsOrg"
+                                      [data]="MeetingOrganizer"
+                                      [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                  
+                                    > 
+                                    </ng-multiselect-dropdown>-->
+                    <!-- <div *ngIf="
+                        this.parentSubmitted &&
+                        this.RegisterForm.controls.meetingOrganizer.value == ''
+                      " class="text text-danger">
+                      Under the Organized By of is required.
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- End First Row -->
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col">
+                  <label for="ContactType"> Division </label>
+                  <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                    (change)="dropdownValueChanged($event, 'Div')">
+                    <option value="" disabled selected>Select Division</option>
+
+                    <option *ngFor="let index of divisions" [ngValue]="index.code">
+                      {{ index.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="ContactType"> District </label>
+                  <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                    (change)="dropdownValueChanged($event, 'Dis')">
+                    <option selected value="">Select District</option>
+
+                    <option *ngFor="let index of this.districts" [ngValue]="index.code">
+                      {{ index.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="ContactType"> Tehsil </label>
+                  <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                    (change)="dropdownValueChanged($event, 'Teh')">
+                    <option selected value="">Tehsil</option>
+
+                    <option *ngFor="let index of this.tehsils" [ngValue]="index.code">
+                      {{ index.name }}
+                    </option>
+                  </select>
+                </div>
+
+                <div class="col">
+                  <div class="form-group">
+                    <label for="ContactType">Organized By </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="OrganizedBy" (change)="OrganizedbyChanged($event.target.value)">
+                      <option selected value="">--Select Organized By--</option>
+
+                      <option *ngFor="let index of this.OrganizedBys" [Value]="index.organizedBy">
+                        {{ index.organizedBy }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="ContactType">Supported By </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="SupportedBy" required class="form-control"
+                      formControlName="SupportedBy" (change)="SupportedByChanged($event.target.value)">
+                      <option selected value="">--Select Supported By--</option>
+
+                      <option *ngFor="let index of this.SupportedBys" [Value]="index.supportedBy">
+                        {{ index.supportedBy }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Filter"> Participants </label>
+
+                    <select style="border: 1px solid #9eb7cf" id="Filter" required class="form-control"
+                      (change)="ParticipantChanged($event)">
+                      <option selected value="">
+                        --Select Participant Type--
+                      </option>
+                      <option value="Trainee">Trainees</option>
+                      <option value="Trainer">Trainers</option>
+                      <option value="ExternalParticipants">External Participants</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-11"></div>
+                <div class="col-md-1">
+                  <div class="form-group">
+                    <button class="btn-lg" (click)="Reset()" style="
+                      color: white;
+                      background-color: #273b3a;
+                      margin-top: 17%;
+                    ">
+                      Reset
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- End Second Row -->
+              <!-- Ubaid (New Filters)-->
+            </div>
+            <br />
+            <div class="table-responsive" *ngIf="trainingBody">
+              <table class="table table-bordered table-striped table-hover mt-5" id="TrainingreportTable"
+                style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="2">Division</th>
+                    <th colspan="2">District</th>
+                    <th colspan="2">Tehsil</th>
+                    <th colspan="3">Title</th>
+                    <th colspan="2">Organized By</th>
+                    <th colspan="2">Supported By</th>
+              <th colspan="1">Total Trainee</th>
+                    <th colspan="1">Total Trainer</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+
+                      let s of this.FilterList                  
+
+                        | searchFilter : searchText;
+                      let i = index
+                    ">
+                    <td colspan="1">{{ i + 1 }}</td>
+                    <td colspan="2">{{ s.division }}</td>
+                    <td colspan="2">{{ s.district }}</td>
+                    <td colspan="2">{{ s.tehsil }}</td>
+
+                    <td colspan="3">{{ s.title }}</td>
+                    <td colspan="2">{{ s.organizedBy }}</td>
+                    <td colspan="2">{{ s.supportedBy }}</td>
+                    <td colspan="1">{{ s.totalTrainee }}</td>
+                    <td colspan="1">{{ s.totalTrainer }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                            <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showSchedule(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="ScheduleBody">
+              <table class="table table-bordered table-striped table-hover mt-5" id="TrainingreportTable"
+                style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="4">Division</th>
+                    <th colspan="4">District</th>
+                    <th colspan="4">Tehsil</th>
+                    <th colspan="4">Title</th>
+                    <th colspan="4">Organized By</th>
+                    <th colspan="4">Supported By</th>
+              <th colspan="1">Total Trainee</th>
+                    <th colspan="1">Total Trainer</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+
+                      let s of this.FilterList                  
+
+                        | searchFilter : searchText;
+                      let i = index
+                    ">
+                    <td colspan="1">{{ i + 1 }}</td>
+                    <td colspan="4">{{ s.division }}</td>
+                    <td colspan="4">{{ s.district }}</td>
+                    <td colspan="4">{{ s.tehsil }}</td>
+
+                    <td colspan="4">{{ s.title }}</td>
+                    <td colspan="4">{{ s.organizedBy }}</td>
+                    <td colspan="4">{{ s.supportedBy }}</td>
+                    <td colspan="1">{{ s.totalTrainee }}</td>
+                    <td colspan="1">{{ s.totalTrainer }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                            <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showSchedule(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="FilterTrainingTittleBody">
+              <table class="table table-bordered table-striped table-hover mt-5" id="TrainingreportTable"
+                style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="4">Division</th>
+                    <th colspan="4">District</th>
+                    <th colspan="4">Tehsil</th>
+
+                    <th colspan="4">Title</th>
+                    <th colspan="4">Organized By</th>
+                    <th colspan="4">Supported By</th>
+
+
+                    <th colspan="1">Total Trainee</th>
+                    <th colspan="1">Total Trainer</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+
+                      let s of this.FilterList                  
+
+                        | searchFilter : searchText;
+                      let i = index
+                    ">
+                    <td colspan="1">{{ i + 1 }}</td>
+                    <td colspan="4">{{ s.division }}</td>
+                    <td colspan="4">{{ s.district }}</td>
+                    <td colspan="4">{{ s.tehsil }}</td>
+
+                    <td colspan="4">{{ s.title }}</td>
+                    <td colspan="4">{{ s.organizedBy }}</td>
+                    <td colspan="4">{{ s.supportedBy }}</td>
+                    <td colspan="1">{{ s.totalTrainee }}</td>
+                    <td colspan="1">{{ s.totalTrainer }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                            <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showSchedule(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="Filterbody">
+              <table class="table table-bordered table-striped table-hover mt-5" id="TrainingreportTable"
+                style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="4">Division</th>
+                    <th colspan="4">District</th>
+                    <th colspan="4">Tehsil</th>
+
+                    <th colspan="4">Title</th>
+                    <th colspan="4">Organized By</th>
+                    <th colspan="4">Supported By</th>
+
+
+                    <th colspan="1">Total Trainee</th>
+                    <th colspan="1">Total Trainer</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+
+                      let s of this.FilterList                  
+
+                        | searchFilter : searchText;
+                      let i = index
+                    ">
+                    <td colspan="1">{{ i + 1 }}</td>
+                    <td colspan="4">{{ s.division }}</td>
+                    <td colspan="4">{{ s.district }}</td>
+                    <td colspan="4">{{ s.tehsil }}</td>
+
+                    <td colspan="4">{{ s.title }}</td>
+                    <td colspan="4">{{ s.organizedBy }}</td>
+                    <td colspan="4">{{ s.supportedBy }}</td>
+                    <td colspan="1">{{ s.totalTrainee }}</td>
+                    <td colspan="1">{{ s.totalTrainer }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                            <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showSchedule(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="trainerBody">
+              <table class="table table-bordered table-striped table-hover" id="TrainerTable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+
+                    <th colspan="4">Name</th>
+                    <th colspan="4">Designation Name</th>
+                    <th colspan="4">CNIC</th>
+
+                    <th colspan="4">Working Health Facility</th>
+                    <th colspan="1">Total Trainings</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                  let s of trainerWiseReportList
+                  
+                    | searchFilter : searchText;
+                  let i = index
+                ">
+                    <td colspan="1">{{ i + 1 }}</td>
+
+                    <td colspan="4">{{ s.employeeName }}</td>
+                    <td colspan="4">{{ s.designation_Name }}</td>
+                    <td colspan="4">{{ s.cnic }}</td>
+
+                    <td colspan="4">{{ s.workingHealthFacility }}</td>
+                    <td colspan="1">{{ s.totalTrainings }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                            <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showTrainerDetails(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="traineeBody">
+              <table class="table table-bordered table-striped table-hover" id="TraineeTable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="4">Name</th>
+                    <th colspan="4">Designation Name</th>
+                    <th colspan="4">CNIC</th>
+
+                    <th colspan="4">Working Health Facility</th>
+                    <th colspan="1">Total Trainings</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                    let s of traineeWiseReportList
+                 
+                      | searchFilter : searchText;
+                    let i = index
+                  ">
+                    <td colspan="1">{{ i + 1 }}</td>
+
+                    <td colspan="4">{{ s.employeeName }}</td>
+                    <td colspan="4">{{ s.designation_Name ==null?'External Participant':s.designation_Name }}</td>
+                    <td colspan="4">{{ s.cnic }}</td>
+
+
+                    <td colspan="4">{{ s.workingHealthFacility }}</td>
+                    <td colspan="1">{{ s.totalTrainings }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                              <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showTraineeDetails(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-responsive" *ngIf="ExternalBody">
+              <table class="table table-bordered table-striped table-hover" id="TraineeTable" style="width: 100%">
+                <thead>
+                  <tr>
+                    <th colspan="1">Sr#</th>
+                    <th colspan="4">Name</th>
+                    <th colspan="4">Designation Name</th>
+                    <th colspan="4">CNIC</th>
+
+                    <th colspan="4">Working Health Facility</th>
+                    <th colspan="1">Total Trainings</th>
+                    <th colspan="2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="
+                    let s of ExternalList
+                 
+                      | searchFilter : searchText;
+                    let i = index
+                  ">
+                    <td colspan="1">{{ i + 1 }}</td>
+
+                    <td colspan="4">{{ s.name }}</td>
+                    <td colspan="4">{{ s.designation_Name ==null?'External Participant':s.designation_Name }}</td>
+
+                    <td colspan="4">{{ s.cnic }}</td>
+                    <td colspan="4">{{ s.workingHealthFacility }}</td>
+                    <td colspan="1">{{ s.totalTrainings }}</td>
+                    <td colspan="2">
+                      <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                              <td colspan="1" > -->
+                      <button class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                        (click)="showTraineeDetails(s)"></button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

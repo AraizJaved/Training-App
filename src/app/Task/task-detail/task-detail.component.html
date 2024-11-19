@@ -1,0 +1,516 @@
+<form [formGroup]="TaskDetailsForm">
+  <div class="col-md-12">
+    <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+    <div class="card" style="background-color: lightgrey">
+      <div class="card-header">
+        
+        <div class="row">
+          <div class="col-md-6">
+            <h4 style="text-align: left; font-family: unset">
+              <b>{{ this.task[0].title }}</b>
+        
+            </h4>
+            <!-- <img style="border-radius: 25px;" [src]="getInitials({first: 'Lora' , last : 'Bonda'})"> -->
+          </div>
+          <div class="col-md-6" style="text-align: right">
+            
+            <h6>
+              <span
+                class="badge badge-secondary"
+                style="
+                  font-family: unset;
+                  background-color: lightpink;
+                  color: black;
+                "
+              >
+                {{ currentStatus }}</span
+              >
+            </h6>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 17px">
+          <div class="col-md-3">
+            <h6><b>Assigned To :</b></h6>
+          </div>
+          <div class="col-md-9">
+            <h6>{{ task[0].taskAssignee }}</h6>
+           
+          </div>
+        </div>
+        <div class="row">
+            
+          <div class="col-md-3">
+            <h6><b>Due Date :</b></h6>
+          </div>
+          <div class="col-md-6">
+
+            
+            <h6    >{{ task[0].extendedDate == null ?  (task[0].dueDate | date: "dd/MM/yyyy") : (task[0].extendedDate | date : 'dd/MM/yyyy') }}   <a *ngIf="task[0].createdBy === user.user.id" (click)="ShowDate = !ShowDate" class="label link text-info">{{ShowDate == true ? 'Click to hide' : 'Click To Extend Due Date'}}</a></h6>
+          
+            <input *ngIf="ShowDate" type="date" formControlName="extendedDueDate"  class="form-control" id="dueDate"  />
+            <button *ngIf="ShowDate" class="btn btn-sm btn-success" type="submit"
+            (click)="onSubmitUpdateExtendedDate()" >Save</button>
+
+           
+          </div>
+
+          <div class="col-md-3"> 
+
+            </div>
+
+        </div>
+       
+        <div class="row">
+          <div class="col-md-3">
+            <h6><b>Description :</b></h6>
+          </div>
+          <div class="col-md-9">
+            <h6>{{ task[0].description }}</h6>
+          </div>
+        </div>
+        <div class="row" *ngIf="task[0].isAssignAble == true">
+          <div class="col-md-12">
+            <hr/>
+            <h5 style="text-align: center;">Sub Task Assignee Detail</h5>
+          </div>
+          <div class="col-md-12">
+
+            <div class="table-responsive"  >
+              <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;border: 2px solid #000;">
+                  <thead>
+                      <tr>
+                  
+                        <th style="border-right: 1px solid #000;">Task Assinged To</th>
+                        <th >Task Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td style="border-right: 1px solid #000;" >{{  task[0].isSubTaskDetail[0].taskAssignee}}</td>
+                          <td  >{{  task[0].isSubTaskDetail[0].taskStatus}}</td>
+                      </tr>
+                  </tbody>
+  
+              </table>
+            </div>
+            <hr/>
+          </div>
+          
+          
+        </div>
+    
+        <div class="row" *ngIf="task[0].parentTaskId!= null && task[0].parentTaskId!= '0'">
+          <div class="col-md-12">
+            <hr/>
+            <h5 style="text-align: center;">Parent Task Detail</h5>
+          </div>
+          <div class="col-md-12">
+
+            <div class="table-responsive"  >
+              <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;border: 2px solid #000;">
+                  <thead>
+                      <tr>
+                  
+                        <th style="border-right: 1px solid #000;">Task Assinged By</th>
+                        <th style="border-right: 1px solid #000;">Main  Description</th>
+                        <th >Task Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <td style="border-right: 1px solid #000;" >{{  task[0].isParentTaskDetail[0].taskAssignee}}</td>
+                          <td style="border-right: 1px solid #000;" >{{  task[0].isParentTaskDetail[0].description}}</td>
+                          <td  >{{  task[0].isParentTaskDetail[0].taskStatus}}</td>
+                      </tr>
+                  </tbody>
+  
+              </table>
+            </div>
+            <hr/>
+          </div>
+          
+          
+        </div>
+        <div class="row">
+        <div class="col-md-12" *ngIf="task[0].parentTaskId ==null && task[0].isAssignAble != true && taskForwardHide">
+            <button class="btn btn-primary" (click)="onTaskForwardShowFunc()">Task Forward</button>
+          </div>
+          <div class="col-md-12" *ngIf="taskForward">
+            <button class="btn btn-primary" (click)="onTaskForwardHideFunc()">Cancel Forward</button>
+          </div>
+          <div class="col-md-12" >
+          <br>
+          </div>
+        </div>
+        
+        
+        <div class="row" *ngIf="taskForward">
+
+         <form [formGroup]="RegisterForm">
+          <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="dueDate">Assign To<span style="color: red;">*</span></label>
+          
+              <ng-multiselect-dropdown
+              [placeholder]="'Select Assign To'"
+              [settings]="dropdownSettings"
+              [data]="AssignTo"
+              [formControl]="this.RegisterForm.controls.assignTo"
+              (onSelect)="onItemSelectAssignTo($event)"
+              (onSelectAll)="onSelectAllAssignTo($event)"
+              (onDeSelect)="onItemDeSelectAssignTo($event)"
+              (onDeSelectAll)="onItemDeSelectAssignToAll()"
+            >
+            </ng-multiselect-dropdown>
+            <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+            class="text text-danger">
+            Task Assingnee  is required.
+        </div>
+          </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="dueDate">Due Date<span style="color: red;">*</span></label>
+              <input style="border: 1px solid #9eb7cf;" type="date" [min]='minDate' formControlName="dueDate" 
+                  class="form-control" id="dueDate" required placeholder="" required>
+              <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.dueDate.value==''"
+                  class="text text-danger">
+                  Due Date is required.
+              </div>
+          </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <label for="priority">Priority<span style="color: red;">*</span></label>
+                <select style="border: 1px solid #9eb7cf;" id="priority" required
+                    class="form-control " formControlName="priority">
+
+                    <option *ngFor="let index of this.Priority" [ngValue]="index.name">
+                        {{ index.name }}
+
+                    </option>
+                </select>
+                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.priority.value==''"
+                    class="text text-danger">
+                    Priority is required.
+                </div>
+            </div>
+        </div>
+
+      </div>
+      <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+                <label for="description">Description<span style="color: red;">*</span></label>
+                <textarea  type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                formControlName="description" class="form-control" id="description" required
+                placeholder="" ></textarea>
+
+                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.description.value==''"
+                    class="text text-danger">
+                    Description is required.
+                </div>
+                <!-- <div *ngIf="this.RegisterForm.controls.description.errors?.pattern">
+                    User name not valid.
+               </div>  -->
+            </div>
+        </div>
+        <div class="col-md-12">
+          <button class="btn btn-primary" (click)="onTaskForwardFunc()" type="submit">Submit</button>
+        </div>
+          
+      </div>
+        
+      
+      
+      </form>
+    </div>
+
+      </div>
+      <div class="card-body">
+        <div
+          class="card-header"
+          *ngIf="taskDetail.result.length === 0"
+          style="text-align: center"
+        >
+          <h4>No Comments Added So Far !</h4>
+        </div>
+
+        <div class="card" style="padding: 15px">
+          <div class="row" *ngIf="this.currentStatus != 'Completed'">
+            <div class="col-md-1"></div>
+
+            <div class="col-md-6">
+              <div class="form-group" style="margin-left: 13px" *ngIf="isCc==false">
+                <!-- <label for="status">Change Status</label> -->
+                <select
+                  style="border: 1px solid #9eb7cf"
+                  id="status"
+                  class="form-control"
+                  formControlName="status"
+                >
+                  <option
+                    *ngFor="let index of this.Status"
+                    [ngValue]="index.id"
+                  >
+                    {{ index.status }}
+                  </option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1" (click)="checkHide()">
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  margin-top: 6px;
+                  margin-left: 8px;
+                  background-color: orange;
+                  text-align: center;
+                  line-height: 52px;
+                  border-radius: 31px;
+                  color: white;
+                  font-size: x-large;
+                "
+              >
+                {{ GetNameInitials(userName) }}
+              </div>
+            </div>
+            <div class="col-md-10">
+              <label for="status" style="margin-left: 18px"
+                ><i
+                  ><b>{{ user.user.designation }}</b></i
+                ></label
+              >
+              <div
+                class="row"
+                style="
+                  margin-left: 12px;
+                  border-radius: 0.25rem;
+                  border: 1px solid #9eb7cf;
+                  padding-bottom: 8px;
+                  padding-top: 5px;
+                "
+              >
+                <!-- <div class="col-md-12" >
+                              
+                                <div class="form-group CommentBox" >
+                                <textarea  type="text" style="border: none !important;" (keyup)="CheckSuggestion()"
+                                (click)="checkShow()"
+                                formControlName="comments" class="form-control NoBorder" id="comments" required
+                                placeholder="Write Comment Here ...." ></textarea>
+                                </div>
+                            </div> -->
+
+                <div class="col-md-12">
+                  <div class="form-group CommentBox">
+                    <textarea
+                      type="text"
+                      style="border: none !important"
+                      (keyup)="CheckSuggestion()"
+                      formControlName="comments"
+                      class="form-control NoBorder"
+                      id="comments"
+                      required
+                      placeholder="Write Comment Here ...."
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="col-md-12 mt-1">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <!-- <button type="submit" (click)="onSubmit()"
+                                        class=" btn  btn-success btn-air-success ">Save</button> -->
+                    </div>
+                    <div class="col-md-6">
+                      <input
+                        (change)="onFileChange($event)"
+                        style="border: none !important"
+                        type="file"
+                        multiple
+                        name="attachment"
+                        class="form-control"
+                        id="attachment"
+                        required
+                        placeholder=""
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <br>  <br>
+              <div class="progress" *ngIf="progress">
+                <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+            </div>
+            <br>
+              <div
+                class="form-group"
+                style="text-align: right; margin-top: 10px; margin-right: 6%"
+              >
+                <button
+                  type="submit"
+                  (click)="onSubmit()"
+                  class="mr-1 btn btn-success btn-air-success btn-lg"
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          style="padding: 6px"
+          *ngFor="let s of taskDetail.result; let i = index"
+        >
+          <div class="row">
+            <div class="col-md-1">
+              <div
+                style="
+                  width: 50px;
+                  height: 50px;
+                  margin-top: 6px;
+                  margin-left: 8px;
+                  background-color: orange;
+                  text-align: center;
+                  line-height: 52px;
+                  border-radius: 31px;
+                  color: white;
+                  font-size: x-large;
+                "
+              >
+                {{ GetNameInitials(s.createdBy) }}
+              </div>
+            </div>
+            <div class="col-md-10">
+              <label for="status" style="margin-left: 18px"
+                ><i
+                  ><b>{{ s.createdBy }}</b></i
+                ></label
+              >
+              <br />
+              <label class="control-label" style="margin-left: 18px">{{
+                s.comments
+              }}</label>
+            </div>
+            <div class="col-md-1" style="font-size: 20px">
+              <i
+                *ngIf="user.user.designation === s.createdBy"
+                class="fa fa-trash text-danger"
+                (click)="onCommentDelete(s.id)"
+              ></i>
+            </div>
+          </div>
+          
+          <div class="row">
+            <div
+              class="col-md-4 col-md-offset-2"
+              style="margin-left: 8%; margin-bottom: 5px"
+            >
+            <a  class="fa fa-download btn-Info btn  btn-primary btn-air-success " *ngIf="s.attachment.length != 0"
+            href="{{s.attachment}}" target="_blank">&nbsp; Download</a>
+              <!-- <button
+                *ngIf="s.attachment.length != 0"
+                style="margin-left: 18px; margin-top: 10px"
+                class="fa fa-download btn-Info btn btn-primary btn-air-success"
+                (click)="onDownload(s.attachment)"
+              >
+                &nbsp; Download
+              </button> -->
+              <label
+                class="control-label text-primary"
+                *ngIf="s.attachment.length == 0"
+                style="margin-left: 18px"
+                ><i>No Attachment!</i></label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="col-md-4 col-md-offset-2"
+              style="margin-left: 8%; margin-bottom: 5px"
+            >
+              <label class="control-label text-black" style="margin-left: 18px">
+                <i class="fa fa-clock-o" style="font-weight: 800;">
+                  {{ s.createdDate | date: "dd/MMM/yyyy hh:mm a" }}</i
+                ></label
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="card">
+                    <div class="card-body">
+                        <form [formGroup]="TaskDetailsForm" class="form theme-form">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="status">Change Status</label>
+                                            <select style="border: 1px solid #9eb7cf;" id="status" class="form-control"
+                                                formControlName="status">
+
+                                                <option *ngFor="let index of this.Status" [ngValue]="index.value">
+                                                    {{ index.text }}
+                                                </option>
+                                            </select>
+                                          
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="comments">Comments<span style="color: red;">*</span></label>
+                                            <textarea style="border: 1px solid #9eb7cf;" type="text"
+                                                formControlName="comments" class="form-control" id="comments" required
+                                                placeholder="" required>
+                                            </textarea>
+
+                                          
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="attachment">Attachment<span style="color: red;">*</span></label>
+                                            <input (change)="onFileChange($event)" style="border: 1px solid #9eb7cf;"
+                                                type="file" multiple name="attachment" class="form-control" id="attachment"
+                                                required placeholder="" required>
+                                            
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group" style="text-align: center;">
+                                            <button type="submit" (click)="onSubmit()"
+                                                class=" mr-1   btn  btn-success btn-air-success btn-lg">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div> -->
+      </div>
+    </div>
+  </div>
+</form>

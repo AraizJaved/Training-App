@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACT,MAAM,EAAE,OAAO;EACf,cAAc,EAAE,IAAI;CACvB",
+    "sources": [
+        "aids-procurement.component.scss"
+    ],
+    "names": [],
+    "file": "aids-procurement.component.css"
+}

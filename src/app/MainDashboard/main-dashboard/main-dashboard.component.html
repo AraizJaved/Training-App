@@ -1,0 +1,46 @@
+<div class="container-fluid " style="margin-top: 3rem; width: 100%; ">
+
+    <!-- <h3 style="margin-bottom: 50px; ">Meeting Management System Dashboard</h3> -->
+ 
+    <div class="row">
+       
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="OnMeetingClick()" *ngIf="this.userRoles.includes('Admin')" >
+            <app-main-card imagePath="assets/images/dashboard-main-cards/meeting_app_meeting_area.png" title="Training Management" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div>
+
+
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="OnScheduleClick()" *ngIf="this.userRoles.includes('Admin')">
+            <app-main-card imagePath="assets/images/dashboard-main-cards/meeting_app_daily_engagements.png" title="Schedule Management" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div>
+
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="onTask()" *ngIf="this.userRoles.includes('Admin')">
+            <app-main-card imagePath="assets/images/dashboard-main-cards/Group.png" title="Calendar" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div> 
+
+       
+        
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="OnParticipantClick()"  *ngIf="this.userRoles.includes('Admin')">
+            <app-main-card imagePath="assets/images/main-dashboard/meeting_app_contacts_list.png" title="Participants Management" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div>
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="OnReportsClick()" *ngIf="this.userRoles.includes('Admin')">
+            <app-main-card imagePath="assets/images/dashboard-main-cards/Group.png" title="Reports" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div>
+        <div class="col-sm-4 col-xl-4 col-lg-4" (click)="OnAttendanceClick()" *ngIf="this.userRoles.includes('Admin')" >
+            <app-main-card imagePath="assets/images/dashboard-main-cards/meeting_app_meeting_area.png" title="Attendance" [width]="170"
+                [height]="120">
+            </app-main-card>
+        </div>
+
+    </div>
+    
+</div>

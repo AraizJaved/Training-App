@@ -1,0 +1,121 @@
+<div class="card" style="margin-top: 1%">
+    <br>
+    <br>
+    
+     <div class="row" >
+         <div class="col-md-9" *ngIf="this.isAdmin ==true || this.isDailyEngagementAdd ==true " >
+             <button class="btn btn-success " style="margin-left: 16px;" (click)="AddDailyEngagement()" >
+                 <i class="fa fa-plus " ></i>
+                 Daily Engagement
+             </button>
+         </div>
+         <div class="col-md-2" >
+             <app-back-button   style="margin-left: 170px;"></app-back-button> 
+         </div>
+     </div>
+     <form [formGroup]="FilterForm">
+       <br>
+     <div class="row">
+      <div class="col-md-3 " style="margin-left: 16px;">
+
+        <div class="form-group" *ngIf="this.isDailyEngagementFilter==true">
+          <label for="FormType">Select Daily Engagement Status</label>
+          <select id="EventType" formControlName="EventType" required class="form-control"
+            style="border: 1px solid #9eb7cf; " (change)="onFilterChange()">
+            <option value="" selected> --Select Daily Engagement Status--</option>
+            <option *ngFor="let index of DEFilter" [value]="index.id">
+              {{ index.name }}
+            </option>
+          </select>
+        </div>
+
+
+
+
+      </div>
+
+    </div>
+    </form>
+     <div class="row">
+         <div class="col-xl-12 col-sm-12">
+           <div class="card" style="height: 100%; ">
+           
+             <div class="card-body ">
+             
+                 <div class="table-responsive"  >
+                     <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;">
+                         <thead>
+                             <tr>
+                               <th colspan="1">Sr#</th>
+     
+                                 
+                                 
+                                 <th colspan="1">Engagement</th>
+                                 <th colspan="1">Location</th>
+                                 <th colspan="1">Date</th>
+                                 <th colspan="1">Edit</th>
+                                 <th colspan="1">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody> 
+                         
+                             <tr *ngFor="let s of rows | paginate: config  let i = index"  >
+                               <td colspan="1">{{i+1}}</td>
+                                 
+                               
+                                 <td colspan="1">{{s.task }}</td>
+                            
+                                 <td colspan="1">{{s.venueIdName }}</td>
+                                 <td colspan="1">{{s.whenToGo | date :'short' }}</td>
+                                 <td colspan="1" >
+
+                                  <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)">
+                                  </button></td>
+                                
+                                 <td colspan="1" >
+
+                                                <button *ngIf="this.isAdmin || this.DailyEngagementDelete" style="margin-left: 10px;" class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="onDelete(s.id)">
+                                                </button></td>
+                             </tr>
+                         </tbody>
+         
+                     </table>
+         
+                 </div>
+               </div>
+     
+               <div class="row">
+                  <div  class="col-lg-2">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <label>Tasks Per Page</label>
+                 <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px;width: 5pc;"
+                   [(ngModel)]="config.itemsPerPage">
+              
+                   <option [value]="5000" >All</option>
+                   <option  [value]="10" selected>10</option>
+                   <option  [value]="50">50</option>
+                   <option  [value]="100">100</option>
+                   <option  [value]="250">250</option>
+                   <option  [value]="500">500</option>
+                   <option  [value]="1000">1000</option>
+                 </select>
+                 </div> 
+               </div> 
+             </div> 
+                 <div  class="col-lg-10">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+                   (pageBoundsCorrection)="onPageBoundsCorrection($event)"  style="letter-spacing: 5px;
+                   font-size: 20px;text-align: center;"></pagination-controls>
+                 </div>
+               </div>
+             </div>
+               </div>
+           </div>
+          
+         </div>
+       </div>
+     </div>
+     

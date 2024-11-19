@@ -1,0 +1,174 @@
+<div class="container-fluid">
+  <div class="row" id="project">
+    <div class="col-xl-12 col-sm-12">
+      <div class="card" style="margin-top: 10px;">
+        <div class="card1-body">
+
+          <ngb-tabset type="pills" (tabChange)="onTabChange($event)">
+
+            <ngb-tab>
+              <ng-template ngbTabTitle class="nav-item">
+                <app-feather-icons [icon]="'home'" class="custom-ic"></app-feather-icons>
+                Pendency
+                <div class="material-border"></div>
+              </ng-template>
+              <ng-template ngbTabContent class="tab-content">
+                <div class="card">
+
+                  <div class="card1-body">
+                    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+
+                      <div class="row">
+                        <div class="col-xl-12 col-sm-12">
+                          <div class="card" style="height: 100%;">
+                            <div class="card-header">
+                              <h5>Pendency List</h5>
+                            </div>
+                            <div class="card-body" style="padding: 0%;">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <app-pendency></app-pendency>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle class="nav-item">
+                <app-feather-icons [icon]="'layers'" class="custom-ic"></app-feather-icons>
+                Employees on Leave
+                <div class="material-border"></div>
+              </ng-template>
+              <ng-template ngbTabContent class="tab-content">
+
+
+                <div class="tab-pane fade show" id="compliance" role="tabpanel" aria-labelledby="compliance">
+
+                  <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                      <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                          <h5>Employees on Leave</h5>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <app-employees-on-leave></app-employees-on-leave>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle class="nav-item">
+                <app-feather-icons [icon]="'book-open'" class="custom-ic"></app-feather-icons>
+                Awaiting Posting
+                <div class="material-border"></div>
+              </ng-template>
+              <ng-template ngbTabContent class="tab-content">
+                <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel"
+                  aria-labelledby="epiStoreMonitoring">
+
+                  <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                      <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                          <h5>Awaiting Posting Applications</h5>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <app-awaiting-posting></app-awaiting-posting>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle class="nav-item">
+                <app-feather-icons [icon]="'book-open'" class="custom-ic"></app-feather-icons>
+                Central Recoord Room
+                <div class="material-border"></div>
+              </ng-template>
+              <ng-template ngbTabContent class="tab-content">
+                <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel"
+                  aria-labelledby="epiStoreMonitoring">
+
+                  <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                      <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                          <h5>Central Recoord Room</h5>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+                          <div class="row">
+                            <div class="col-md-12">
+                              <app-crrsummary></app-crrsummary>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab>
+              <ng-template ngbTabTitle class="nav-item">
+                <app-feather-icons [icon]="'home'" class="custom-ic"></app-feather-icons>
+                Vacant Positions Report
+                <div class="material-border"></div>
+              </ng-template>
+              <ng-template ngbTabContent class="tab-content">
+                <div class="card">
+
+                  <div class="card1-body">
+                    <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+
+                      <div class="row">
+                        <div class="col-xl-12 col-sm-12">
+                          <div class="card" style="height: 100%;">
+                            <div class="card-header">
+                              <h5>Vacant Positions Report</h5>
+                            </div>
+                            <div class="card-body" style="padding: 0%;">
+                              <div class="row">
+                                <div class="col-md-12">
+                                  <app-vpreport></app-vpreport>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

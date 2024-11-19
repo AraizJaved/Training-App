@@ -1,0 +1,43 @@
+<div class="container">
+    <div class="row" >
+
+        <div class="col-xl-12">
+            <div class="card" style="margin-top: 2%;" *ngIf="this.district && !this.formName" >
+                <div class="card-header">
+                    <h5>{{this.district}}</h5>
+                </div>
+                <!-- {{this.formFilledDetails | json}}  -->
+                <div class="card-body">
+                    <div class="row" *ngFor="let item of this.formFilledDetails.formfilled">
+                        <div class="col-md-12">
+                            <label> {{item.name}}  : {{item.total}}</label>
+                        </div>
+                      
+                    </div>
+                    <br>
+                    <label> Total :  {{this.totalFormCount}}</label>
+                  
+                
+                </div>
+            </div>
+            <div class="card" style="margin-top: 2%;" *ngIf="this.formName && !this.district">
+                <div class="card-header">
+                    <h5>{{this.formName}}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" *ngFor="let item of this.formFilledDetailsDesignationWise.formfilled">
+                        <div class="col-md-12">
+                         
+                            <label>{{item.name}}  {{item.designation}}  : {{item.total}}</label>
+                        </div>
+                      
+                    </div>
+                    <br>
+                  
+                  
+                
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

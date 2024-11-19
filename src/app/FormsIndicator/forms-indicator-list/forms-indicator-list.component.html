@@ -1,0 +1,112 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid" >
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card" style="margin-top: 2%;" >
+          <div class="card-header">
+            <h5>Forms Indicator List</h5>
+        </div>
+        <div class="custom-datatable" style="margin-bottom:15px">
+          <div class="row">
+          <div class="col-md-3"  >
+            <div class="form-group" >
+                <label style="margin-top:30px; margin-left: 10px;" for="FormType">Select Form Type</label>
+                <select id="FormType" required class="form-control " style="border: 1px solid #9eb7cf; margin-left: 10px;  margin-bottom: 20px;"
+                    (change)= "FormTypeChange($event.target.options.selectedIndex)" >
+                    <option [ngValue]="-1" selected>All</option>
+                    <option *ngFor="let FormType of this.FormType" [ngValue]="FormType.id">
+                        {{ FormType.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+      
+      <div class="col-md-3"  >
+        <div class="form-group" >
+            <label style="margin-top:30px; " for="FormType">Select Category</label>
+            <select id="FormCategory" required class="form-control" style="border: 1px solid #9eb7cf;  margin-bottom: 20px;"
+                (change)= "FormCategoryChange($event.target.options.selectedIndex)" >
+                <option [ngValue]="-1" selected>All</option>
+                <option *ngFor="let FormCategory of this.IndicatorCategory" [ngValue]="FormCategory.id">
+                    {{ FormCategory }}
+                </option>
+            </select>
+        </div>
+    </div>
+  </div>
+          <!--   
+          <input style="margin-left: 850px;" type="text" class="filter-ngx form-control"
+            placeholder="Type to filter the name column..." (keyup)="updateFilter($event)" /> -->
+
+          <ngx-datatable
+          (select)="onSelect($event)"
+          [selectionType]="'checkbox'"
+          #table
+          class="bootstrap"
+          [columnMode]="ColumnMode.force"
+          [headerHeight]="50"
+          [footerHeight]="50"
+          rowHeight="auto"
+          [limit]="20"
+          [rows]="rows"
+        >
+        
+
+        <ngx-datatable-column  name="Sr#"  [width]="-80"  [resizeable]="false" >
+          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              {{ rowIndex+1 }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column  name="Indicator Name"  [width]="275"  [resizeable]="false" >
+          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              {{ row.indicatorName }}
+          </ng-template>
+        </ngx-datatable-column>
+        
+        <!-- <ngx-datatable-column  name="Input Type" [width]="30" [resizeable]="false">
+          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              {{ row.inputType }}
+          </ng-template>
+        </ngx-datatable-column> -->
+  
+        <ngx-datatable-column  name="Indicator Category" [width]="10" [resizeable]="false">
+          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+              {{ row.indicatorCategory }}
+          </ng-template>
+        </ngx-datatable-column>
+  
+        <ngx-datatable-column  name="Form Name" [width]="10" [resizeable]="false">
+        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+          <span *ngIf="row.formId === 1">Fixed Site Form</span>
+          <span *ngIf="row.formId === 2">Supervisor Monitoring Form</span>
+          <span *ngIf="row.formId === 3">Team Monitoring Form</span>
+          <span *ngIf="row.formId === 4">SIA Transit Site Monitoring Checklist</span>
+          <span *ngIf="row.formId === 5">House Hold Form</span>
+          <span *ngIf="row.formId === 6">Area/Household Monitoring Checklist</span>
+        </ng-template>
+        </ngx-datatable-column>
+    
+       <ngx-datatable-column  name="Have Sub Indicator" [width]="10" [resizeable]="false">
+        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        <span *ngIf="row.havingSubIndicator === true">Yes</span>
+          <span *ngIf="row.havingSubIndicator === false">No</span>
+        </ng-template>
+        </ngx-datatable-column>
+  
+        <ngx-datatable-column  name="Edit / Delete" [width]="100" [resizeable]="false">
+        <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+        <button class="fa fa-edit  btn  btn-success btn-air-success btn-lg" (click)="onEdit(row.id)">
+        </button>
+        <button style="margin-left: 10px;" class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="onDelete(row.id)">
+        </button>
+        </ng-template>
+        </ngx-datatable-column>
+  
+        </ngx-datatable>
+  
+        </div>
+        </div>
+      </div>
+      </div>
+  
+    <!-- Container-fluid Ends -->

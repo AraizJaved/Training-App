@@ -1,0 +1,83 @@
+<style>
+    table thead tr th {
+        color: white;
+    }
+
+    table tbody tr td {
+        color: white;
+    }
+</style>
+<br />
+
+
+<div class="row">
+    <div class="col-md-8">
+        <button class="btn btn-success" (click)="AddQualification()">
+            <i class="fa fa-plus"></i>
+            Add Qualification
+        </button>
+    </div>
+
+    <div class="col-md-2">
+        <app-back-button style="margin-left: 170px"></app-back-button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xl-12 col-sm-12">
+        <br />
+        <input type="text" class="form-control search-field col-md-3" placeholder="Search Here"
+            [(ngModel)]="searchText" />
+        <br />
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped" id="reportTable" style="width: 100%">
+                <thead>
+                    <tr>
+                        <th colspan="1">Sr#</th>
+                        <th colspan="2">Name</th>
+                        <th colspan="2">Delete</th>
+                      </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of QualificationList
+                                | paginate : config
+                                | searchFilter : searchText;
+                                let i = index ">
+                        <td colspan="1">{{ i + 1 }}</td>
+
+                        <td colspan="2">{{ s.qualification }}</td>    
+                        <td colspan="2">
+                            <button style="margin-left: 10px" class="fa fa-trash btn-danger btn btn-primary"
+                                (click)="onDelete(s.id)">
+                            </button>
+                        </td>              
+                      
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<br />
+<div class="row">
+    <div class="col-lg-3 col-md-3">
+        <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px; width: 5pc"
+            [(ngModel)]="config.itemsPerPage">
+            <option [value]="5000">All</option>
+            <option [value]="10" selected>10</option>
+            <option [value]="50">50</option>
+            <option [value]="100">100</option>
+            <option [value]="250">250</option>
+            <option [value]="500">500</option>
+            <option [value]="1000">1000</option>
+        </select>
+
+    </div>
+    <div class="col-lg-7 col-md-7">
+
+        <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+            (pageBoundsCorrection)="onPageBoundsCorrection($event)"
+            style="letter-spacing: 5px; font-size: 20px; text-align: center"></pagination-controls>
+
+    </div>
+</div>

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC,KAAK,CAAC,EAAE,AAAA,YAAa,CAAA,GAAG,EAAE;EACrC,gBAAgB,EAAE,OACtB;CAAC;;AAED,AAAA,YAAY,EAAE,EAAE,EAAE,EAAE,CAAC;EACjB,MAAM,EAAE,GAAG,CAAC,KAAK,CAAC,OAAkB;CACvC",
+    "sources": [
+        "drsdaily-patient-count.component.scss"
+    ],
+    "names": [],
+    "file": "drsdaily-patient-count.component.css"
+}

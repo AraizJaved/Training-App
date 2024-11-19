@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "range-slider.component.scss"
+    ],
+    "names": [],
+    "file": "range-slider.component.css"
+}

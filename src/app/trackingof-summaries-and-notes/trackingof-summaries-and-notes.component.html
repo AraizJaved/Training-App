@@ -1,0 +1,95 @@
+<div class="card">
+
+    <div class="card1-body">
+        <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12">
+                    <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Summaries / Notes List</h5>
+                                </div>
+                                <div class="col-md-6" style="text-align-last: right;">
+                                    <app-back-button></app-back-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+                                            </ngx-loading>
+
+                                        
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <!-- <button
+                                                        class="btn btn-primary btn-success btn-air-success pull-left"
+                                                        style="margin-bottom: 15px; " type="submit"
+                                                        (click)="exportexcel()"><span><i
+                                                                class="fa fa-download text-white "></i></span>
+                                                        Export to Excel</button> -->
+                                                </div>
+                                                <div class="col-md-6 mt-2" style="text-align-last: right;">
+                                                    <h5>
+                                                        {{TOSANDataList.length}} Records Total
+                                                    </h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="table-responsive" style="margin-top: 25px;"
+                                                [hidden]="TOSANDataList.length == 0">
+                                                <table class="table table-bordered table-striped " style="width: 100%;"
+                                                    id="reportTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.</th>
+                                                            <th>Type</th>
+                                                            <th>Title</th>
+                                                            <th>Tracking #</th>
+                                                            <!-- <th>Status</th> -->
+                                                            <th>Unit / Wing</th>
+                                                            <th>Current Office</th>
+                                                            <th>Date Time</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let s of TOSANDataList| filterAll: searchString let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{s.applicationTypeName}}</td>
+                                                            <td>{{s.dispatchSubject}}</td>
+                                                            <td>{{s.trackingNumber}}</td>
+                                                            <!-- <td>{{s.statusName}}</td> -->
+                                                            <td>{{s.dispatchFrom}}</td>
+                                                            <td>{{s.toOfficerName ? s.toOfficerName : s.forwardingOfficerName ? s.forwardingOfficerName : s.pandSOfficerName}}</td>
+                                                            <td>{{s.dispatchDated | date : 'dd-MM-yyyy'}}</td>
+
+                                                            
+                                                            <td><button class="fa fa-info  btn  btn-success btn-air-success btn-lg" (click)="GetSummeryDetail(s.id , s)">
+                                                            </button></td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,338 @@
+<div class="container-fluid" >
+  <div class="row" style="margin-top: 0px;">
+    <div class="col-xl-12">
+      <div class="card" style="margin-top: 2%;">
+        <div class="job-search">
+          <div class="card-body">
+            <div class="media">
+              <div class="media-body">
+                <h6 style="margin-bottom: 30px;" class="f-w-600"><a href="javascript:void(0)">Reporting Filters</a></h6>
+              </div>
+            </div>
+            <form class="form theme-form" [formGroup]="searchForm">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="division">Division<span style="color: red;" *ngIf="this.formSelected==true">*</span></label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            (change)="onChange(this.searchForm.controls.division.value)" id="division" required
+                            class="form-control "
+                            formControlName="division">
+                            <option selected="true" style='display: none'></option>
+                      <option [ngValue]=1 *ngIf="this.isRegistration==true">All</option>
+                      <option *ngFor="let index of this.Division" [ngValue]="index.code">
+                        {{ index.name }}
+
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.division.value==''"
+                    class="text text-danger">
+                    Division is required.
+                </div> -->
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="district">District</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            (change)="onChange(this.searchForm.controls.district.value)" id="district" required
+                            class="form-control "
+                            formControlName="district">
+                            <option selected="true" style='display: none'></option>
+                      <option [ngValue]=1 *ngIf="this.isRegistration==true" >All</option>
+                      <option *ngFor="let index of this.District" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.district.value==''"
+                    class="text text-danger">
+                    District is required.
+                </div> -->
+                  </div>
+
+                </div>
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="tehsil">Tehsil</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            (change)="onChange(this.searchForm.controls.tehsil.value)" id="tehsil" required
+                            class="form-control "
+                            formControlName="tehsil">
+                            <option selected="true" style='display: none'></option>
+                      <option [ngValue]=1 *ngIf="this.isRegistration==true">All</option>
+                      <option *ngFor="let index of this.Tehsil" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.tehsil.value==''"
+                    class="text text-danger">
+                    Tehsil is required.
+                </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="uc">Union Council</label>
+                    <select style="border: 1px solid #9eb7cf;" id="uc" required class="form-control "
+                            formControlName="uc">
+                            <option selected="true" style='display: none'></option>
+                            <option [ngValue]=1 *ngIf="this.isRegistration==true">All</option>
+                      <option *ngFor="let index of this.UC" [ngValue]="index.id">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.uc.value==''"
+                      class="text text-danger">
+                      Health Facility is required.
+                    </div> -->
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="row">
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="reportType">Report Type</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            (change)="onChangeReportType(this.searchForm.controls.reportType.value)" id="reportType" required
+                            class="form-control "
+                            formControlName="reportType">
+
+                      <option *ngFor="let index of this.ReportType" [ngValue]="index.id">
+                        {{ index.name }}
+
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.division.value==''"
+                    class="text text-danger">
+                    Division is required.
+                </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="userType">User Type</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                    (change)="onChangeType()" required
+                            class="form-control "
+                            formControlName="userType">
+
+                            <option *ngFor="let index of this.UserType" [ngValue]="index">
+                              {{ index }}
+                            </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.division.value==''"
+                    class="text text-danger">
+                    Division is required.
+                </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-3" *ngIf="this.isReportType !== true">
+                  <div class="form-group">
+                    <label for="form">Form<span style="color: red;">*</span></label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            (change)="onChangeForm(this.searchForm.controls.form.value)" id="form" required
+                            class="form-control "
+                            formControlName="form">
+
+                      <option *ngFor="let index of this.Forms" [ngValue]="index.id">
+                        {{ index.name }}
+
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.division.value==''"
+                    class="text text-danger">
+                    Division is required.
+                </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-3" *ngIf="(this.searchForm.controls.form.value != '5' && this.searchForm.controls.form.value != '6') && this.isReportType !== true ">
+                  <div class="form-group">
+                    <label for="indicators">Indicators<span style="color: red;">*</span></label>
+                    <select style="border: 1px solid #9eb7cf;" id="indicators" required class="form-control "
+                            formControlName="indicators">
+                      <!-- <option [ngValue]="null">All</option> -->
+                      <option selected="true" style='display: none'></option>
+                      <option *ngFor="let index of this.Indicators" [ngValue]="index.id">
+                        {{ index.name }}
+
+                      </option>
+                    </select>
+                    <!-- <div *ngIf="this.parentSubmitted && this.searchForm.controls.division.value==''"
+                    class="text text-danger">
+                    Division is required.
+                </div> -->
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="organization">Organization</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                    (change)="onChangeOrganization(this.searchForm.controls.organization.value)"
+                            id="organization" required
+                            class="form-control " formControlName="organization">
+
+                      <option *ngFor="let index of this.Organization" [ngValue]="index.id">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                   
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="designation">Designation</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            id="designation" required
+                            class="form-control " formControlName="designation">
+
+                      <option *ngFor="let index of this.Designations" [ngValue]="index.name">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="compaign">Campaign</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            id="compaign" required
+                            class="form-control " formControlName="compaign">
+
+                      <option *ngFor="let index of this.Compaign" [ngValue]="index.id">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  
+                  </div>
+
+                </div>
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="day">Day</label>
+                    <select style="border: 1px solid #9eb7cf;" id="day" required class="form-control "
+                            formControlName="day" >
+
+                      <option *ngFor="let index of this.Day" [ngValue]="index">
+                        {{ index }}
+                      </option>
+                    </select>
+                  
+                  </div>
+                </div>
+
+                <div class="col-md-3" *ngIf="this.searchForm.controls.form.value == '5' || this.searchForm.controls.form.value == '6'">
+                  <div class="form-group">
+                    <label for="population">Population</label>
+                    <select style="border: 1px solid #9eb7cf;"
+                            id="population" required
+                            class="form-control " formControlName="population">
+
+                      <option *ngFor="let index of this.Population" [ngValue]="index">
+                        {{ index }}
+                      </option>
+                    </select>
+                  
+                  </div>
+
+                </div>
+              
+                <div class="col-md-3" style="margin-top: 15px;" *ngIf="this.isReportType !== true">
+                 
+                </div>
+
+                <div>
+                  <button style="margin-top: 25px; margin-left: 80px;" class="btn btn-success btn-air" [class.spinner]="loading" [disabled]="loading"  isLoading=true (click)="onSubmit()" ><span><i
+                    class="fa fa-check text-white"></i></span>
+                    Generate Report
+                  </button>
+                  <button style="margin-top: 25px; margin-left: 35px;" class="btn btn-primary btn-air" [class.spinner]="loading" [disabled]="loading" (click)="onReset()" isLoading=true ><span><i
+                    class="fa fa-refresh text-white"></i></span>
+                    Reset
+                  </button>
+                </div>
+              </div>
+             
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Container-fluid starts -->
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="row">
+
+          <div class="col-md-12" style="margin-top: 10px;">
+
+            <button class="btn btn-success btn-air-success float-right" style="margin-bottom: 20px; margin-right: 60px;"
+                    type="submit" [class.spinner2]="loading2" [disabled]="loading2"  isLoading=true (click)=" exportToExcel()"><span><i
+              class="fa fa-download text-white"></i></span>
+              Export to Excel
+            </button>
+          </div>
+
+
+        </div>
+        <div class="custom-datatable" style="margin-bottom:15px">
+
+          <!--
+          <input style="margin-left: 850px;" type="text" class="filter-ngx form-control"
+            placeholder="Type to filter the name column..." (keyup)="updateFilter($event)" /> -->
+
+          <ngx-datatable
+            #table
+            class="bootstrap"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [count]="this.rows.length"
+            [limit]="100"
+            [rows]="rows"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column name="Sr#" [width]="40" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ rowIndex + 1 }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column *ngFor="let column of this.columns" [name]="this.getHeaderName(column)"
+                                  [width]="getWidth(column)" [resizeable]="false"
+            >
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{row[column]}}
+              </ng-template>
+            </ngx-datatable-column>
+
+          
+          </ngx-datatable>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Container-fluid Ends -->
+

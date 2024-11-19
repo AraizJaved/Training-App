@@ -1,0 +1,175 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Add Schedule</h5>
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="RegisterForm" class="form theme-form">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  
+                  
+                  
+                  <label for="ContactType">Training<span style="color: red">*</span>
+                  </label>
+                  <search-dropdown [items]="this.Trainings" [size]="'small'" [img]="'product'"
+                    [label]="'title'" [uid]="'id'"
+                    formControlName="trainingId"
+                    >
+                  </search-dropdown>
+                  
+                  <!-- <ng-multiselect-dropdown
+                                        [placeholder]="'Select Chairmanship of'"
+                                        [settings]="dropdownSettingsOrg"
+                                        [data]="MeetingOrganizer"
+                                        [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                    
+                                      > 
+                                      </ng-multiselect-dropdown>-->
+                  <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.trainingId.value == ''" class="text text-danger">
+                    Select Training.
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="ContactType"> Location of Training (Division)<span style="color: red">*</span>
+                </label>
+                <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                  formControlName="Division" (change)="dropdownValueChanged($event, 'Div')">
+                  <option value="" disabled selected>
+                    Select Division
+                  </option>
+
+                  <option *ngFor="let index of divisions" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="ContactType"> Location of Training (District) <span style="color: red">*</span>
+                </label>
+                <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                  formControlName="District" (change)="dropdownValueChanged($event, 'Dis')">
+                  <option selected value="">Select District</option>
+
+                  <option *ngFor="let index of this.districts" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="ContactType">
+                  Location of Training (Tehsil) <span style="color: red">*</span>
+                </label>
+                <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                  formControlName="Tehsil" (change)="dropdownValueChanged($event, 'Teh')">
+                  <option selected value="">Tehsil</option>
+
+                  <option *ngFor="let index of this.tehsils" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" style="margin-top: auto">
+                <div class="form-group">
+
+                  <table colspan="1">
+                    <tr>
+                      <td colspan="4">Virtual</td>
+                      &nbsp;&nbsp;
+
+
+                      <td colspan="2">
+                        <input type="checkbox" formControlName="IsVirtual" class="form-control" id="titles"
+                          (change)="changed($event)" />
+                      </td>
+                    </tr>
+                  </table>
+
+                </div>
+              </div>
+              <div class="col-md-9" *ngIf="!IsVirtual">
+                <div class="form-group">
+                  <label for="ContactType">Venue
+                    <span style="color: red" class="btn btn-link" (click)="AddMeetingVenue()"><i class="fa fa-plus"></i>
+                      Venue</span></label>
+
+
+                  <search-dropdown [items]="this.Venues" [size]="'small'" [img]="'product'" [label]="'venue'"
+                    [uid]="'id'" formControlName="venuId">
+                  </search-dropdown>
+
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="startDateTime">Start Date Time<span style="color: red">*</span></label>
+                  <input style="border: 1px solid #9eb7cf" type="datetime-local" min="{{ minDate }}"
+                    formControlName="startDateTime" class="form-control" id="startDateTime" required placeholder=""
+                    required />
+                  <div *ngIf="
+                      this.parentSubmitted &&
+                      this.RegisterForm.controls.endDateTime.value == ''
+                    " class="text text-danger">
+                    Start DateTime is required.
+                  </div>
+                </div>
+              </div>
+              <b style="margin-top: 35px">To</b>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <label for="endDateTime">End Date Time<span style="color: red">*</span></label>
+                  <input style="border: 1px solid #9eb7cf" type="datetime-local" min="{{ minDate }}"
+                    formControlName="endDateTime" class="form-control" id="endDateTime" required placeholder="" required
+                    style="width: 115%" />
+                  <div *ngIf="
+                      this.parentSubmitted &&
+                      this.RegisterForm.controls.endDateTime.value == ''
+                    " class="text text-danger">
+                    End DateTime is required.
+                  </div>
+                </div>
+              </div>
+
+              <br />
+              <div class="col-md-6">
+                <div class="form-group">
+                  <button [disabled]="!this.RegisterForm.valid" style="margin-left: 87%" type="submit" (click)="onSubmit()"
+                    class="mr-1 btn btn-primary btn-air-success btn-lg">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

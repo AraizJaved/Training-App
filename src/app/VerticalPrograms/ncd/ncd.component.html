@@ -1,0 +1,77 @@
+<div class="container-fluid">
+    <div class="row" id="project">
+        <div class="col-xl-12 col-sm-12">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card1-body">
+
+                    <ngb-tabset type="pills" (tabChange)="onTabChange($event)">
+
+                        <ngb-tab>
+                            <ng-template ngbTabTitle class="nav-item">
+                                <app-feather-icons [icon]="'book-open'" class="custom-ic"></app-feather-icons>
+                                NCD Clinic
+                                <div class="material-border"></div>
+                            </ng-template>
+                            <ng-template ngbTabContent class="tab-content">
+                                <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel"
+                                    aria-labelledby="epiStoreMonitoring">
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-sm-12">
+                                            <div class="card" style="height: 100%;">
+                                                <div class="card-header">
+                                                    <h5>NCD Clinic Report</h5>
+                                                </div>
+                                                <div class="card-body" style="padding: 0%;">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <app-ncddaily-report>
+                                                            </app-ncddaily-report>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+
+                        <ngb-tab>
+                            <ng-template ngbTabTitle class="nav-item">
+                                <app-feather-icons [icon]="'book-open'" class="custom-ic"></app-feather-icons>
+                                NCD Desk
+                                <div class="material-border"></div>
+                            </ng-template>
+                            <ng-template ngbTabContent class="tab-content">
+                                <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel"
+                                    aria-labelledby="epiStoreMonitoring">
+
+                                    <div class="row">
+                                        <div class="col-xl-12 col-sm-12">
+                                            <div class="card" style="height: 100%;">
+                                                <div class="card-header">
+                                                    <h5>NCD Desk Report</h5>
+                                                </div>
+                                                <div class="card-body" style="padding: 0%;">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <app-ncddesk-report>
+                                                            </app-ncddesk-report>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ng-template>
+                        </ngb-tab>
+
+
+                    </ngb-tabset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

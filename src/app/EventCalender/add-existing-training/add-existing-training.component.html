@@ -1,0 +1,536 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+  <div class="card" style="margin-top: 2%">
+    <div class="card-header" style="border-bottom: 4px solid #229106">
+      <div class="row">
+        <div class="col-md-11">
+          <h5>Add Previous Training</h5>
+        </div>
+        <div class="col-md-1">
+          <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="RegisterForm" class="form theme-form">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="title">Training Title<span style="color: red">*</span></label>
+              <input style="border: 1px solid #9eb7cf" type="text" formControlName="title" class="form-control"
+                id="title" required placeholder="" required />
+              <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.title.value == ''
+                " class="text text-danger">
+                Title is required.
+              </div>
+            </div>
+            <tr>
+              <table colspan="1">
+                <tr>
+                  <td *ngIf="!this.digitized" colspan="4"> Non digitized training data</td>
+                  &nbsp;&nbsp;
+
+                  <td *ngIf="!this.digitized" colspan="2">
+                    <input type="checkbox" formControlName="IsNonDigitized" class="form-control" id="nonDigitized"
+                      (change)="changed($event,1)" />
+                  </td>
+                  &nbsp;&nbsp; &nbsp;&nbsp;
+                  <td *ngIf="!this.notAvailable" colspan="4">Individual Candidate Information Not Available</td>
+                  &nbsp;&nbsp;
+
+                  <td *ngIf="!this.notAvailable" colspan="2">
+                    <input type="checkbox" formControlName="IsNonDigitized" class="form-control" id="NonAvailable"
+                      (change)="changedCandidate($event)" />
+                  </td>
+                </tr>
+              </table>
+            </tr>
+            <div class="form-group" *ngIf="this.IsCanidate">
+              <label for="title">Total Participants<span style="color: red">*</span></label>
+              <input style="border: 1px solid #9eb7cf" type="number" formControlName="totalParticipant"
+                class="form-control" id="title" required placeholder="" required />
+              <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.totalParticipant.value == ''
+                " class="text text-danger">
+                Total Participants are required.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="Cadre" *ngIf="!this.IsVirtual || this.IsCanidate" class="row">
+          <div class="col-md-12" *ngIf="this.Designations.length>0">
+            <div class="form-group">
+              <label for="title">Cadre/Designation<span style="color: red">*</span></label>
+              <!-- <search-dropdown [items]="this.Designations" [size]="'small'" [img]="'product'"
+                [label]="'designationName'" [uid]="'designationId'" formControlName="Cadre">
+              </search-dropdown> -->
+
+              <ng-multiselect-dropdown [placeholder]="'Select Cadre/Designation'"
+                [settings]="dropdownSettingsDesignation" (onSelect)="onItemSelectCadre($event)" [data]="this.Designations" formControlName="Cadre">
+              </ng-multiselect-dropdown>
+              <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.Cadre.value ==null
+                " class="text text-danger">
+                Cadre/Designation are required.
+              </div>
+
+            </div>
+          </div>
+          <!-- <div class="col-md-12">
+            <label for="title">Designation<span style="color: red">*</span></label>
+            <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+              formControlName="Cadre">
+              <option selected value="">--Select Designation--</option>
+
+              <option *ngFor="let index of this.Designations" [ngValue]="index.designationName">
+                {{ index.designationName }}
+              </option>
+            </select>
+
+            
+
+          </div> -->
+        </div>
+        <div id="trainingCategory" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactType">Training Category
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                formControlName="trainingCategory">
+                <option selected value="">--Select Training Category--</option>
+
+                <option *ngFor="let index of this.TrainigCategory" [ngValue]="index.traingCategoryName">
+                  {{ index.traingCategoryName }}
+                </option>
+              </select>
+              <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Chairmanship of'"
+                                    [settings]="dropdownSettingsOrg"
+                                    [data]="MeetingOrganizer"
+                                    [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  > 
+                                  </ng-multiselect-dropdown>-->
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.meetingOrganizer.value == ''
+                " class="text text-danger">
+                Under the Chairmanship of is required.
+              </div> -->
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactType">Training Level
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="TrainingLevel" required class="form-control"
+                formControlName="TrainingLevel">
+                <option selected value="">--Select Training Level--</option>
+
+                <option *ngFor="let index of this.TrainingLevels" [ngValue]="index.trainingLevel">
+                  {{ index.trainingLevel }}
+                </option>
+              </select>
+              <!-- <ng-multiselect-dropdown
+                                [placeholder]="'Select Chairmanship of'"
+                                [settings]="dropdownSettingsOrg"
+                                [data]="MeetingOrganizer"
+                                [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                (onSelect)="onItemSelect($event)"
+                                (onSelectAll)="onSelectAll($event)"
+                            
+                              > 
+                              </ng-multiselect-dropdown>-->
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.TrainingLevel.value == ''
+                " class="text text-danger">
+                Under the Chairmanship of is required.
+              </div> -->
+            </div>
+          </div>
+        </div>
+
+        <div id="trainingType" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactType">Training Type
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                formControlName="trainingType">
+                <option selected value="">--Select Training Type--</option>
+
+                <option *ngFor="let index of this.TrainingType" [ngValue]="index.trainingTypeName">
+                  {{ index.trainingTypeName }}
+                </option>
+              </select>
+              <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Chairmanship of'"
+                                    [settings]="dropdownSettingsOrg"
+                                    [data]="MeetingOrganizer"
+                                    [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  > 
+                                  </ng-multiselect-dropdown>-->
+              <!-- <div *ngIf="this.parentSubmitted &&
+                  this.RegisterForm.controls.trainingType.value == ''
+                " class="text text-danger">
+                Under the Training Type of is required.
+              </div> -->
+            </div>
+          </div>
+
+          <div class="col-md-6" style="margin-top: 14px">
+            <div class="form-group">
+              <label for="dueDate">Departments</label>
+
+              <ng-multiselect-dropdown [placeholder]="'Select Departments'" [settings]="dropdownSettingsCompany"
+                [data]="AssignTo" (onSelect)="onItemSelectDepartment($event)" formControlName="department">
+              </ng-multiselect-dropdown>
+              <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                    class="text text-danger">
+                                    Meeting Assingnee Department is required.
+                                </div> -->
+            </div>
+          </div>
+        </div>
+        <div id="Organized By" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactType">Organized By
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                formControlName="OrganizedBy">
+                <option selected value="">--Select Organized By--</option>
+
+                <option *ngFor="let index of this.OrganizedBys" [ngValue]="index.organizedBy">
+                  {{ index.organizedBy }}
+                </option>
+              </select>
+              <!-- <ng-multiselect-dropdown
+                                      [placeholder]="'Select Chairmanship of'"
+                                      [settings]="dropdownSettingsOrg"
+                                      [data]="MeetingOrganizer"
+                                      [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                  
+                                    > 
+                                    </ng-multiselect-dropdown>-->
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.OrganizedBy.value == ''
+                " class="text text-danger">
+                Under the Organized By is required.
+              </div> -->
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="ContactType">Supported By
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="SupportedBy" required class="form-control"
+                formControlName="SupportedBy">
+                <option selected value="">--Select Supported By--</option>
+
+                <option *ngFor="let index of this.SupportedBys" [ngValue]="index.supportedBy">
+                  {{ index.supportedBy }}
+                </option>
+              </select>
+              <!-- <ng-multiselect-dropdown
+                                      [placeholder]="'Select Chairmanship of'"
+                                      [settings]="dropdownSettingsOrg"
+                                      [data]="MeetingOrganizer"
+                                      [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                      (onSelect)="onItemSelect($event)"
+                                      (onSelectAll)="onSelectAll($event)"
+                                  
+                                    > 
+                                    </ng-multiselect-dropdown>-->
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.SupportedBy.value == ''
+                " class="text text-danger">
+                Under the SupportedBy of is required.
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div *ngIf="this.IsCanidate" class="row">
+          <div class="col-md-12" style="margin-top: auto">
+            <div class="form-group">
+              <table colspan="10">
+                <tr>
+                  <td colspan="5"><strong>Year</strong></td>
+                  &nbsp;&nbsp;
+
+                  <td colspan="5">
+                    <input type="checkbox" formControlName="IsYear" class="form-control" id="titles"
+                      (change)="changedYear($event)" />
+                  </td>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+
+                  <td colspan="5" *ngIf="this.IsYear">
+                    <select class="form-control" formControlName="Year">
+                      <option>--Select Year--</option>
+                      <option>2001</option>
+                      <option>2002</option>
+                      <option>2003</option>
+                      <option>2004</option>
+                      <option>2005</option>
+                      <option>2006</option>
+                      <option>2007</option>
+                      <option>2008</option>
+                      <option>2009</option>
+                      <option>2010</option>
+                      <option>2011</option>
+                      <option>2012</option>
+                      <option>2013</option>
+                      <option>2014</option>
+                      <option>2015</option>
+                      <option>2016</option>
+                      <option>2017</option>
+                      <option>2018</option>
+                      <option>2019</option>
+                      <option>2020</option>
+                      <option>2021</option>
+                      <option>2022</option>
+                      <option>2023</option>
+
+                    </select>
+
+                  </td>
+                  <td colspan="5"><strong>Month</strong></td>
+                  &nbsp;&nbsp;
+
+                  <td colspan="5">
+                    <input type="checkbox" formControlName="IsMonth" class="form-control" id="titles"
+                      (change)="changedMonth($event)" />
+                  </td>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+
+                  <td colspan="5" *ngIf="this.IsMonth">
+                    <select class="form-control" formControlName="Month">
+                      <option>January</option>
+                      <option>February</option>
+                      <option>March</option>
+                      <option>April</option>
+                      <option>May</option>
+                      <option>June</option>
+                      <option>July</option>
+                      <option>August</option>
+                      <option>September</option>
+                      <option>October</option>
+                      <option>November</option>
+                      <option>December</option>
+
+                    </select>
+
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div id="Datetime" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="startDateTime">Start Date Time</label>
+              <input style="border: 1px solid #9eb7cf" type="datetime-local" formControlName="startDateTime"
+                class="form-control" id="startDateTime" required placeholder="" required />
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.endDateTime.value == ''
+                " class="text text-danger">
+                Start DateTime is required.
+              </div> -->
+            </div>
+          </div>
+          <b style="margin-top: 35px">To</b>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="endDateTime">End Date Time</label>
+              <input style="border: 1px solid #9eb7cf" type="datetime-local" formControlName="endDateTime"
+                class="form-control" id="endDateTime" required placeholder="" required style="width: 115%" />
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.endDateTime.value == ''
+                " class="text text-danger">
+                End DateTime is required.
+              </div> -->
+            </div>
+          </div>
+        </div>
+        <div id="province" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="Participant Type">
+                Province
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="Cadre" required class="form-control">
+                <option selected value="Punjab">Punjab</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <!-- <label for="ContactType">Division
+            </label>
+            <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+              formControlName="Division" (change)="dropdownValueChanged($event, 'Div')">
+              <option value="" selected>Select Division</option>
+
+              <option *ngFor="let index of divisions" [ngValue]="index.code">
+                {{ index.name }}
+              </option>
+            </select> -->
+
+
+
+
+
+            <div class="form-group">
+              <label for="ContactType">Division</label>
+
+              <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                formControlName="Division" (change)="dropdownValueChanged($event, 'Div')">
+                <option selected value="">--Select Division--</option>
+
+                <option *ngFor="let index of this.divisions" [ngValue]="index.name">
+                  {{ index.name }}
+                </option>
+              </select>
+            </div>
+
+
+
+
+
+          </div>
+          <div class="col-md-6">
+            <label for="ContactType">District
+            </label>
+            <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+              formControlName="District" (change)="dropdownValueChanged($event, 'Dis')">
+              <option selected value="">Select District</option>
+
+              <option *ngFor="let index of this.districts" [ngValue]="index.name">
+                {{ index.name }}
+              </option>
+            </select>
+            
+          </div>
+          <div class="col-md-6">
+            <label for="ContactType">Tehsil
+            </label>
+            <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+              formControlName="Tehsil" (change)="dropdownValueChanged($event, 'Teh')">
+              <option selected value="">Tehsil</option>
+
+              <option *ngFor="let index of this.tehsils" [ngValue]="index.name">
+                {{ index.name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div id="virtual" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-12" style="margin-top: auto">
+            <div class="form-group">
+              <table colspan="10">
+                <tr>
+                  <td *ngIf="!this.isvirtualChecked" colspan="5">Virtual</td>
+                  &nbsp;&nbsp;
+
+                  <td *ngIf="!this.isvirtualChecked" colspan="5">
+                    <input type="checkbox" formControlName="IsVirtual" class="form-control" id="titles"
+                      (change)="changedOther($event,2)" />
+                  </td>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                  <td *ngIf="!this.isVuneNotAvailable" colspan="5">Venue not Available</td>
+                  &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+
+                  <td *ngIf="!this.isVuneNotAvailable" colspan="5">
+                    <input type="checkbox" formControlName="IsVenue" class="form-control" id="titles"
+                      (change)="changedCandidateOther($event)" />
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-12" *ngIf="this.Venues.length>0 && (!this.hideVenue)">
+            <div class="form-group">
+              <label for="ContactType">Venue</label>
+              <search-dropdown [items]="this.Venues" [size]="'small'" [img]="'product'" [label]="'venue'" [uid]="'venue'"
+                formControlName="VenuId">
+              </search-dropdown>
+
+            </div>
+          </div>
+          <!-- <div class="col-md-12" *ngIf="IsVirtual!=true && IsVenue!=true">
+            <div class="form-group">
+              <label for="ContactType">Venue
+              </label>
+
+              <select style="border: 1px solid #9eb7cf" id="VenuId" required class="form-control"
+                formControlName="VenuId">
+                <option selected value="">--Select Venue--</option>
+
+                <option *ngFor="let index of this.Venues" [ngValue]="index.id">
+                  {{ index.venue }}
+                </option>
+              </select>
+            </div>
+          </div> -->
+        </div>
+
+        <div id="discription" *ngIf="!this.IsVirtual" class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf" formControlName="description"
+                class="form-control" id="description" required placeholder=""></textarea>
+
+              <!-- <div *ngIf="
+                  this.parentSubmitted &&
+                  this.RegisterForm.controls.description.value == ''
+                " class="text text-danger">
+                Description is required.
+              </div> -->
+              <!-- <div *ngIf="this.RegisterForm.controls.description.errors?.pattern">
+                                                User name not valid.
+                                           </div>  -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="form-group">
+            <button style="margin-left: 87%" type="submit" (click)="onSubmit()"
+              class="mr-1 btn btn-primary btn-air-success btn-lg">
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

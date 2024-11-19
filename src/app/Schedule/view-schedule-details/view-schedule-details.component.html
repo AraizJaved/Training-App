@@ -1,0 +1,346 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid w-100">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Schedule Details</h5>
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+        </div>
+        <form class="form theme-form">
+          <div class="card-body" id="tbl_exporttable_to_xls">
+            <button (click)="exportPDF(this.EventObj)" class="w-25 btn btn-success">
+              Export to PDF
+            </button>
+            <button (click)="exportTableToExcel('tbl_exporttable_to_xls','details')" class="w-25 ml-2 btn btn-success">
+              Export to Excel
+            </button>
+          
+            <div class="row">
+
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table class="table table-bordered mb-0" ng-init="loadPatient()">
+                  <thead >
+                    <tr>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1"><strong>Title</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.title }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.startDate">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Start Date</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.startDate | date : 'dd/MM/yyyy' }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.endDate">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1"><strong>End Date</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.endDate | date : 'dd/MM/yyyy' }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.month">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Month</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.month }}</th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.year">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Year</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.year }}</th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.departments">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Departments</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.departments }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.traingCategore" >
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Training Category</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.traingCategore }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.trainingType">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Training Type</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.trainingType }}
+                      </th>
+                    </tr>
+                    <tr *ngIf="this.EventObj?.trainingLevel">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Training Level</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.trainingLevel }}
+                      </th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.organizedBy">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1">
+                        <strong>Organized By</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        {{ this.EventObj?.organizedBy }}
+                      </th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.supportedBy">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Supported By</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.supportedBy }}</th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.description">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Description</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.description }}</th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.totalParticipants">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Total Participants</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.totalParticipants }}</th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.cadre">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Cadre</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.cadre }}</th>
+                    </tr>
+
+                   
+                    <tr *ngIf="this.EventObj?.venue">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Venue</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" *ngIf="this.EventObj?.virtual" colspan="5">Virtual</th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" *ngIf="this.EventObj?.venueNotAvailable" colspan="5">Venue Information Not Available</th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" *ngIf="!this.EventObj?.virtual && !this.EventObj?.venueNotAvailable" colspan="5">
+                        {{this.EventObj?.venue}}</th>
+                    </tr>
+                    <!-- <tr>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Venue Not Available</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.venueNotAvailable }}</th>
+                    </tr> -->
+
+                    <tr *ngIf="this.EventObj?.division">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Division</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.division }}</th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.district">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>District</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.district }}</th>
+                    </tr>
+
+                    <tr *ngIf="this.EventObj?.tehsil">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col"><strong>Tehsil</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ this.EventObj?.tehsil }}</th>
+                    </tr>
+
+                  </thead>
+                </table>
+              </div>
+            </div>
+            <h5 style="color: green; margin-top: 5%">TRAINER - External Participants (Personnel not registered in HRMIS)</h5>
+            <div class="row">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table id="ExternalParticipant" class="table table-bordered mb-0">
+                  <thead>
+                    <tr style="border: 1px solid rgb(0, 0, 0)">
+                   
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="3"><strong>Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Father Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>CNIC</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Participant Type</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Mobile No</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Working Place</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Action</strong></th>
+                      <!-- <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Designation Name</strong></th> -->
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr style="border: 1px solid rgb(0, 0, 0)" *ngFor="let s of this.EventObj?.externalParticipants; let i = index">
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="3" *ngIf="this.s.participantType=='Trainer'" >{{ s.name }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.fatherName }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.cnic }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.participantType }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.mobileNo }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.workingPlace }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" ><button class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,1)"><i class="fa fa-trash"></i> </button></td>
+                      <!-- <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.designationName }}</td> -->
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="text-center mt-1 font-weight-bold h6" *ngIf="this.EventObj?.externalParticipants.length == 0">No
+              record found
+            </p>
+            <h5 style="color: green; margin-top: 5%">TRAINEE - External Participants (Personnel not registered in HRMIS)
+            </h5>
+            <div class="row">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table id="ExternalParticipant" class="table table-bordered mb-0">
+                  <thead>
+                    <tr style="border: 1px solid rgb(0, 0, 0)">
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="3"><strong>Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Father Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>CNIC</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Participant Type</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Mobile No</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Working Place</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Action</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody >
+                    <tr style="border: 1px solid rgb(0, 0, 0)" *ngFor="let s of this.EventObj?.externalParticipants; let i = index">
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="3" *ngIf="this.s.participantType=='Trainee'" >{{ s.name }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.fatherName }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.cnic }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.participantType }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.mobileNo }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.workingPlace }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" ><button class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,2)"><i class="fa fa-trash"></i> </button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="text-center mt-1 font-weight-bold h6" *ngIf="this.EventObj?.externalParticipants.length == 0">No
+              record found
+            </p>
+            <h5 style="color: green; margin-top: 5%">TRAINER - Participants (Personnel registered in HRMIS)
+            </h5>
+            <div class="row">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <table id="Trainer" class="table table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1"><strong>Sr No</strong></th>
+
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="3"><strong>CNIC</strong></th>
+
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>Current work place
+                        </strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>work place during training</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>Designation Name</strong>
+                      </th>
+                      
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Action</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let s of this.EventObj?.trainerList; let i = index">
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="1">{{ i + 1 }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.name }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="3">{{ s.cnic }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workingPlace }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workedPlaceAtTraining }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.designationName }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button class="btn btn-danger mr-3 my-1" (click)="onDelete(s,1)"><i class="fa fa-trash"></i> </button>
+                      </td>
+                   
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <p class="text-center mt-1 font-weight-bold h6" *ngIf="this.EventObj?.trainerList.length == 0">No record
+              found</p>
+            <h5 style="color: green; margin-top: 5%">TRAINEE - Participants (Personnel registered in HRMIS)</h5>
+            <div class="row">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <table id="Trainee" class="table table-bordered mb-0">
+                  <thead>
+                    <tr>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="1"><strong>Sr No</strong></th>
+
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Name</strong></th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="3"><strong>CNIC</strong></th>
+
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>Current work place </strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>Work place during training</strong>
+                      </th>
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5">
+                        <strong>Designation Name</strong>
+                      </th>
+                      
+                      <th style="border: 1px solid rgb(0, 0, 0); text-align: center;" scope="col" colspan="5"><strong>Action</strong></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let s of this.EventObj?.traineeList; let i = index">
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="1">{{ i + 1 }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.name }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="3">{{ s.cnic }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workingPlace }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workedPlaceAtTraining }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.designationName }}</td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button class="btn btn-danger mr-3 my-1" (click)="onDelete(s,2)"><i class="fa fa-trash"></i> </button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <p class="text-center mt-1 font-weight-bold h6" *ngIf="this.EventObj?.traineeList.length == 0">No record
+              found</p>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

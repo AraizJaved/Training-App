@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,YAAY,CAAC;EACT,MAAM,EAAE,OAAO;EACf,cAAc,EAAE,IAAI;CACvB;;AAED,AAAA,YAAY,CAAC;EACT,MAAM,EAAE,OAAO;EACf,cAAc,EAAE,IAAI;CACvB",
+    "sources": [
+        "drug-control-procurement.component.scss"
+    ],
+    "names": [],
+    "file": "drug-control-procurement.component.css"
+}

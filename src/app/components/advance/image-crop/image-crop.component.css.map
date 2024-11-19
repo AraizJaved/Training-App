@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "image-crop.component.scss"
+    ],
+    "names": [],
+    "file": "image-crop.component.css"
+}

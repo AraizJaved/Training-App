@@ -1,0 +1,110 @@
+<div class="material-border"></div>
+<div class="card">
+
+    <div class="card1-body">
+        <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+
+            <div class="row">
+                <div class="col-xl-12 col-sm-12">
+                    <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Employees On Leave</h5>
+                                </div>
+                                <div class="col-md-6" style="text-align-last: right;">
+                                    <app-back-button></app-back-button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+                                            </ngx-loading>
+
+                                            <form class="form theme-form">
+                                                <div class="row">
+                                                    <div class="col-md-8"></div>
+                                                    <div class="col-md-4">
+
+                                                        <form id="searchForm">
+                                                            <div class="form-group " style="margin-top: 27px;">
+                                                                <div class="input-group float-right" id="filterAll">
+                                                                    <div class="input-group-addon"><i
+                                                                            class="glyphicon glyphicon-search"></i>
+                                                                    </div>
+                                                                    <input type="text" class="form-control"
+                                                                        name="searchString"
+                                                                        placeholder="Search any keyword..."
+                                                                        [(ngModel)]="searchString">
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <button
+                                                        class="btn btn-primary btn-success btn-air-success pull-left"
+                                                        style="margin-bottom: 15px; " type="submit"
+                                                        (click)="exportexcel()"><span><i
+                                                                class="fa fa-download text-white "></i></span>
+                                                        Export to Excel</button>
+                                                </div>
+                                                <div class="col-md-6 mt-2" style="text-align-last: right;">
+                                                    <h5>
+                                                        {{employees.length}} Records Total
+                                                    </h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="table-responsive" style="margin-top: 25px;"
+                                                [hidden]="employees.length == 0">
+                                                <table class="table table-bordered table-striped " style="width: 100%;"
+                                                    id="reportTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.</th>
+                                                            <th>Office</th>
+                                                            <th>Total</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr
+                                                            *ngFor="let s of employees| filterAll: searchString let i = index">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{s.signedBy}}</td>
+                                                            <td>{{s.total}}</td>
+                                                            <td>
+                                                                <button type="button" class="btn btn-success btn-sm"
+                                                                    (click)="onOfficer(s.signedBy)">Details</button>
+                                                            </td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="card" style="margin-top: 20px; background-color: lightgrey">
+            <div class="card-header">
+                        <h4 style="text-align: center; font-family: unset;"><b>Back Logs</b></h4>
+            </div>
+            <div class="card-body" style="background-color:#ff0b0b5e;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div *ngFor="let s of rows  let i = index">
+                            <div class="card">
+                                
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <h5 style="text-align: left; font-family: unset;"><b>{{(s.title.length>10)? (s.title | slice:0:10)+'...':(s.title)}}</b></h5>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span style="border-color: lightgrey; text-align: right;" 
+                                                class="fa fa-info btn btn-info-gradien" data-toggle="tooltip"
+                                                data-placement="bottom" title="Change Status"
+                                                (click)="GetDetail(s.id,s.taskStatus)"></span>
+
+                                           
+                                        </div>
+                                    </div>
+                                 
+                                </div>
+                                <table class="table  table-striped " style="width: 100%;">
+                                   
+                                    <tr>
+                                        <td><b>Description</b></td>
+                                        <td>{{(s.description.length>25)? (s.description | slice:0:25)+'...':(s.description)}} </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><b>Due Date</b></td>
+                                        <td>{{s.dueDate | date: 'dd/MM/yyyy'}} </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><b>Assigned By</b></td>
+                                        <td>{{s.createdBy}} </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td><b>Assigned To</b></td>
+                                        <td>{{s.designation}} </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        </td>
+                                        <td></td>
+
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,13 @@
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #d3d3d1;
+}
+
+#reportTable, td, th {
+  border: 1px solid #797979;
+}
+
+.checkcursor {
+  cursor: pointer;
+  pointer-events: auto;
+}
+/*# sourceMappingURL=district-count.component.css.map */

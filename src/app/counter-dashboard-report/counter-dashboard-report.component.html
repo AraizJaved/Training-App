@@ -1,0 +1,168 @@
+<div class="page-body" style="
+    background: url(../../../../../assets/Picture.jfif);
+    width: 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: #999;
+  ">
+  <div class="container-fluid pt-3">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="row">
+          <div class="col-lg-3" style="margin-top: inherit">
+            <div class="card border-info h-100" style="background-color: #869da3">
+              <div class="text-center my-auto">
+                <strong class="text-white" (click)="GetTrainings(1)">Total Trainings</strong>
+                <br>
+                <strong style="color: white" (click)="GetTrainings(1)">{{trainingData?.totalTrainings.length}}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3" style="margin-top: inherit">
+            <div class="card border-success h-100" style="background-color: #5c8285" (click)="GetTrainings(2)">
+              <div class="text-center my-auto">
+                <strong class="text-white">Scheduled Trainings</strong>
+                <br>
+                <strong class="text-white">{{trainingData?.scheduleTrainings.length}}</strong>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col-lg-3" style="margin-top: inherit">
+            <div class="card border-danger h-100" style="background-color: #415f61" (click)="GetTrainings(3)">
+              <div class="text-center my-auto">
+                <strong class="text-white">Unscheduled Trainings</strong>
+                <br>
+                <strong class="text-white">{{trainingData?.unScheduleTrainings.length}}</strong>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3" style="margin-top: inherit">
+            <div class="card border-warning h-100" style="background-color: #273b3a" (click)="GetTrainings(4)">
+              <div class="text-center my-auto">
+                <strong class="text-white">Pending Trainings</strong>
+                <br>
+                <strong class="text-white">{{trainingData?.pendingTrainings.length}}</strong>
+              </div>
+            </div>
+          </div> -->
+        </div>
+        <div class="row mt-2">
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="startDateTime"><strong style="color: white">Start Date</strong></label>
+              <input style="border: 1px solid #9eb7cf" type="date" [(ngModel)]="startDate" class="form-control"
+                id="startDateTime" required placeholder="" required />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <label for="endDateTime"><strong style="color: white">End Date</strong></label>
+              <input style="border: 1px solid #9eb7cf" type="date" [(ngModel)]="endDate" class="form-control"
+                id="endDateTime" required placeholder="" required />
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <button (click)="openModal()" class="btn btn-lg"
+                style="color:white;background-color:#273b3a;margin-top: 25px;">
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-md-5">
+            <kendo-chart [title]="{ text: 'Trainings', color: 'white' }" [style]="{ color: 'blue' }">
+              <kendo-chart-area background="#273b3a"></kendo-chart-area>
+              <kendo-chart-series>
+                <kendo-chart-series-item type="bar" [data]="monthlyTrainnig" [color]="pointColor" field="amount"
+                  categoryField="period" summaryField="summary">
+                  <kendo-chart-series-item-labels format="0" position="insideEnd">
+                  </kendo-chart-series-item-labels>
+                </kendo-chart-series-item>
+              </kendo-chart-series>
+              <kendo-chart-value-axis>
+                <kendo-chart-value-axis-item color="white">
+                </kendo-chart-value-axis-item>
+              </kendo-chart-value-axis>
+              <kendo-chart-category-axis>
+                <kendo-chart-category-axis-item>
+                  <kendo-chart-category-axis-item-labels color="white">
+                  </kendo-chart-category-axis-item-labels>
+                </kendo-chart-category-axis-item>
+              </kendo-chart-category-axis>
+            </kendo-chart>
+          </div>
+          <div class="col-md-5">
+            <kendo-chart [title]="{ text: 'Training Type', color: 'white' }" [style]="{ color: 'blue' }">
+              <kendo-chart-area background="#273b3a"></kendo-chart-area>
+              <kendo-chart-series>
+                <kendo-chart-series-item type="bar" [data]="typeWiseTraining" [color]="pointColor" field="amount"
+                  categoryField="period" summaryField="summary">
+                  <kendo-chart-series-item-labels format="0" position="insideEnd">
+                  </kendo-chart-series-item-labels>
+                </kendo-chart-series-item>
+              </kendo-chart-series>
+              <kendo-chart-value-axis>
+                <kendo-chart-value-axis-item color="white">
+                </kendo-chart-value-axis-item>
+              </kendo-chart-value-axis>
+              <kendo-chart-category-axis>
+                <kendo-chart-category-axis-item>
+                  <kendo-chart-category-axis-item-labels color="white">
+                  </kendo-chart-category-axis-item-labels>
+                </kendo-chart-category-axis-item>
+              </kendo-chart-category-axis>
+            </kendo-chart>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="text-right" style="margin-top: inherit">
+          <button class="button" (click)="routeToTraining()">
+            <span>Training Management </span>
+          </button>
+        </div>
+        <div class="text-right" style="margin-top: inherit">
+          <button class="button" (click)="routeToReporting()">
+
+            <span>Reporting Management </span>
+          </button>
+        </div>
+        <!-- <div class="offset-md-4 col-md-8" style="margin-top: inherit">
+          <div class="card border-info mx-sm-1 p-3" style="background-color: #869da3">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="Filter"> Filter </label>
+
+                <select style="border: 1px solid #9eb7cf" id="Filter" required class="form-control"
+                  (change)="showTaskDetailModelView()">
+                  <option selected value="">--Select Filter--</option>
+                  <option value="1">Training Title
+                  </option>
+                  <option value="5">Cadre of Trainings
+                  </option>
+                  <option value="7">Trainings Category</option>
+                  <option value="6">Training Level</option>
+                  <option value="2">Training Type</option>
+                  <option value="8">Department</option>
+                  <option value="9">Trainings Venue
+                  </option>
+                  <option value="3">Trainees</option>
+                  <option value="4">Trainers</option>
+
+
+
+
+                </select>
+              </div>
+            </div>
+            <div class="text-info text-center"></div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>

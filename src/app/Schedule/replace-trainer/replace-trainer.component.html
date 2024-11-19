@@ -1,0 +1,180 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Replace Trainer</h5>
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="RegisterForm" class="form theme-form">
+          <div class="card-body">
+            <div class="row">
+
+
+              <div class="col-md-3">
+                <div class="form-check">
+                  <input mdbRadio class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1"
+                    [checked]="true" (click)="check()" />
+                  <label class="form-check-label" for="flexRadioDefault1"> Cnic </label>
+                </div>
+              </div>
+
+              <div class="col-md-9">
+                <div class="form-check">
+
+                  <input mdbRadio class="form-check-input" (click)="check()" type="radio" checked="true"
+                    name="flexRadioDefault" id="flexRadioDefault2" />
+                  <label class="form-check-label" for="flexRadioDefault2"> Filters </label>
+                </div>
+              </div>
+
+
+              <div *ngIf="this.cnic" class="col-md-6 mt-1">
+                <input maxlength="13" style="border: 1px solid #9eb7cf" type="text" formControlName="personCnic"
+                  class="form-control" id="title" required placeholder="Enter Cnic" required />
+              </div>
+
+
+              <div *ngIf="this.cnic" class="col-md-6 mt-1">
+                <button class="btn btn-primary" (click)="searchByCnic()">Search</button>
+              </div>
+
+
+              <div class="container">
+                <div class="row">
+                  <div *ngIf="!this.cnic" class="col-md-4">
+                    <label for="Division">
+                      Division
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="districtsData" (change)="dropdownValueChanged($event, 'Div')">
+                      <option hidden value="" disabled selected>
+                        -- Select Division--
+                      </option>
+
+                      <option *ngFor="let index of divisions" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div *ngIf="!this.cnic" class="col-md-4">
+                    <label for="District">
+                      District
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="districtsData" (change)="dropdownValueChanged($event, 'Dis')">
+                      <option selected value="">--Select District--</option>
+
+                      <option *ngFor="let index of this.districts" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div *ngIf="!this.cnic" class="col-md-4">
+                    <label for="Tehsil">
+                      Tehsil
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="tehsilData" (change)="dropdownValueChanged($event, 'Teh')">
+                      <option selected value="">--Tehsil--</option>
+
+                      <option *ngFor="let index of this.tehsils" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <br />
+
+                <div *ngIf="!this.cnic" class="row">
+                  <div class="col-md-4">
+                    <label for="HF Type">
+                      HF Type
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="HfTypesData" (change)="dropdownValueChanged($event, 'bhu')">
+                      <option selected value="">-- HF Type --</option>
+
+                      <option *ngFor="let index of this.hfTypes" [ngValue]="index.code">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  </div>
+
+                  <div *ngIf="this.RegisterForm.controls.HfTypesData.value === '014'" class="col-md-4">
+                    <label for="HF Type">
+                      Basic Health Unit
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="BasicHealthUnitType" (change)="dropdownValueChanged($event, 'hft')">
+                      <option selected value="">Basic Health Unit</option>
+
+                      <option *ngFor="let index of this.BasicHealthUnit" [ngValue]="index.name">
+                        {{ index.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-md-4">
+                    <label for="Designation">
+                      Designation
+
+                    </label>
+                    <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                      formControlName="DesignationId" (change)="dropdownValueChanged($event, 'hft')">
+                      <option selected value="">--Designation--</option>
+
+                      <option *ngFor="let index of this.Designations" [ngValue]="index.designationId">
+                        {{ index.designationName }}
+                      </option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+
+              <div *ngIf="!this.cnic" class="col-md-12" style="margin-top: 20px;">
+                <ng-multiselect-dropdown [placeholder]="'Select Health Facilities'" [settings]="dropdownSettingsHf"
+                  [data]="this.healthFacilities" [formControl]="this.RegisterForm.controls.healthFacilitiesData"
+                  (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                </ng-multiselect-dropdown>
+              </div>
+              <div class="col-md-12" style="margin-top: 20px;">
+                <ng-multiselect-dropdown [placeholder]="'Select Trainee'" [settings]="dropdownSettingTrainee"
+                  [data]="this.traineeList" [formControl]="this.RegisterForm.controls.healthFacilitiesData"
+                  (onSelect)="onItemSelectTrainee($event)" (onDeSelect)="ondeSelectTrainee($event)">
+                </ng-multiselect-dropdown>
+              </div>
+
+
+
+              <div class="col-md-6" style="margin-top: 30px;">
+                <div class="form-group">
+                  <button style="margin-left: 87%" type="submit" (click)="onSubmit()"
+                    class="mr-1 btn btn-primary btn-air-success btn-lg">
+                    Submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

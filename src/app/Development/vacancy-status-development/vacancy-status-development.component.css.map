@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "vacancy-status-development.component.scss"
+    ],
+    "names": [],
+    "file": "vacancy-status-development.component.css"
+}

@@ -1,0 +1,24 @@
+.card-height {
+  height: 207px;
+  zoom: small;
+}
+
+#my-card:hover {
+  cursor: pointer;
+}
+
+.zoom {
+  -webkit-transition: -webkit-transform .50s;
+  transition: -webkit-transform .50s;
+  transition: transform .50s;
+  transition: transform .50s, -webkit-transform .50s;
+  /* Animation */
+  margin: 20 auto;
+}
+
+.zoom:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+/*# sourceMappingURL=main-card.component.css.map */

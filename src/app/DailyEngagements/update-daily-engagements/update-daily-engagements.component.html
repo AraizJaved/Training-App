@@ -1,0 +1,114 @@
+<!-- Container-fluid starts -->
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Add Daily Engagement</h5>
+                </div>
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+                        <div class="row">
+                           
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="name">Engagement<span style="color: red;">*</span></label>
+                                    <textarea style="border: 1px solid #9eb7cf;" type="text"  rows="4" cols="100"  formControlName="task"
+                                        class="form-control" id="task" required placeholder="" required></textarea>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.task.value==''"
+                                        class="text text-danger">
+                                        Engagement is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="meetingVenue">Venue<span style="color: red;">*</span></label><br>
+                                   
+                                    <select style="border: 1px solid #9eb7cf;"
+                                     id="meetingVenue" required
+                                    class="form-control "
+                                    formControlName="meetingVenue">
+                                    <option selected value="" >--Select Venue--</option>
+                                    
+                            
+        
+                              <option *ngFor="let index of this.MeetingVenue" [ngValue]="index.id">
+                                {{ index.venue }}
+        
+                              </option>
+                            </select>
+                                    <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Venue'"
+                                    [settings]="dropdownSettingsVenue"
+                                    [data]="MeetingVenue"
+                                    [formControl]="this.RegisterForm.controls.meetingVenue"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  >
+                                  </ng-multiselect-dropdown> -->
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.meetingVenue.value==''"
+                                        class="text text-danger">
+                                        Venue is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="designation">Venue <span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="whereToGo"
+                                        class="form-control" id="whereToGo" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.whereToGo.value==''"
+                                        class="text text-danger">
+                                        location is required.
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="col-md-3">
+                                <label for="ContactType">If Venue not Exist <span style="color: red;" class="btn btn-link " (click)="AddMeetingVenue()"  ><i class="fa fa-plus " ></i> Venue</span></label>
+                                
+                                </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="whenToGo">Date<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="datetime-local" min="{{minDate}}"   formControlName="whenToGo"
+                                        class="form-control" id="whenToGo" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.whenToGo.value==''"
+                                        class="text text-danger">
+                                        Due Date is required.
+                                    </div>
+                                </div>
+                            </div>
+                       
+                            
+                            
+                        </div>
+                     
+
+                        <div class="row">
+                            
+                      
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

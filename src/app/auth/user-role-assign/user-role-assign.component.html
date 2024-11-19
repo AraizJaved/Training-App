@@ -1,0 +1,116 @@
+<div class="container-fluid mt-3">
+  <form [formGroup]="userAssignForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card" style="margin-top: 2%;">
+            <div class="card-header">
+              <h5>User Roles Assignment</h5>
+          </div>
+            <div class="card-body">
+             
+              <div class="list-group">
+                <div *ngFor="let role of this.userAllRoles.allRoles; let i = index;"
+                     class="list-group-item list-group-item-action font-size-16 font-weight-bold custom-control">
+                  <div class="custom-control custom-checkbox mt-1" formArrayName="roles">
+                    <input type="checkbox" class="custom-control-input" [id]="i" [formControlName]="i" />
+                    <label class="custom-control-label" [for]="i">
+                      {{this.userAllRoles.allRoles[i]}}
+                    </label>
+                  </div>
+  <!--                <div class="custom-control float-left">-->
+  <!--                  <label formArrayName="roles" class="custom-control-label">-->
+  <!--                    <input type="text" [formControlName]="i">-->
+  <!--                    {{this.userAllRoles.allRoles[i]}}-->
+  <!--                  </label>-->
+  <!--&lt;!&ndash;                  <label [for]="role" class="custom-control-label">&ndash;&gt;-->
+  <!--&lt;!&ndash;                    {{role}}&ndash;&gt;-->
+  <!--&lt;!&ndash;                  </label>&ndash;&gt;-->
+  <!--                </div>-->
+                </div>
+              </div>
+              <div class="row">
+  
+                <div class="col-md-5">
+                  
+                </div>
+               
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <button  style="margin-top: 30px;" type="submit" class=" mr-1   btn  btn-primary  btn-air-success btn-lg"
+                           >Update Roles</button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                  
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  
+  <!-- <app-ui-preloader [display]="isLoading"></app-ui-preloader> -->
+  <!-- <div class="container-fluid mt-3">
+    <form [formGroup]="userAssignForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <h5>Assign Roles</h5>
+          </div>
+            <div class="card-body">
+            
+              <div class="custom-datatable">
+                    
+                <ngx-datatable
+                  
+                  [selectionType]="'checkbox'"
+                  #table
+                  class="bootstrap"
+                  [headerHeight]="50"
+                  [footerHeight]="50"
+                  rowHeight="auto"
+                  [limit]="10"
+                  [rows]="userAllRoles"
+                >
+                <ngx-datatable-column name="Status" [width]="100" >
+                  <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                  
+               <input type="checkbox"  formControlName="Checkbox"  class="checkbox" (click)="onChange(row.name)" class="form-control " id="Checkbox">
+                    
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Roles" [width]="1050" [resizeable]="false">
+                  <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                      {{ row.name }}
+                  </ng-template>
+              </ngx-datatable-column>
+              
+                </ngx-datatable>
+  
+                <div class="row">
+  
+                  <div class="col-md-5">
+                    
+                  </div>
+                 
+                  <div class="col-md-4">
+                      <div class="form-group">
+                          <button   type="submit" (click)="onSubmit()" class=" mr-1   btn  btn-primary btn-air-success btn-lg"
+                             >Update Roles</button>
+                      </div>
+                  </div>
+                  <div class="col-md-3">
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div> -->

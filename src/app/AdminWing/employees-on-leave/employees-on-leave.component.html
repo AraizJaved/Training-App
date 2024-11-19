@@ -1,0 +1,110 @@
+<div class="card">
+    <div class="card-header">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+
+        <form id="searchForm">
+            <div class="row ">
+                <div class="col-md-8"> </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <div class="input-group float-right" id="filterAll">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                            <input type="text" class="form-control" name="searchString"
+                                placeholder="Search any keyword..." [(ngModel)]="searchString">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <!-- <form class="form theme-form" [formGroup]="EmplOnLeaveForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="From">From Date</label>
+                        <input class="form-control " formControlName="From" type="date" name="From">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="To">To Date</label>
+                        <input class="form-control " formControlName="To" type="date" name="To">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-success btn-air-success " type="submit"
+                        style="margin-left: 60px; margin-top: 27px;" (click)="getEmployeesOnLeave()"><span><i
+                                class="fa fa-check text-white "></i></span>
+                        Search</button>
+                </div>
+
+
+            </div>
+        </form> -->
+
+        <div class="row">
+            <div class="col-md-2">
+                <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                    type="submit" (click)="exportexcel()"><span><i class="fa fa-download text-white "></i></span>
+                    Export to Excel</button>
+            </div>
+            <div class="col-md-3" >
+                <h6>
+                    Total Employee on Leave: <strong>   &nbsp;{{empOnLeaveList.length}}</strong><br><br>
+                   <span style="color:red"> Leaves Expire This Month: <strong>  {{count}}</strong> </span>
+                </h6>
+            </div>
+            <div class="col-md-3">
+                <h5>
+                 
+            
+                </h5>
+            </div>
+            <div class="col-md-4 mt-2" style="text-align-last: right;">
+                <h5>
+                    {{empOnLeaveList.length}} Records Total
+                    {{count}}
+                </h5>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="margin-top: 25px;" [hidden]="empOnLeaveList.length == 0">
+            <table class="table table-bordered table-striped " style="width: 100%;" id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>Employee Name</th>
+                        <th>Father Name</th>
+                        <th>CNIC</th>
+                        <th>Designation</th>
+                        <th>File Number</th>
+                        <th>Leave Type</th>
+                        <th>From Date</th>
+                        <th>To Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of empOnLeaveList | filterAll: searchString let i = index">
+                        <td [ngClass]="s.class">{{i+1}}</td>
+                        <td [ngClass]="s.class">{{s.employeeName}}</td>
+                        <td [ngClass]="s.class">{{s.fatherName}}</td>
+                        <td [ngClass]="s.class">{{s.cnic}}</td>
+                        <td [ngClass]="s.class">{{s.designation_Name}}</td>
+                        <td [ngClass]="s.class">{{s.fileNumber}}</td>
+                        <td [ngClass]="s.class">{{s.leaveTypeName}}</td>
+                        <td [ngClass]="s.class">{{s.fromDate | date: 'dd/MM/yyyy'}}</td>
+                        <td [ngClass]="s.class">{{s.toDate | date: 'dd/MM/yyyy'}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>

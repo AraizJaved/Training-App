@@ -1,0 +1,64 @@
+.font-primary {
+    color: #ffffff !important;
+}
+
+.body {
+    
+    font-size: 15px !important ;
+}
+
+
+.headertext {
+    display: none;
+  }
+  .headertext:after {
+    content: 'Task Management System (Primary & Secondary Healthcare Department)';
+  }
+
+  .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: rgb(217, 228, 226);
+ }
+ 
+ .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: rgb(176, 197, 194);
+}
+
+.div {
+  color: #FF0000;
+  animation: bgColor 5s infinite linear;
+  font-weight: 700;
+  float: right;
+  width: 150px;
+  height: 44px; 
+  line-height: 35px;
+  padding: 5px;
+  text-align: center;
+  border-radius: 25px;
+
+}
+@keyframes bgColor {
+  12.5% {
+    color: #c85d5d;
+  }
+  25% {
+    color: #FFA500;
+  }
+  37.5% {
+    color: #FFFF00;
+  }
+  50% {
+    color: #7FFF00;
+  }
+  62.5% {
+    color: #00FFFF;
+  }
+  75% {
+    color: #6363bb;
+  }
+  87.5% {
+    color: #9932CC;
+  }
+  100% {
+    color: #b35486;
+  }
+}

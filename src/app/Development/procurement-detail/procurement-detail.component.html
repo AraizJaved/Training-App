@@ -1,0 +1,134 @@
+<div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel" aria-labelledby="epiStoreMonitoring">
+
+    <div class="row">
+        <div class="col-xl-12 col-sm-12">
+            <div class="card" style="height: 100%; margin-top: 20px;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Procurement Details</h5>
+                        </div>
+                        <div class="col-md-6" style="text-align-last: right;">
+                            <app-back-button></app-back-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+                                    </ngx-loading>
+
+                                    <form id="searchForm">
+                                        <div class="row ">
+                                            <div class="col-md-8"> </div>
+                                            <div class="col-md-4 ">
+                                                <div class="form-group">
+                                                    <div class="input-group float-right" id="filterAll">
+                                                        <div class="input-group-addon"><i
+                                                                class="glyphicon glyphicon-search"></i></div>
+                                                        <input type="text" class="form-control" name="searchString"
+                                                            placeholder="Search any keyword..."
+                                                            [(ngModel)]="searchString">
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                    <!-- <form class="form theme-form" [formGroup]="AwaitingPostingForm">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="From">From Date</label>
+                                                    <input class="form-control " formControlName="From" type="date" name="From">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label for="To">To Date</label>
+                                                    <input class="form-control " formControlName="To" type="date" name="To">
+                                                </div>
+                            
+                                            </div>
+                                            <div class="col-md-4">
+                                                <button class="btn btn-primary btn-success btn-air-success " type="submit"
+                                                    style="margin-left: 60px; margin-top: 27px;" (click)="getAwaitingPosting()"><span><i
+                                                            class="fa fa-check text-white "></i></span>
+                                                    Search</button>
+                                            </div>
+                            
+                            
+                                        </div>
+                                    </form> -->
+
+
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <button class="btn btn-primary btn-success btn-air-success pull-left"
+                                                style="margin-bottom: 15px; " type="submit"
+                                                (click)="exportexcel()"><span><i
+                                                        class="fa fa-download text-white "></i></span>
+                                                Export to Excel</button>
+                                        </div>
+                                        <!-- <div class="col-md-6 mt-2" style="text-align-last: right;">
+                                            <h5>
+                                                {{procurementDetails.length}} Records Total
+                                            </h5>
+                                        </div> -->
+                                    </div>
+
+                                    <div class="table-responsive" style="margin-top: 25px;">
+                                        <table class="table table-bordered table-striped " style="width: 100%;"
+                                            id="reportTable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sr.</th>
+                                                    <th>Name</th>
+                                                    <th>Bids Received</th>
+                                                    <th>Entered By</th>
+                                                    <th>Firm Awarded Contract</th>
+                                                    <th>Firms Qualified</th>
+                                                    <th>Status Award Name</th>
+                                                    <th>Total Contract Amount</th>
+                                                    <th>Request Proposal Date</th>
+                                                    <th>Moving Date</th>
+                                                    <th>Approval Date</th>
+                                                    <th>Evaluation Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr
+                                                    *ngFor="let s of procurementDetails | filterAll: searchString let i = index">
+                                                    <td>{{i+1}}</td>
+                                                    <td>{{s.userDetail}}</td>
+                                                    <td>{{s.bids_Received}}</td>
+                                                    <td>{{s.entered_By}}</td>
+                                                    <td>{{s.firm_Awarded_Contract}}</td>
+                                                    <td>{{s.firms_Qualified}}</td>
+                                                    <td>{{s.status_Award_Name}}</td>
+                                                    <td>{{s.total_Contract_Amount}}</td>
+                                                    <td>{{s.request_Proposal_Date | date: 'dd/MM/yyyy'}}</td>
+                                                    <td>{{s.dist_Date_Of_Moving | date: 'dd/MM/yyyy'}}</td>
+                                                    <td>{{s.dist_Date_Approval | date: 'dd/MM/yyyy'}}</td>
+                                                    <td>{{s.technical_Evaluation_Date | date: 'dd/MM/yyyy'}}</td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

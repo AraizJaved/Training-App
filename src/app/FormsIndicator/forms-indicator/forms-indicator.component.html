@@ -1,0 +1,608 @@
+<!-- Container-fluid starts -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header">
+                    <h5>Forms Indicator</h5>
+                </div>
+                <form [formGroup]="FormIndicator" class="form theme-form">
+                    <div class="card-body">
+                   
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="IndicatorCategory">Indicator Category<span
+                                            style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="IndicatorCategory" required
+                                        class="form-control " formControlName="IndicatorCategory">
+                                        <option *ngFor="let IndicatorCategory of this.IndicatorCategory"
+                                            [ngValue]="IndicatorCategory">
+                                            {{ IndicatorCategory }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.IndicatorCategory.value==''"
+                                        class="text text-danger">
+                                        Indicator Category is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="FormType">Form Type<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="FormType" required
+                                        class="form-control " formControlName="FormType">
+
+                                        <option *ngFor="let FormType of this.FormType" [ngValue]="FormType.id">
+                                            {{ FormType.name }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.FormType.value==''"
+                                        class="text text-danger">
+                                        Form Type is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="IndicatorName">Indicator Name<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text"
+                                        formControlName="IndicatorName" class="form-control" id="IndicatorName" required
+                                        placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.IndicatorName.value==''"
+                                        class="text text-danger">
+                                        Indicator Name is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Required">Indicator Required<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="Required" required
+                                        class="form-control" formControlName="Required">
+
+                                        <option *ngFor="let index of this.Required" [ngValue]="index.value">
+                                            {{ index.text }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.Required.value!=false && !this.FormIndicator.controls.Required.value "
+                                        class="text text-danger">
+                                        Required Choice are required.
+                                    </div>
+                                </div>
+                           
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Comments">Comments<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="Comments" required
+                                        class="form-control" formControlName="Comments">
+
+                                        <option *ngFor="let item of this.Comments" [ngValue]="item.value">
+                                            {{ item.text }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.Comments.value!=false && !this.FormIndicator.controls.Comments.value "
+                                        class="text text-danger">
+                                        Comments are required.
+                                    </div>
+                                </div>
+                           
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="SubIndicatorDependancy">SubIndicator Dependancy<span
+                                            style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;"
+                                        onkeyup="this.value=this.value.replace(/[^A-Z, a-z,.,-,()]/g, '');" type="text"
+                                        formControlName="SubIndicatorDependancy" class="form-control"
+                                        id="SubIndicatorDependancy" required placeholder="">
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.SubIndicatorDependancy.value==''"
+                                        class="text text-danger">
+                                        SubIndicator Dependancy is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="HavingSubIndicator">Having Sub Indicator<span
+                                            style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="HavingSubIndicator" required
+                                        class="form-control " formControlName="HavingSubIndicator">
+
+                                        <option *ngFor="let item of this.HavingSubIndicator" [ngValue]="item.value">
+                                            {{ item.text }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.HavingSubIndicator.value!=false && !this.FormIndicator.controls.HavingSubIndicator.value "
+                                        class="text text-danger">
+                                        SubIndicator Choice is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="Type">Type<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="Type" required class="form-control " (ngModelChange)="onParentTypeChange($event)"
+                                        formControlName="Type">
+                                        <option *ngFor="let Index of this.ParentType" [ngValue]="Index">
+                                            {{ Index }}
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.FormIndicator.controls.Type.value==''"
+                                        class="text text-danger">
+                                        Type is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div [hidden]="this.FormIndicator.controls.Type.value == ''">
+                            <div class="card">
+                                <div style=" border: 2px solid #9eb7cf;" class="card mt-4 p-4">
+                                    <div class="card-header">
+                                        <h5>Type Details</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="InputLabel">Input Label<span
+                                                        style="color: red;">*</span></label>
+                                                <input style="border: 1px solid #9eb7cf;" type="text"
+                                                    formControlName="InputLabel" class="form-control" id="InputLabel"
+                                                    required placeholder="" required>
+                                                <div *ngIf="this.childSubmittedOption && this.FormIndicator.controls.InputLabel?.errors?.required"
+                                                    class="text text-danger">
+                                                    InputLabel is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="TypeComments">Comments<span
+                                                        style="color: red;">*</span></label>
+                                                <select style="border: 1px solid #9eb7cf;" id="TypeComments" required
+                                                    class="form-control" formControlName="TypeComments">
+
+                                                    <option *ngFor="let item of this.TypeCommentsOption"
+                                                        [ngValue]="item">
+                                                        {{ item.text }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmittedOption   && this.FormIndicator.controls.TypeComments?.errors?.required "
+                                                    class="text text-danger">
+                                                    Comments are required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="Indicator">Indicator<span
+                                                        style="color: red;">*</span></label>
+                                                <select style="border: 1px solid #9eb7cf;" id="Indicator" required
+                                                    class="form-control" formControlName="Indicator">
+
+                                                    <option *ngFor="let item of this.Indicator" [ngValue]="item">
+                                                        {{ item.text }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmittedOption  && this.FormIndicator.controls.Indicator?.errors?.required "
+                                                    class="text text-danger">
+                                                    Indicator is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label for="InputType">Input Type<span
+                                                        style="color: red;">*</span></label>
+                                                <select style="border: 1px solid #9eb7cf;" id="InputType"  required
+                                                    class="form-control " formControlName="InputType">
+                                                    <option *ngFor="let InputType of this.EditTextOptions"
+                                                        [ngValue]="InputType">
+                                                        {{ InputType }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmittedOption  && this.FormIndicator.controls.InputType?.errors?.required "
+                                                    class="text text-danger">
+                                                    Input Type is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row d-flex justify-content-end">
+                                        <div class="col-sm-2 ">
+                                            <button (click)="AddInputType(id)"
+                                                class="btn btn-primary float-right d-flex justify-content-end btn-primary btn-air-success">Add</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body custom-datatable">
+                                        <ngx-datatable [selectionType]="'checkbox'" #table class='bootstrap'
+                                            [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5"
+                                            [rows]="realRow">
+                                            <ngx-datatable-column name="Input Label" [width]="300" [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+                                                    {{ row.InputLabel }}
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="Comments" [width]="300" [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+                                                    <span *ngIf="row.TypeComments">Yes</span>
+                                                    <span *ngIf="!row.TypeComments">No</span>
+
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="Indicator" [width]="300" [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+                                                    <span *ngIf="row.Indicator">Yes</span>
+                                                    <span *ngIf="!row.Indicator">No</span>
+
+                                                </ng-template>
+                                            </ngx-datatable-column>
+
+
+                                            <ngx-datatable-column name="Update / Delete" [width]="300"
+                                                [resizeable]="false">
+                                                <ng-template let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+                                                    <button class="fa fa-edit  btn  btn-success btn-air-success btn-lg"
+                                                        (click)="subEditOptions(rowIndex)">
+                                                    </button>
+                                                    <button style="margin-left: 10px;"
+                                                        class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"
+                                                        (click)="onDeleteOptions(rowIndex)">
+                                                    </button>
+                                                </ng-template>
+                                            </ngx-datatable-column>
+
+                                        </ngx-datatable>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div [hidden]="this.FormIndicator.controls.HavingSubIndicator.value !== true">
+                            <div class="card">
+                                <div style=" border: 2px solid #9eb7cf;" class="card mt-4 p-4">
+                                    <div class="card-header">
+                                        <h5>Sub Indicator Detail</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label style=" margin-top: 20px;" for="InnerIndicatorName">
+                                                    Name<span style="color: red;">*</span></label>
+                                                <input style="border: 1px solid #9eb7cf;" type="text"
+                                                    formControlName="InnerIndicatorName" class="form-control"
+                                                    id="InnerIndicatorName" placeholder="">
+                                                <div *ngIf="this.childSubmitted &&  this.FormIndicator.controls.InnerIndicatorName?.errors?.required"
+                                                    class="text text-danger">
+                                                    Indicator Name is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+
+                                                <label style=" margin-top: 20px;" for="InnerComments">Comments<span
+                                                        style="color: red;">*</span></label>
+                                                <select style="border: 1px solid #9eb7cf;" id="InnerComments"
+                                                    class="form-control " formControlName="InnerComments">
+
+                                                    <option *ngFor="let item of this.InnerCommentsList"
+                                                        [ngValue]="item">
+                                                        {{ item.text }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmitted && this.FormIndicator.controls.InnerComments?.errors?.required "
+                                                    class="text text-danger">
+                                                    Comments are required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 40px;" class="form-row">
+                                        <div class="col-md-6">
+                                       
+                                            <div class="form-group">
+                                                <label for="InnerRequired">Indicator Required<span
+                                                        style="color: red;">*</span></label>
+                                                <select style="border: 1px solid #9eb7cf;" id="InnerRequired" required
+                                                    class="form-control" formControlName="InnerRequired">
+
+                                                    <option *ngFor="let index of this.Required" [ngValue]="index">
+                                                        {{ index.text }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmitted && this.FormIndicator.controls.InnerRequired?.errors?.required "
+                                                    class="text text-danger">
+                                                    Required Choice are required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label 
+                                                    for="InnerSubIndicatorDependancy">SubIndicator Dependancy<span
+                                                        style="color: red;">*</span></label>
+                                                <input style="border: 1px solid #9eb7cf;"
+                                                    onkeyup="this.value=this.value.replace(/[^A-Z, a-z,.,-,()]/g, '');"
+                                                    type="text" formControlName="InnerSubIndicatorDependancy"
+                                                    class="form-control" id="InnerSubIndicatorDependancy"
+                                                    placeholder="">
+                                                <div *ngIf="this.childSubmitted &&  this.FormIndicator.controls.InnerSubIndicatorDependancy?.errors?.required"
+                                                    class="text text-danger">
+                                                    SubIndicator Dependancy is required.
+                                                </div>
+                                            </div>
+                              
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="ChildType">Type<span style="color: red;">*</span></label>
+                                                <select style="margin-top: 20px; border: 1px solid #9eb7cf;" id="Type" (ngModelChange)="onChildTypeChange($event)"
+                                                    required class="form-control" formControlName="ChildType">
+                                                    <option *ngFor="let ChildType of this.ParentType"
+                                                        [ngValue]="ChildType">
+                                                        {{ ChildType }}
+                                                    </option>
+                                                </select>
+                                                <div *ngIf="this.childSubmitted && this.FormIndicator.controls.ChildType?.errors?.required"
+                                                    class="text text-danger">
+                                                    Type is required.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                        </div>
+                                    </div>
+                                    <div [hidden]="this.FormIndicator.controls.ChildType.value == '' ">
+                                        <div class="card">
+                                            <div style=" border: 2px solid #9eb7cf;" class="card mt-3 p-3">
+                                                <div class="card-header">
+                                                    <h5>Type Details</h5>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="ChildInputLabel">Input Label<span
+                                                                    style="color: red;">*</span></label>
+                                                            <input style="border: 1px solid #9eb7cf;" type="text"
+                                                                formControlName="ChildInputLabel" class="form-control"
+                                                                id="ChildInputLabel" required placeholder="" required>
+                                                            <div *ngIf="this.SubmittedChild && this.FormIndicator.controls.ChildInputLabel.value==''"
+                                                                class="text text-danger">
+                                                                Input Label is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-group">
+                                                            <label for="ChildTypeComments">Comments<span
+                                                                    style="color: red;">*</span></label>
+                                                            <select style="border: 1px solid #9eb7cf;"
+                                                                id="ChildTypeComments" required class="form-control"
+                                                                formControlName="ChildTypeComments">
+
+                                                                <option
+                                                                    *ngFor="let ChildTypeComments of this.TypeCommentsOption"
+                                                                    [ngValue]="ChildTypeComments.value">
+                                                                    {{ ChildTypeComments.text }}
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="this.SubmittedChild && this.FormIndicator.controls.ChildTypeComments.value==''"
+                                                                class="text text-danger">
+                                                                Comments are required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="ChildIndicator">Indicator<span
+                                                                    style="color: red;">*</span></label>
+                                                            <select style="border: 1px solid #9eb7cf;"
+                                                                id="ChildIndicator" required class="form-control"
+                                                                formControlName="ChildIndicator">
+
+                                                                <option *ngFor="let ChildIndicator of this.Indicator"
+                                                                    [ngValue]="ChildIndicator.value">
+                                                                    {{ ChildIndicator.text }}
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="this.SubmittedChild && this.FormIndicator.controls.ChildIndicator.value==''"
+                                                                class="text text-danger">
+                                                                Indicator is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+
+                                                        <div class="form-group">
+                                                            <label for="InnerInputType">Input Type<span
+                                                                    style="color: red;">*</span></label>
+                                                            <select style="border: 1px solid #9eb7cf;"
+                                                                id="InnerInputType" class="form-control "
+                                                                formControlName="InnerInputType">
+                                                                <option *ngFor="let item of this.EditTextOptions"
+                                                                    [ngValue]="item">
+                                                                    {{ item }}
+                                                                </option>
+                                                            </select>
+                                                            <div *ngIf="this.SubmittedChild && this.FormIndicator.controls.InnerInputType.value==''"
+                                                                class="text text-danger">
+                                                                Input Type is required.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-row d-flex justify-content-end">
+                                                    <div class="col-sm-2 ">
+                                                        <button (click)="AddInputTypeChild(id)"
+                                                            class="btn btn-primary float-right d-flex justify-content-end btn-primary btn-air-success">Add</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-body custom-datatable">
+                                                    <ngx-datatable [selectionType]="'checkbox'" #table class='bootstrap'
+                                                        [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                                                        [limit]="5" [rows]="realRowChild">
+                                                        <ngx-datatable-column name="Input Label" [width]="270"
+                                                            [resizeable]="false">
+                                                            <ng-template id="filetype" let-row="row"
+                                                                let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                                {{ row.ChildInputLabel }}
+                                                            </ng-template>
+                                                        </ngx-datatable-column>
+                                                        <ngx-datatable-column name="Comments" [width]="270"
+                                                            [resizeable]="false">
+                                                            <ng-template id="filetype" let-row="row"
+                                                                let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                                <span *ngIf="row.ChildTypeComments">Yes</span>
+                                                                <span *ngIf="!row.ChildTypeComments">No</span>
+
+                                                            </ng-template>
+                                                        </ngx-datatable-column>
+                                                        <ngx-datatable-column name="Indicator" [width]="270"
+                                                            [resizeable]="false">
+                                                            <ng-template id="filetype" let-row="row"
+                                                                let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                                <span *ngIf="row.ChildIndicator">Yes</span>
+                                                                <span *ngIf="!row.ChildIndicator">No</span>
+
+                                                            </ng-template>
+                                                        </ngx-datatable-column>
+
+
+                                                        <ngx-datatable-column name="Update / Delete" [width]="270"
+                                                            [resizeable]="false">
+                                                            <ng-template let-row="row" let-rowIndex="rowIndex"
+                                                                ngx-datatable-cell-template>
+                                                                <button
+                                                                    class="fa fa-edit  btn  btn-success btn-air-success btn-lg"
+                                                                    (click)="subEditChild(rowIndex)">
+                                                                </button>
+                                                                <button style="margin-left: 10px;"
+                                                                    class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"
+                                                                    (click)="onDeleteChild(rowIndex)">
+                                                                </button>
+                                                            </ng-template>
+                                                        </ngx-datatable-column>
+
+                                                    </ngx-datatable>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="margin-top: 10px;" class="form-row d-flex justify-content-end">
+                                        <div class="col-sm-2 ">
+                                            <button (click)="Add(id)"
+                                                class="btn btn-primary float-right d-flex justify-content-end btn-primary btn-air-success">Add</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-body custom-datatable">
+                                        <ngx-datatable [selectionType]="'checkbox'" #table class='bootstrap'
+                                            [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="5"
+                                            [rows]="realRows">
+                                            <ngx-datatable-column name="Indicator Name" [width]="200"
+                                                [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" name="filetype"
+                                                    let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                    {{ row.IndicatorName }}
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <!-- <ngx-datatable-column name="Input Type" [width]="150" [resizeable]="false">
+                                        <ng-template id="filetype" let-row="row" name="filetype" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                            {{ row.ChildType }}
+                                        </ng-template>
+                                    </ngx-datatable-column> -->
+
+                                            <ngx-datatable-column name="Comments" [width]="200" [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" name="filetype"
+                                                    let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                    <span *ngIf="row.Comments">Yes</span>
+                                                    <span *ngIf="!row.Comments">No</span>
+
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="Sub Indicator Dependancy" [width]="220"
+                                                [resizeable]="false">
+                                                <ng-template id="filetype" let-row="row" name="filetype"
+                                                    let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                                    {{ row.SubIndicatorDependancy }}
+                                                </ng-template>
+                                            </ngx-datatable-column>
+
+                                            <ngx-datatable-column name="" [width]="150" [resizeable]="false">
+                                                <ng-template let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+
+                                                </ng-template>
+                                            </ngx-datatable-column>
+                                            <ngx-datatable-column name="Edit / Delete" [width]="330"
+                                                [resizeable]="false">
+                                                <ng-template let-row="row" let-rowIndex="rowIndex"
+                                                    ngx-datatable-cell-template>
+                                                    <button class="fa fa-edit  btn  btn-success btn-air-success btn-lg"
+                                                        (click)="subEdit(rowIndex)">
+                                                    </button>
+                                                    <button style="margin-left: 10px;"
+                                                        class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"
+                                                        (click)="onDelete(rowIndex)">
+                                                    </button>
+                                                </ng-template>
+                                            </ngx-datatable-column>
+
+                                        </ngx-datatable>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-5">
+
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <button style="margin-top: 10px; " type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Container-fluid Ends -->

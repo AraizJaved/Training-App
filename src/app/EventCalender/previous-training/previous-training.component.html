@@ -1,0 +1,119 @@
+<style>
+  table thead tr th {
+    color: white;
+  }
+
+  table tbody tr td {
+    color: white;
+  }
+</style>
+<br />
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+
+<div>
+  <div class="d-inline">
+    <button class="btn btn-light" (click)="AddExistingTrainingModel(null,false)">
+      <i class="fa fa-plus"></i>
+      Past Training
+    </button>
+    <button class="btn btn-secondary mx-3" (click)="NonDigitizedTrainingData()">
+      DOCUMENTS/MEDIA
+    </button>
+  </div>
+  <div class="d-inline float-right">
+    <button class="btn btn-info mx-3 my-1" (click)="openFile()">
+      <i class="fa fa-info-circle"></i>
+      <!-- Downlaod -->
+    </button>
+    <app-back-button></app-back-button>
+  </div>
+</div>
+
+
+
+
+<br />
+<br />
+
+<div class="row">
+  <div class="col-xl-12 col-sm-12">
+    <br />
+    <input type="text" class="form-control search-field col-md-3" placeholder="Search Here" (keyup)="GetScheduleList($event)" />
+    <br />
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped" id="reportTable" style="width: 100%">
+        <thead>
+          <tr>
+            <th colspan="1">Sr#</th>
+            <th class="setWidth">Title</th>
+            <th colspan="3">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+                let s of ScheduleList
+                  | paginate : config;
+               
+                let i = index
+              ">
+            <td colspan="1">{{ i + 1 }}</td>
+
+            <td class="setWidth">{{ s.title }}</td>
+
+
+            <td colspan="3">
+              <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                              <td colspan="1" > -->
+              <button class="fa fa-eye btn btn-light btn-air-success btn-lg mx-1 my-1" (click)="showSchedule(s)"></button>
+
+              <button class="btn btn-dark mx-1 my-1" (click)="showAddTrainee(s)">
+                <i class="fa fa-plus"></i>
+                Trainee
+              </button>
+              <button class="btn btn-secondary mx-1 my-1" (click)="showAddTrainer(s)">
+                <i class="fa fa-plus"></i>
+                Trainer
+              </button>
+
+              <button class="btn btn-info mx-1 my-1" (click)="showAddExternalModel(s)">
+                <i class="fa fa-plus"></i>
+                External Participants
+              </button>
+
+              <button  class="fa fa-pencil btn btn-secondary btn-air-success btn-lg mx-1 my-1"
+                (click)="editTraining(s)">
+              </button>
+
+              <button  class="btn btn-danger  mx-1 my-1" (click)="onDelete(s.id)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br />
+<br />
+<div class="d-flex">
+  <div class="mr-auto">
+    <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px; width: 5pc"
+      [(ngModel)]="config.itemsPerPage">
+      <option [value]="5000">All</option>
+      <option [value]="10" selected>10</option>
+      <option [value]="50">50</option>
+      <option [value]="100">100</option>
+      <option [value]="250">250</option>
+      <option [value]="500">500</option>
+      <option [value]="1000">1000</option>
+    </select>
+
+  </div>
+  <div>
+    <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+      (pageBoundsCorrection)="onPageBoundsCorrection($event)"></pagination-controls>
+
+  </div>
+</div>

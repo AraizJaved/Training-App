@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "scrollable.component.scss"
+    ],
+    "names": [],
+    "file": "scrollable.component.css"
+}

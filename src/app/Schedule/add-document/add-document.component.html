@@ -1,0 +1,109 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header">
+          <div class="row border-bottom border-success border-4 p-1">
+            <div class="col-md-11">
+              <h5>{{ title }}</h5>
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+
+          <form [formGroup]="documentFrom" class="form theme-form">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12" *ngIf="this.Trainings.length>0">
+                  <div class="form-group">
+                    <label for="ContactType">Training<span style="color: red">*</span>
+                    </label>
+                    <search-dropdown [items]="this.Trainings" [size]="'small'" [img]="'product'" [label]="'title'"
+                      [uid]="'id'" formControlName="trainingId">
+                    </search-dropdown>
+
+                  </div>
+                </div>
+                <!-- <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="ContactType">Training<span style="color: red">*</span>
+                    </label>
+
+                    <select style="border: 1px solid #9eb7cf" required class="form-control"
+                      formControlName="trainingId">
+                      <option selected value="">-- Select Training --</option>
+
+                      <option *ngFor="let index of this.Trainings" [ngValue]="index.id">
+                        {{ index.title }}
+                      </option>
+                    </select>
+                  </div>
+                </div> -->
+              </div>
+              <div class="row">
+                <div class="col-md-4" style="margin-top: 12px;">
+                  <label for="ContactType">Document Title<span style="color: red">*</span>
+                  </label>
+                  <input type="text" formControlName="documentTitle" class="form-control search-field col-md-12"
+                    placeholder="Document Title" />
+                </div>
+                <div class="col-md-8">
+                  <label for="ContactType">
+                    Document Type
+                    <!-- <span style="color: red" class="btn btn-link" (click)="AddDocumentType()"><i class="fa fa-plus"></i>
+                      Document Type</span> -->
+                  </label>
+
+                  <select style="border: 1px solid #9eb7cf" id="meetingVenue" required class="form-control"
+                    formControlName="documentType">
+                    <option selected value="">--Select Document Type--</option>
+
+                    <option *ngFor="let index of this.DocumentTypes" [ngValue]="index.documentType">
+                      {{ index.documentType }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="ContactType">Selection Type<span style="color: red">*</span>
+                  </label>
+                  <select style="border: 1px solid #9eb7cf" id="trainingId" required class="form-control"
+                    formControlName="selectionType">
+                    <option selected value="">
+                      -- Select Selection Type --
+                    </option>
+
+                    <option *ngFor="let index of fileTypes" [ngValue]="index.Id">
+                      {{ index.Name }}
+                    </option>
+                  </select>
+                </div>
+                <div *ngIf="this.documentFrom.value.selectionType == 1" class="col-md-12">
+                  <label for="ContactType">Upload File<span style="color: red">*</span>
+                  </label>
+                  <input type="file" formControlName="file" (change)="onFileChange($event)"
+                    class="form-control col-md-12" placeholder="Search Here" />
+                </div>
+                <div *ngIf="this.documentFrom.value.selectionType == 2" class="col-md-12">
+                  <label for="ContactType">Upload Files<span style="color: red">*</span>
+                  </label>
+                  <input type="file" formControlName="file" multiple (change)="onFileChange($event)"
+                    class="form-control col-md-12" placeholder="Search Here" />
+                </div>
+              </div>
+              <br />
+              <div>
+                <button [disabled]="!this.documentFrom.valid" type="submit" (click)="Upload()" class="btn btn-primary">
+                  Upload
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

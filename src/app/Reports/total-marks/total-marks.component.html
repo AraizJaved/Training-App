@@ -1,0 +1,41 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Total Marks</h5>
+            </div>
+            <div class="col-md-1">
+              <i
+                type="button"
+                class="fa fa-close"
+                aria-label="Close"
+                (click)="CloseModal()"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <input
+        type="text"
+        class="form-control"
+        name="searchString"
+        placeholder="Enter total marks"
+        [(ngModel)] = value
+      />
+    </div>
+  </div>
+  <br>
+  <div >
+    <button class="btn btn-success" (click)="saveTM()">Save</button>
+  </div>
+  <br>
+  <br>
+</div>

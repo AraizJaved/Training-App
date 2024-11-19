@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "drag-drop.component.scss"
+    ],
+    "names": [],
+    "file": "drag-drop.component.css"
+}

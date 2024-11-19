@@ -1,0 +1,52 @@
+<!-- Container-fluid starts -->
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Add Document Type </h5>
+                </div>
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+                        <div class="row">
+                           
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="designation">Document Type<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="DocumentType"
+                                        class="form-control" id="DocumentType" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.DocumentType.value==''"
+                                        class="text text-danger">
+                                        Document Type is required.
+                                    </div>
+                                </div>
+                            </div>                           
+                           
+                        </div>
+                       
+                        <div class="row">
+                            
+                      
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

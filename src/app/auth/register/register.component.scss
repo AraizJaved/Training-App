@@ -1,0 +1,36 @@
+#background{
+    position:absolute;
+    z-index:0;
+  //  background:rgb(248, 248, 248);
+    display:block;
+    margin: 0 auto;
+    color:grey;
+  // text-align: center;
+  top:-13%;
+  left:30%;
+
+  @media screen and (max-width: 479px) {
+    top:-15%;
+    left:21%; 
+  }
+  @media screen and (max-width: 1250px) and (min-width : 769px) {
+    top:-4%;
+    left:30%; 
+  }
+  @media screen and (max-width: 768px) and (min-width : 481px) {
+    top:-22%;
+    left:37%; 
+  }
+}
+#content-watermark{
+    position:relative;
+    z-index:1;
+}
+#bg-text
+{
+    font-size:150px;
+    font-weight: bold;
+    opacity: 0.6;
+}
+
+ 

@@ -1,0 +1,453 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+
+    <div class="row">
+  
+</div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Update Meeting</h5>
+                    
+                </div>
+
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+
+                    
+                    <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="meetingStatus">Meeting Status<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;"
+                                    id="meetingStatus" required
+                                   class="form-control "
+                                   formControlName="meetingStatus">
+                                   <option selected value="">--Select Meeting Status--</option>
+                           
+                        
+                             <option *ngFor="let index of this.MeetingStatus" [ngValue]="index.id">
+                               {{ index.status }}
+                        
+                             </option>
+                           </select>
+                           <!-- {{RegisterForm.controls.meetingOrganizer.value | json}} -->
+                                  
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.meetingStatus.value==''"
+                                        class="text text-danger">
+                                        Meeting Status Required.
+                                    </div>
+                                </div>
+                        
+                                
+                            </div>
+                        </div>
+                        <div *ngIf="this.RegisterForm.controls.meetingStatus.value!=''">
+                            <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="title">Agenda<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="title"
+                                        class="form-control" id="title" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.title.value==''"
+                                        class="text text-danger">
+                                        Agenda is required.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="meetingOrganizer">Under the Chairmanship of is required.<span style="color: red;">*</span></label>
+                                    <label for="ContactType">If Chair Person not Exist <span style="color: red;" class="btn btn-link " (click)="AddMeetingOrganizer()" ><i class="fa fa-plus " ></i> Chaired By</span></label>
+                                    
+                                    <select style="border: 1px solid #9eb7cf;"
+                                    id="meetingVenue" required
+                                   class="form-control "
+                                   formControlName="meetingOrganizer">
+                                   <option selected value="" >--Select Chaired By--</option>
+                           
+       
+                             <option *ngFor="let index of this.MeetingOrganizer" [ngValue]="index.id">
+                               {{ index.organizer }}
+       
+                             </option>
+                           </select>
+                           
+                                    <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Chairmanship of'"
+                                    [settings]="dropdownSettingsOrg"
+                                    [data]="MeetingOrganizer"
+                                    [formControl]="this.RegisterForm.controls.meetingOrganizer"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  > 
+                                  </ng-multiselect-dropdown>-->
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.meetingOrganizer.value==''"
+                                        class="text text-danger">
+                                        Under the Chairmanship of is required.
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                             
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="meetingVenue">Venue<span style="color: red;">*</span></label><br>
+                                    <label for="ContactType">If Venue not Exist <span style="color: red;" class="btn btn-link " (click)="AddMeetingVenue()"  ><i class="fa fa-plus " ></i> Venue</span></label>
+                                
+                                    <select style="border: 1px solid #9eb7cf;"
+                                     id="meetingVenue" required
+                                    class="form-control "
+                                    formControlName="meetingVenue">
+                                    <option selected value="" >--Select Venue--</option>
+                                    
+                            
+        
+                              <option *ngFor="let index of this.MeetingVenue" [ngValue]="index.id">
+                                {{ index.venue }}
+        
+                              </option>
+                            </select>
+                                    <!-- <ng-multiselect-dropdown
+                                    [placeholder]="'Select Venue'"
+                                    [settings]="dropdownSettingsVenue"
+                                    [data]="MeetingVenue"
+                                    [formControl]="this.RegisterForm.controls.meetingVenue"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  >
+                                  </ng-multiselect-dropdown> -->
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.meetingVenue.value==''"
+                                        class="text text-danger">
+                                        Venue is required.
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description<span style="color: red;">*</span></label>
+                                <textarea  type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                                formControlName="description" class="form-control" id="description" required
+                                placeholder="" ></textarea>
+
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.description.value==''"
+                                    class="text text-danger">
+                                    Description is required.
+                                </div>
+                                <!-- <div *ngIf="this.RegisterForm.controls.description.errors?.pattern">
+                                    User name not valid.
+                               </div>  -->
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Meeting Participant P&SHD Department<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select P&SHD Department'"
+                                    [settings]="dropdownSettingsCompany"
+                                    [data]="AssignTo"
+                                    [formControl]="this.RegisterForm.controls.assignTo"
+                                    (onSelect)="onItemSelectCompany($event)"
+                                    (onSelectAll)="onSelectAllCompany($event)"
+                                    (onDeSelect)="onItemDeSelectCompany($event)"
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                        class="text text-danger">
+                                        Meeting Assingnee Department is required.
+                                    </div> -->
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Meeting Participant P&SHD Wing<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select P&SHD Department'"
+                                    [settings]="dropdownSettingsDepartment"
+                                    [data]="departmentList"
+                                    [formControl]="this.RegisterForm.controls.departmentList"
+                                    (onSelect)="onItemSelectDepartment($event)"
+                                    (onSelectAll)="onSelectAllDepartment($event)"
+                                    (onDeSelect)="onItemDeSelectDepartment($event)"
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.departmentList.value==''"
+                                        class="text text-danger">
+                                        Meeting Assingnee Wing is required.
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Meeting Participant P&SHD Category<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select P&SHD Category'"
+                                    [settings]="dropdownSettingsCategory"
+                                    [data]="categoryList"
+                                    [formControl]="this.RegisterForm.controls.categoryList"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                    (onDeSelect)="onItemDeSelect($event)"
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.categoryList.value==''"
+                                        class="text text-danger">
+                                        Meeting Assingnee Category is required.
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Meeting Participant P&SHD Names<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select P&SHD Participant Name'"
+                                    [settings]="dropdownSettingsContact"
+                                    [data]="contact"
+                                    [formControl]="this.RegisterForm.controls.eventcontactparticipant"
+                                    (onSelect)="onItemSelectForContact($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                        class="text text-danger">
+                                        Meeting Assingnee  is required.
+                                    </div>
+                                </div>
+                                </div>
+                                  <!-- ///////////////////////Splzd//////////////////////////////                          -->
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dueDate">Meeting Participant Specialized Department<span style="color: red;">*</span></label>
+                                    
+                                        <ng-multiselect-dropdown
+                                        [placeholder]="'Select Specialized Department'"
+                                        [settings]="dropdownSettingsSPLCompany"
+                                        [data]="AssignToSPL"
+                                        [formControl]="this.RegisterForm.controls.assignToSPL"
+                                        (onSelect)="onItemSelectCompanySPL($event)"
+                                        (onSelectAll)="onSelectAllCompanySPL($event)"
+                                        (onDeSelect)="onItemDeSelectCompanySPL($event)"
+                                      >
+                                      </ng-multiselect-dropdown>
+                                        <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignToSPL.value==''"
+                                            class="text text-danger">
+                                            Meeting Assingnee Department is required.
+                                        </div>
+                                    </div>
+    
+                                    
+                                </div>
+    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dueDate">Meeting Participant Specialized Wing<span style="color: red;">*</span></label>
+                                    
+                                        <ng-multiselect-dropdown
+                                        [placeholder]="'Select Specialized Wing'"
+                                        [settings]="dropdownSettingsSPLDepartment"
+                                        [data]="departmentListSPL"
+                                        [formControl]="this.RegisterForm.controls.departmentListSPL"
+                                        (onSelect)="onItemSelectDepartmentSPL($event)"
+                                        (onSelectAll)="onSelectAllDepartmentSPL($event)"
+                                        (onDeSelect)="onItemDeSelectDepartmentSPL($event)"
+                                      >
+                                      </ng-multiselect-dropdown>
+                                        <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.departmentListSPL.value==''"
+                                            class="text text-danger">
+                                            Meeting Assingnee Wing is required.
+                                        </div>
+                                    </div>
+    
+                                    
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dueDate">Meeting Participant Specialized Category<span style="color: red;">*</span></label>
+                                    
+                                        <ng-multiselect-dropdown
+                                        [placeholder]="'Select Specialized Category'"
+                                        [settings]="dropdownSettingsSPLCategory"
+                                        [data]="categoryListSPL"
+                                        [formControl]="this.RegisterForm.controls.categoryListSPL"
+                                        (onSelect)="onItemSelectSPL($event)"
+                                        (onSelectAll)="onSelectAllSPL($event)"
+                                        (onDeSelect)="onItemDeSelectSPL($event)"
+                                      >
+                                      </ng-multiselect-dropdown>
+                                        <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.categoryListSPL.value==''"
+                                            class="text text-danger">
+                                            Meeting Assingnee Category is required.
+                                        </div>
+                                    </div>
+    
+                                    
+                                </div>
+    
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="dueDate">Meeting Participant Specialized Names<span style="color: red;">*</span></label>
+                                    
+                                        <ng-multiselect-dropdown
+                                        [placeholder]="'Select Specialized Participant Name'"
+                                        [settings]="dropdownSettingsSPLContact"
+                                        [data]="contactSPL"
+                                        [formControl]="this.RegisterForm.controls.eventcontactparticipantSPL"
+                                        (onSelect)="onItemSelectForContactSPL($event)"
+                                        (onSelectAll)="onSelectAllSPL($event)"
+                                    
+                                      >
+                                      </ng-multiselect-dropdown>
+                                        <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignToSPL.value==''"
+                                            class="text text-danger">
+                                            Meeting Assingnee  is required.
+                                        </div>
+                                    </div>
+                                    </div>
+   <!-- ///////////////////////Splzd//////////////////////////////                          -->
+
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="endDateTime">End Date Time<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="datetime-local" min="{{minDate}}" formControlName="endDateTime"
+                                        class="form-control" id="endDateTime" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.endDateTime.value==''"
+                                        class="text text-danger">
+                                        End DateTime is required.
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Event Participant<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select Participant'"
+                                    [settings]="dropdownSettings"
+                                    [data]="AssignTo"
+                                    [formControl]="this.RegisterForm.controls.assignTo"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                        class="text text-danger">
+                                        Task Assingnee  is required.
+                                    </div>
+                                </div>
+
+                                
+                            </div> -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="externalParticipant">External Participant (Please write comma separated names)</label>
+                                    <textarea  type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                                    formControlName="externalParticipant" class="form-control" id="externalParticipant" required
+                                    placeholder="" ></textarea>
+    
+                                   
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="externalParticipantsMobileNo">External Participant Mobile No (Please write comma separated MobileNo)</label>
+                                    <textarea  type="number" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                                    formControlName="externalParticipantsMobileNo" class="form-control" id="externalParticipantsMobileNo" required
+                                    placeholder="" ></textarea>
+    
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="meetingAttendVia">Attend Via<span style="color: red;">*</span></label>
+                                
+                                    <select class="form-control" formControlName="meetingAttendVia">
+                                        <option value="" selected>--Select Attend Via--</option>
+                                        <option value="InPerson" >In Person</option>
+                                        <option value="VideoLink">Video Link</option>
+                                     
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.meetingAttendVia.value==''"
+                                        class="text text-danger">
+                                        Attend Via is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="startDateTime">Start Date Time<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="datetime-local" min="{{minDate}}" formControlName="startDateTime"
+                                        class="form-control" id="startDateTime" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.startDateTime.value==''"
+                                        class="text text-danger">
+                                        Start DateTime is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="attachment">Attachment</label>
+                                    <input (change)="onFileChange($event)" style="border: 1px solid #9eb7cf;"
+                                        type="file" multiple name="attachment" class="form-control" id="attachment" required
+                                        placeholder="" required>
+                                    
+                                </div>
+                            </div>
+
+                            <div  class="col-md-12">
+
+                                <br>  <br>
+                                <div class="progress" *ngIf="progress">
+                                  <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+                              </div>
+                              <br>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+                        
+                        </div>
+
+                    </div>
+
+                      
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

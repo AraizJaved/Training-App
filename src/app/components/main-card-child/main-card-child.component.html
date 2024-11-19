@@ -1,0 +1,60 @@
+<div class="container-fluid" style="margin-top: 5rem;">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                {{this.title}}
+            </h3>
+        </div>
+        <div class="col-md-6" style="text-align-last: right;">
+            <app-back-button [title]="this.title" (cb)="cb()"></app-back-button>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 4rem;">
+        <!-- <div class="col-sm-2 col-xl-2 col-lg-2"></div> -->
+
+        <div class="col-sm-3 col-xl-3 col-lg-3" *ngFor="let data of adminWingData">
+            <app-main-card [imagePath]="data.image" [title]="data.title" [width]="data.width" [height]="data.height"
+                (click)="onTabsOpen(data)">
+            </app-main-card>
+        </div>
+
+        <!-- <div class="col-sm-3 col-xl-3 col-lg-3">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="data.title">
+            </app-main-card>
+        </div>
+
+        <div class="col-sm-3 col-xl-3 col-lg-3" (click)="onTabsOpen()">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="data.title">
+            </app-main-card>
+        </div>
+
+        <div class="col-sm-3 col-xl-3 col-lg-3">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="data.title">
+            </app-main-card>
+        </div> -->
+
+        <!-- <div class="col-sm-2 col-xl-2 col-lg-2"></div> -->
+    </div>
+    <!-- <div class="row">
+        <div class="col-sm-3 col-xl-3 col-lg-3">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="adminWingData[4].title">
+            </app-main-card>
+        </div>
+
+        <div class="col-sm-3 col-xl-3 col-lg-3">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="adminWingData[5].title">
+            </app-main-card>
+        </div>
+
+        <div class="col-sm-3 col-xl-3 col-lg-3">
+            <app-main-card imagePath="assets/images/dashboard-main-cards-transparent/admin_wing.png"
+                [title]="adminWingData[6].title">
+            </app-main-card>
+        </div>
+    </div> -->
+</div>

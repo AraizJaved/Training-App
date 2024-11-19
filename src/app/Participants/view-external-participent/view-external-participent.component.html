@@ -1,0 +1,114 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Training Details</h5>
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+        </div>
+
+        <form class="form theme-form">
+          <div class="card-body">
+            <button (click)="exportPDF(this.EventObj)" class="w-25 btn btn-success">
+              Export to PDF
+            </button>
+            <div class="row">
+              <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                <table class="table table-bordered mb-0" ng-init="loadPatient()">
+                  <thead>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>Name</strong></th>
+                      <th scope="col" colspan="5">{{ this.EventObj.name }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1"><strong>FatherName</strong></th>
+                      <th scope="col" colspan="5">{{ this.EventObj.fatherName }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1">
+                        <strong>CNIC</strong>
+                      </th>
+                      <th scope="col" colspan="5">
+                        {{ this.EventObj.cnic }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1">
+                        <strong>Department</strong>
+                      </th>
+                      <th scope="col" colspan="5">
+                        {{ this.EventObj.department }}
+                      </th>
+                    </tr>
+                    <tr>
+                      <th scope="col" colspan="1">
+                        <strong>Profession</strong>
+                      </th>
+                      <th scope="col" colspan="5">
+                        {{ this.EventObj.profession }}
+                      </th>
+                    </tr>
+
+                    <tr>
+                      <th scope="col"><strong>Job Title</strong></th>
+                      <th colspan="5">{{ this.EventObj.jobTittle }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><strong>Email</strong></th>
+                      <th colspan="5">{{ this.EventObj.email }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><strong>ParticipantType</strong></th>
+                      <th colspan="5">{{ this.EventObj.participantType }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><strong>Working Place</strong></th>
+                      <th colspan="5">{{ this.EventObj.workingPlace }}</th>
+                    </tr>
+                    <tr>
+                      <th scope="col"><strong>Mobile No</strong></th>
+                      <th colspan="5">{{ this.EventObj.mobileNo }}</th>
+                    </tr>
+                    <!-- <tr>
+                        <th scope="col"><strong>Division</strong></th>
+                        <th colspan="5">{{ this.EventObj.division }}</th>
+                      </tr>
+                    <tr>
+                        <th scope="col"><strong>District</strong></th>
+                        <th colspan="5">{{ this.EventObj.district }}</th>
+                      </tr>
+  
+                    <tr>
+                        <th scope="col"><strong>Tehsil</strong></th>
+                        <th colspan="5">{{ this.EventObj.tehsil }}</th>
+                      </tr>
+   -->
+
+                    <!-- <tr>
+
+                    <th scope="col" colspan="1"><strong>Schedule</strong></th>
+                  
+                    <th scope="col"colspan="2"><button class="fa fa-edit  btn  btn-success btn-air-success btn-lg" (click)="showTaskDetailModelList(this.EventObj)">
+                        Add Schedule
+                              </button> </th>
+                </tr> -->
+                  </thead>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

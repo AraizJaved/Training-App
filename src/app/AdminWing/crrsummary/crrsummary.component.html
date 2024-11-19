@@ -1,0 +1,90 @@
+<div class="card">
+    <div class="card-header">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+
+
+
+        <form class="form theme-form" [formGroup]="CRRSummaryForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="From">From Date</label>
+                        <input class="form-control " formControlName="From" type="date" name="From">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="To">To Date</label>
+                        <input (change)="getCrrSummary()" class="form-control " formControlName="To" type="date"
+                            name="To">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+
+                    <form id="searchForm">
+                        <div class="form-group " style="margin-top: 27px;">
+                            <div class="input-group float-right" id="filterAll">
+                                <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                                <input type="text" class="form-control" name="searchString"
+                                    placeholder="Search any keyword..." [(ngModel)]="searchString">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </form>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                    type="submit" (click)="exportexcel()"><span><i class="fa fa-download text-white "></i></span>
+                    Export to Excel</button>
+            </div>
+            <div class="col-md-6 mt-2" style="text-align-last: right;">
+                <h5>
+                    {{crrSummaryList.length}} Records Total
+                </h5>
+            </div>
+        </div>
+
+
+
+        <div class="table-responsive" style="margin-top: 25px;" [hidden]="crrSummaryList.length == 0">
+            <table class="table table-bordered table-striped " style="width: 100%;" id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>Officer Designation</th>
+                        <th>Order By</th>
+                        <th>Today Under Process</th>
+                        <th>&nbsp; 1 - 7 &nbsp; Days</th>
+                        <th>&nbsp; 8 - 15 &nbsp; Days</th>
+                        <th>&nbsp; 16 - 30 &nbsp; Days</th>
+                        <th>&nbsp; 30+ &nbsp; Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of crrSummaryList | filterAll: searchString let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.officerDesignation}}</td>
+                        <td>{{s.orderBy}}</td>
+                        <td>{{s.todayUnderProcess}}</td>
+                        <td>{{s.gT7Days}}</td>
+                        <td>{{s.gT15Days}}</td>
+                        <td>{{s.gT30Days}}</td>
+                        <td>{{s.lT7Days}}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>

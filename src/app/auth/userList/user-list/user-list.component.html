@@ -1,0 +1,173 @@
+<!-- Container-fluid starts -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header">
+          <h5>User List</h5>
+        </div>
+        <div class="card-body custom-datatable">
+          <div class="row">
+            <div class="col-md-6">
+              <input
+                type="text"
+                class="form-control search-field col-md-12"
+                placeholder="Type User Name to filter..."
+                (keyup)="updateFilter($event)"
+              />
+            </div>
+            <div class="col-md-4"></div>
+            <div class="col-md-1">
+              <button
+                type="submit"
+                style="margin-left: 88%;"
+                class="btn btn-primary btn-air-success btn-lg"
+                (click)="routeToCreateUser()"
+              >
+                Add user
+              </button>
+            </div>
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-md-4">
+              <input type="text" class="form-control search-field col-md-12" placeholder="Search Here"
+                [(ngModel)]="searchText" />
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                type="submit" (click)="exportToExcel()"><span><i class="fa fa-download text-white "></i></span>
+                Export to Excel</button>
+            </div>
+          </div> -->
+
+          <ngx-datatable
+            [selectionType]="'checkbox'"
+            #myFilterTable
+            class="bootstrap"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            rowHeight="auto"
+            [limit]="20"
+            [rows]="TableRowsData"
+          >
+            <ngx-datatable-column name="Sr#" [width]="75" [resizeable]="false">
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ rowIndex + 1 }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Full Name"
+              [width]="150"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ row.fullName }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="User Name"
+              [width]="120"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ row.userName }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Designation"
+              [width]="150"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ row.designation }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Email"
+              [width]="250"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ row.email }}
+              </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column
+              name="Password"
+              [width]="150"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                {{ row.np }}
+              </ng-template>
+            </ngx-datatable-column>
+           
+
+            <ngx-datatable-column
+              name="Action"
+              [width]="700"
+              [resizeable]="false"
+            >
+              <ng-template
+                let-row="row"
+                style="margin-left: 50px"
+                let-rowIndex="rowIndex"
+                ngx-datatable-cell-template
+              >
+                <button
+                  class="fa fa-pencil btn-success btn btn-primary"
+                  (click)="assignRole(row.id)"
+                >
+                  Update Roles
+                </button>
+
+                <!-- <button
+                  style="margin-left: 10px"
+                  class="fa fa-key btn-info btn btn-primary"
+                  (click)="changePassword(row.id)"
+                >
+                  Change Passowrd
+                </button> -->
+                <!-- <button style="margin-left: 10px;" class="fa fa-pencil btn-success btn btn-primary" (click)="assignDistrict(row.id)">
+                    Assign District </button> -->
+                <button
+                  style="margin-left: 10px"
+                  class="fa fa-trash btn-danger btn btn-primary"
+                  (click)="onDelete(row.id)"
+                >
+                  Delete
+                </button>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Container-fluid Ends -->

@@ -1,0 +1,28 @@
+<div class="material-border"></div>
+
+
+<div class="tab-pane fade show" id="compliance" role="tabpanel" aria-labelledby="compliance">
+    <div class="row">
+        <div class="col-xl-12 col-sm-12">
+            <div class="card" style="height: 100%;">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>Employees On Leave</h5>
+                        </div>
+                        <div class="col-md-6" style="text-align-last: right;">
+                            <app-back-button></app-back-button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0%;">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <app-employees-on-leave [officerId]="this.obj.id"></app-employees-on-leave>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

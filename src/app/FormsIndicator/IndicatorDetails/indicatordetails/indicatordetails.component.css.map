@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,EAAE,CAAC;EAED,cAAc,EAAE,iBAAiB;CAClC",
+    "sources": [
+        "indicatordetails.component.scss"
+    ],
+    "names": [],
+    "file": "indicatordetails.component.css"
+}

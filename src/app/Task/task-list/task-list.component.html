@@ -1,0 +1,156 @@
+
+<form [formGroup]="TaskList">
+    <div class="row" *ngIf="this.isAdmin ==true" >
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <!-- <label for="userList">Switch User</label> -->
+                <select style="border: 1px solid #9eb7cf; margin-top: 15px;" id="userList" class="form-control"
+                    formControlName="userList"   (change)= "UserTypeChange($event.target.value)">
+                    
+                    <option *ngFor="let index of this.userList" [ngValue]="index.id">
+                        {{ index.name }}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="row">
+
+    <div class="col-md-3">
+        <app-backlog [userID]="this.userId"></app-backlog>
+    </div>
+    <div class="col-md-3">
+        <app-to-do [userID]="this.userId"></app-to-do>
+    </div>
+    <div class="col-md-3">
+        <app-in-process [userID]="this.userId"></app-in-process>
+    </div>
+    <div class="col-md-3">
+        <app-completed [userID]="this.userId"></app-completed>
+    </div>
+
+</div>
+
+
+
+<!-- <div class="material-border"></div>
+<div class="card" style="margin-top: 20px;">
+
+    <div class="card1-body">
+        <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+            <div class="row">
+                <div class="col-xl-12 col-sm-12">
+                    <div class="card" style="height: 100%;">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Tasks List</h5>
+                                </div>
+                                <div class="col-md-6" style="text-align-last: right;">
+                                        <app-back-button></app-back-button>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="padding: 0%;">
+
+
+                            
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+                                            </ngx-loading>
+                                            <form class="form theme-form">
+                                                <div class="row">
+                                                    <div class="col-md-8">
+                                                    </div>
+                                                    <div class="col-md-4">
+
+                                                        <form id="searchForm">
+                                                            <div class="form-group " style="margin-top: 27px;">
+                                                                <div class="input-group float-right" id="filterAll">
+                                                                    <div class="input-group-addon"><i
+                                                                            class="glyphicon glyphicon-search"></i>
+                                                                    </div>
+                                                                    <input type="text" class="form-control"
+                                                                        name="searchString"
+                                                                        placeholder="Search any keyword..."
+                                                                        [(ngModel)]="searchString">
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+
+
+                                                </div>
+                                            </form>
+
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <button
+                                                        class="btn btn-primary btn-success btn-air-success pull-left"
+                                                        style="margin-bottom: 15px; " type="submit"
+                                                        (click)="exportexcel()"><span><i
+                                                                class="fa fa-download text-white "></i></span>
+                                                        Export to Excel</button>
+                                                </div>
+                                                <div class="col-md-6 mt-2" style="text-align-last: right;">
+                                                    <h5>
+                                                        {{rows.length}} Records Total
+                                                    </h5>
+                                                </div>
+                                            </div>
+
+                                            <div class="table-responsive" style="margin-top: 25px;"
+                                                [hidden]="rows.length == 0">
+                                                <table class="table table-bordered table-striped " style="width: 100%;"
+                                                    id="reportTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sr.</th>
+                                                            <th>Title</th>
+                                                            <th>Description</th>
+                                                            <th>Due Date</th>
+                                                            <th>Designation</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let s of rows| filterAll: searchString let i = index"
+                                                            [ngClass]="s.totalWorking === 0 ? 'table-danger' : ''">
+                                                            <td>{{i+1}}</td>
+                                                            <td>{{s.title}} </td>
+                                                            <td>{{s.description}}</td>
+                                                            <td>{{s.dueDate}}</td>
+                                                            <td>{{s.designation}}</td>
+                                                            <td><button style="margin-left: 10px;"
+                                                                    class="fa fa-info btn-primary btn  btn-primary btn-air-success btn-lg"
+                                                                    (click)="Details(s.id)">&nbsp; Detail</button></td>
+                                                        </tr>
+
+                                                    </tbody>
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->

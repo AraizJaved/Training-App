@@ -1,0 +1,64 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Training Details</h5>
+
+                </div>
+
+                <form class="form theme-form">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                                <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+                                <table class="table table-bordered mb-0">
+                                    <thead>
+
+                                        <tr>
+                                            <th scope="col" colspan="1"><strong>Sr No</strong></th>
+
+
+
+                                            <th scope="col" colspan="5"><strong>Title</strong></th>
+
+
+                                            <th scope="col" colspan="2"><strong>Training Type</strong></th>
+                                            <th scope="col" colspan="2"><strong>Start Date</strong></th>
+                                            <th scope="col" colspan="2"><strong>End Date</strong></th>
+                                            <th scope="col" colspan="2"><strong>Total Trainee</strong></th>
+                                            <th scope="col" colspan="2"><strong>Total Trainer</strong></th>
+
+
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let s of this.EventObj;let i=index">
+                                            <td colspan="1">{{i+1}}</td>
+                                            <td colspan="5">{{s.title}}</td>
+                                            <td colspan="2">{{s.trainingType}}</td>
+                                            <td colspan="2">{{s.startDate | date :'short'}}</td>
+                                            <td colspan="2">{{s.endDate | date :'short'}}</td>
+                                            <td colspan="2">{{s.totalTrainee}}</td>
+                                            <td colspan="2">{{s.totalTrainer}}</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

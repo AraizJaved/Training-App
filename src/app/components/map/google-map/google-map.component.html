@@ -1,0 +1,326 @@
+<div class="container-fluid">
+  <div class="row">
+
+    <div class="col-xl-12">
+      <div class="card" style="margin-top: 2%;">
+        <div class="card-header">
+          <div class="media">
+            <div class="media-body">
+              <h6 class="f-w-600"><a href="javascript:void(0)">Map Dashboard</a></h6>
+            </div>
+          </div>
+          <form class="form theme-form" [formGroup]="searchForm">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="division">Division<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf;"
+                    (change)="onChange(this.searchForm.controls.division.value)" id="division" required
+                    class="form-control" formControlName="division">
+                    <option selected="true" style='display: none'></option>
+                    <option *ngFor="let index of this.Division" [ngValue]="index.code">
+                      {{ index.name }}
+
+                    </option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="district">District<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf;"
+                    (change)="onChange(this.searchForm.controls.district.value)" id="district" required
+                    class="form-control " formControlName="district">
+                    <option selected="true" style='display: none'></option>
+                    <option *ngFor="let index of this.District" [ngValue]="index.code">
+                      {{ index.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="tehsil">Tehsil<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf;" (change)="onChange(this.searchForm.controls.tehsil.value)"
+                    id="tehsil" required class="form-control " formControlName="tehsil">
+                    <option selected="true" style='display: none'></option>
+                    <option *ngFor="let index of this.Tehsil" [ngValue]="index.code">
+                      {{ index.name }}
+                    </option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="uc">Union Council<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf;" id="uc" required class="form-control "
+                    formControlName="uc">
+
+                    <option *ngFor="let index of this.UC" [ngValue]="index.id">
+                      {{ index.name }}
+                    </option>
+                  </select>
+
+                </div>
+
+              </div>
+            </div>
+
+            <div class="row">
+
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="compaign">Campaign</label>
+                  <select style="border: 1px solid #9eb7cf;"
+                    (change)="onChange(this.searchForm.controls.compaign.value)" id="compaign" required
+                    class="form-control " formControlName="compaign">
+                    <option *ngFor="let index of this.Compaign" [ngValue]="index.id">
+                      {{ index.name }}
+                    </option>
+                  </select>
+
+                </div>
+
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="days">Day</label>
+                  <select style="border: 1px solid #9eb7cf;  " (change)="onDayChange()" id="days" formControlName="day"
+                    required class="form-control">
+                    <option [ngValue]="0">All</option>
+                    <option *ngFor="let day of this.days" [ngValue]="day">
+                      {{ 'Day ' + day }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="populationTypes">Population</label>
+                  <select style="border: 1px solid #9eb7cf; " formControlName="populationType" id="populationTypes"
+                    required class="form-control">
+                    <!-- <option [ngValue]="null"></option> -->
+                    <option disabled selected value>-------Select Population------</option>
+                    <option *ngFor="let populationType of this.populationTypes" [ngValue]="populationType">
+                      {{ populationType }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label for="modules">Module<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf; " (change)="onChangeModule()" formControlName="module"
+                    id="modules" required class="form-control">
+                    <!-- <option [ngValue]="null"></option> -->
+                    <option disabled selected value>-------Select Module------</option>
+                    <option *ngFor="let module of this.modules" [ngValue]="module">
+                      {{ module }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3" *ngIf="this.searchForm.controls.module.value === 'ReasonFor'">
+                <div class="form-group">
+                  <label for="reason">Select Reason<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf; " formControlName="reason" id="reason" required
+                    class="form-control">
+                    <!-- <option [ngValue]="null"></option> -->
+                    <option disabled selected value>-------Select Reason------</option>
+                    <option *ngFor="let reason of this.reasons" [ngValue]="reason.id">
+                      {{ reason.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-3" *ngIf="this.searchForm.controls.module.value === 'Polygon'">
+                <div class="form-group">
+                  <label for="reason">Polygon Type<span style="color: red;">*</span></label>
+                  <select style="border: 1px solid #9eb7cf; " formControlName="polygon" id="polygon" required
+                    class="form-control">
+                    <option disabled selected value>-------Select Polygon Type------</option>
+                    <!-- <option [ngValue]="null"></option> -->
+                    <option *ngFor="let index of this.polyGon" [ngValue]="index.id">
+                      {{ index.name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <!-- <div class="col-md-3">
+                  <div class="form-group">
+                      <label for="day">Day</label>
+                      <select style="border: 1px solid #9eb7cf;" (change)="onChange(this.searchForm.controls.day.value)"  id="tehsil" required class="form-control "
+                          formControlName="day">
+
+                          <option *ngFor="let index of this.Day" [ngValue]="index">
+                              {{ index }}
+                          </option>
+                      </select>
+                       <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.day.value==''"
+                      class="text text-danger">
+                      Tehsil is required.
+                  </div>
+                   </div>
+              </div>  -->
+              <!-- <div class="col-md-3"  >
+                <div class="form-group" >
+                    <label  for="FormType">Select Category</label>
+                    <select id="FormCategory" required class="form-control" style="border: 1px solid #9eb7cf;  "
+                        (change)= "FormCategoryChange($event.target.options.selectedIndex)" >
+                        <option [ngValue]="-1" selected>All</option>
+                        <option *ngFor="let FormCategory of this.IndicatorCategory" [ngValue]="FormCategory">
+                            {{ FormCategory }}
+                        </option>
+                    </select>
+                </div>
+            </div> -->
+              <div class="col-md-9"
+                *ngIf="this.searchForm.controls.module.value !== 'ReasonFor' && this.searchForm.controls.module.value !== 'Polygon'">
+              </div>
+              <div class="col-md-6"
+                *ngIf="this.searchForm.controls.module.value === 'ReasonFor' || this.searchForm.controls.module.value === 'Polygon'">
+              </div>
+
+
+              <div class="col-md-3">
+                <div style="margin-top: 10px;  margin-left: 30px;" class="form-group">
+                  <label for="exampleFormControlInput1" class="col-md-12"></label>
+                  <div class="col-md-12">
+                    <span>
+                      <button class="btn btn-primary" type="submit" (click)="onSubmit()"><span><i
+                            class="fa fa-check text-white"></i></span>
+                        Search</button></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <!-- <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Map View</h4>
+
+              </div>
+              <div class="col-md-6">
+                <div class="float-right">
+                  <label for="days">Select Day</label>
+                  <select style="border: 1px solid #9eb7cf; width: 250px;" (change)="onDayChange()" id="days" required class="form-control" [(ngModel)]="selectedDay">
+                    <option [ngValue]="0">All</option>
+                    <option *ngFor="let day of this.days" [ngValue]="day">
+                      {{ 'Day ' + day }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+
+          </div> -->
+        </div>
+
+        <div class="card-body">
+
+          <!-- <div class="row">
+            <div class="col-md-3">
+
+              <div class="form-group">
+                  <label for="FormType">Form Type</label>
+                  <select id="FormType" name="formType" [(ngModel)]="this.formType" required class="form-control btn-pill">
+                    <option value="">
+                      All Forms
+                    </option>
+                      <option *ngFor="let index of this.FormType" value={{index.id}}>
+                          {{ index.name }}
+                      </option>
+                  </select>
+
+              </div>
+
+          </div>
+            <div class="col-md-3">
+
+              <div class="form-group">
+                  <label for="DistrictType">District Type</label>
+                  <select id="DistrictType" name="districtType" [(ngModel)]="this.districtType" required class="form-control btn-pill">
+                    <option value="">
+                      All Districts
+                    </option>
+                      <option *ngFor="let index of this.DistrictType" value={{index.code}}>
+                          {{ index.name }}
+                      </option>
+                  </select>
+
+              </div>
+
+          </div>
+          <div class="col-md-3"  >
+            <div class="form-group" >
+              <label for="FormCategory">Select Category</label>
+                <select id="FormCategory" name="FormCategory" required class="form-control" [(ngModel)]="this.FormCategory" required class="form-control btn-pill" >
+                    <option value="" selected>All Categories</option>
+                    <option *ngFor="let FormCategory of this.IndicatorCategory"  value={{FormCategory}}>
+                        {{ FormCategory }}
+                    </option>
+                </select>
+            </div>
+        </div>
+
+          <div style="margin-top: 10px;" class="form-row d-flex justify-content-end">
+            <div class="col-md-3 ">
+              <button  (click)="search()" class="btn btn-primary btn float: right d-flex justify-content-end" style="margin-top: 18px;" >Search</button>
+            </div>
+           </div>
+
+          </div> -->
+          <div class="map-js-height">
+            <agm-map [latitude]="lat_m2" [longitude]="lng_m2" [zoom]="zoom_m2" [disableDefaultUI]="false"
+              [scrollwheel]="null" [zoom]="zoomLevel" (zoomChange)="changeZoomMap($event)" #AgmMap
+              [zoomControl]="false">
+              <agm-polygon [paths]="this.polygonPaths" strokeColor="#FF0000"
+              (polyPathsChange)="onPolygonChanged($event)" strokeOpacity="0.7" strokeWeight="2" fillColor="#FF0000"
+              fillOpacity="0.3"></agm-polygon>
+              <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.long"
+                [iconUrl]="m.icon" [draggable]="true" (mouseOver)="onMouseOver(infoWindow,m)"
+                (mouseOut)="onMouseOut(infoWindow,m)" strokeColor="#FF0000">
+                <agm-info-window #infoWindow>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <br />
+                      <strong><b>Form Name : {{this.FormName}}</b></strong>
+                      <br *ngIf="this.FormName == 'Fixed Site Form'" />
+                      <strong *ngIf="this.FormName == 'Fixed Site Form'"><b>Status : {{this.status}}</b></strong>
+                      <br />
+                      <strong><b>Division : {{this.divisionName}}</b></strong>
+                      <br />
+                      <strong><b>District : {{this.districtName}}</b></strong>
+                      <br />
+                      <strong><b>Tehsil : {{this.tehsilName}}</b></strong>
+                      <br />
+                      <strong><b>UC : {{this.ucNumber}}</b></strong>
+                      <br *ngIf="this.FormName == 'Fixed Site Form'" />
+                      <strong *ngIf="this.FormName == 'Fixed Site Form'"><b>Team No : {{this.teamNo}}</b></strong>
+                      <br />
+                      <strong><b>Day of Work : {{this.dayofwork}}</b></strong>
+                    </div>
+
+                  </div>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

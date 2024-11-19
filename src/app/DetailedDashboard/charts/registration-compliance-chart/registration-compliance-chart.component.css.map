@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,uBAAuB,CAAC;EACtB,OAAO,EAAE,eAAe;EACxB,MAAM,EAAE,yBAAyB;CAClC;;AAED,AAAA,sBAAsB,CAAC,uBAAuB,GAAG,uBAAuB,CAAC;EACvE,GAAG,EAAE,eAAe;EACpB,IAAI,EAAE,cAAc;CACrB",
+    "sources": [
+        "registration-compliance-chart.component.scss"
+    ],
+    "names": [],
+    "file": "registration-compliance-chart.component.css"
+}

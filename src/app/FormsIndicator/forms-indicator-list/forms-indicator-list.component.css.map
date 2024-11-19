@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,QAAQ,CAAA;EACJ,WAAW,EAAE,iBAAiB;EAC9B,SAAS,EAAE,eAAe;CAC7B;;AAED,AAAA,UAAU,CAAA;EACN,KAAK,EAAC,KAAK;CACd",
+    "sources": [
+        "forms-indicator-list.component.scss"
+    ],
+    "names": [],
+    "file": "forms-indicator-list.component.css"
+}

@@ -1,0 +1,21 @@
+.card-height {
+    height: 207px;
+    zoom:small
+}
+
+#my-card:hover {
+    cursor: pointer;
+    
+}
+
+.zoom {
+    
+    transition: transform .50s; /* Animation */
+    margin: 20 auto;
+  }
+  
+  .zoom:hover {
+   
+    transform: scale(1.1,1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+

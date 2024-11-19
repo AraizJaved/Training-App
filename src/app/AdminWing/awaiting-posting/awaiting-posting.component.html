@@ -1,0 +1,97 @@
+<div class="card">
+    <div class="card-header">
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+
+        <form id="searchForm">
+            <div class="row ">
+                <div class="col-md-8"> </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <div class="input-group float-right" id="filterAll">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                            <input type="text" class="form-control" name="searchString"
+                                placeholder="Search any keyword..." [(ngModel)]="searchString">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+        <!-- <form class="form theme-form" [formGroup]="AwaitingPostingForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="From">From Date</label>
+                        <input class="form-control " formControlName="From" type="date" name="From">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="To">To Date</label>
+                        <input class="form-control " formControlName="To" type="date" name="To">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-success btn-air-success " type="submit"
+                        style="margin-left: 60px; margin-top: 27px;" (click)="getAwaitingPosting()"><span><i
+                                class="fa fa-check text-white "></i></span>
+                        Search</button>
+                </div>
+
+
+            </div>
+        </form> -->
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                    type="submit" (click)="exportexcel()"><span><i class="fa fa-download text-white "></i></span>
+                    Export to Excel</button>
+            </div>
+            <div class="col-md-6 mt-2" style="text-align-last: right;">
+                <h5>
+                    {{awaitingPostingList.length}} Records Total
+                </h5>
+            </div>
+        </div>
+
+        <div class="table-responsive" style="margin-top: 25px;" [hidden]="awaitingPostingList.length == 0">
+            <table class="table table-bordered table-striped " style="width: 100%;" id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>Name</th>
+                        <th>Section</th>
+                        <th>Application Type</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Tracking Number</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of awaitingPostingList | filterAll: searchString let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.name}}</td>
+                        <td>{{s.section}}</td>
+                        <td>{{s.applicationType}}</td>
+                        <td>{{s.status}}</td>
+                        <td>{{s.datetime | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{s.trackingNumber}}</td>
+
+
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div>

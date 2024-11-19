@@ -1,0 +1,155 @@
+<!-- Container-fluid starts -->
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header">
+                    <h5>Location Management</h5>
+                </div>
+                <div class="card">
+                <div class="card-body" >
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label >User Name : {{this.userInfo.userName}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label >Password : {{this.userInfo.rawPassword}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label >Designation : {{this.userInfo.designation}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label >Email : {{this.userInfo.email}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label >Phone Number : {{this.userInfo.phoneNumber}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Full Name : {{this.userInfo.fullName}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label >Division : {{this.userInfo.division_Name}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            <label >District : {{this.userInfo.district_Name}}</label>
+                        </div>
+                        <div class="col-md-4">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <form [formGroup]="AssignDistrictForm"  class="form theme-form">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="division">Division<span style="color: red;">*</span></label>
+                                    <select  style="border: 1px solid #9eb7cf;" (change)="onChange(this.AssignDistrictForm.controls.division.value)" id="division" required class="form-control "
+                                        formControlName="division">
+                                       
+                                        <option *ngFor="let index of this.Division" [ngValue]="index.code"  >
+                                            {{ index.name }}
+                                            
+                                        </option>
+                                    </select>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.AssignDistrictForm.controls.division.value==''"
+                                    class="text text-danger">
+                                    Division is required.
+                                </div> -->
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="district">District<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;"   id="district" required class="form-control "
+                                        formControlName="district">
+                                       
+                                        <option *ngFor="let index of this.District" [ngValue]="index.code">
+                                            {{ index.name }}
+                                        </option>
+                                    </select>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.AssignDistrictForm.controls.district.value==''"
+                                    class="text text-danger">
+                                    District is required.
+                                </div> -->
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <button style="margin-top: 27px; " type="submit" class="btn btn-primary  mr-1" (click)="onSubmit()" >Assign District</button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </div>
+  
+                </form>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card">
+                      <div class="card-body custom-datatable">
+                        <!-- <input 
+                          type="text"
+                          class="filter-ngx form-control"
+                          placeholder="Type to filter the name column..."
+                          
+                        /> -->
+                        <ngx-datatable
+                          
+                         
+                          #table
+                          class="bootstrap"
+                          [headerHeight]="50"
+                          [footerHeight]="50"
+                          rowHeight="auto"
+                          [limit]="10"
+                          [rows]="rows"
+                        >
+                        
+                        <ngx-datatable-column name="Sr#" [width]="200" [resizeable]="false">
+                            <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                                {{ rowIndex+1 }}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Assigned District" [width]="800" [resizeable]="false">
+                          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                              {{ row.name }}
+                          </ng-template>
+                      </ngx-datatable-column>
+                        <ngx-datatable-column name="Action" [width]="300" [resizeable]="false">
+                          <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                              <button class="fa fa-trash btn-danger btn btn-primary" (click)="onDelete(row.geolvl)">
+                             </button>
+                          </ng-template>
+                        </ngx-datatable-column>
+                        </ngx-datatable>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+         
+              
+            </div>
+        </div>
+    </div>
+  
+  <!-- Container-fluid Ends -->
+  

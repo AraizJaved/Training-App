@@ -1,0 +1,197 @@
+<div class="card" style="margin-top: 20px;">
+    <div class="card-header">
+        <div style="text-align: right;">
+            <app-back-button></app-back-button>
+        </div>
+        <h4 style="text-align:center">ADP Schemes</h4>
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive" style="margin-top: 25px;  ">
+            <table class="table  table-striped " id="reportTable" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>GS No</th>
+                        <th>Project ID</th>
+                        <th>Lo Number Capital</th>
+                        <th>Lo Number Revenue</th>
+                        <th>Name</th>
+                        <th>District</th>
+
+                        <th>District Name</th>
+                        <th>Issue / Remarks</th>
+                        <th>Approval Status</th>
+                        <th>Cost</th>
+                        <th>Expense up to June</th>
+                        <th>Actual Expenditure upto June 2021</th>
+                        <th>Local South Punjab</th>
+
+                        <th>Foreign South Punjab</th>
+                        <th>Allocation South Punjab</th>
+                        <th>Local Allocation</th>
+                        <th>Foreign Allocation</th>
+                        <th>Allocation</th>
+                        <th>Local Revised Allocation</th>
+                        <th>Foreign Revised Allocation </th>
+
+                        <th>Revised Allocation</th>
+                        <th>Release By P&DD</th>
+                        <th>Release Received by AD</th>
+                        <th>Spending Release</th>
+                        <th>Controllng Release</th>
+                        <th>Utilization Pifra</th>
+                        <th>Utilization</th>
+
+
+                        <th>% Util. Cont.</th>
+                        <th>% Util. Rev. Alloc.</th>
+                        <th>Sector ID</th>
+                        <th>Sector Name</th>
+                        <th>Scheme Type</th>
+                        <th>Scheme Sub Type</th>
+                        <th>Ac To Be Credited</th>
+
+                        <th>Project Status Type</th>
+                        <th>Approval Forum</th>
+                        <th>AA</th>
+                        <th>TS</th>
+                        <th>Execution Agency</th>
+                        <th>Sponsoring Agency</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of DataADPScheme  let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.GSNo}}</td>
+                        <td>{{s.ProjectID}}</td>
+                        <td>{{s.LoNumberCapital}}</td>
+                        <td>{{s.LoNumberRevenue}}</td>
+                        <td>{{s.Name}}</td>
+                        <td>{{s.District}}</td>
+                        <td>{{s.DistrictName}}</td>
+                        <td>{{s.IssueRemarks}}</td>
+                        <td>{{s.ApprovalStatus}}</td>
+                        <td>{{s.Cost}}</td>
+                        <td>{{s.ExpenseuptoJune}}</td>
+                        <td>{{s.ActualExpenditureuptoJune2021}}</td>
+                        <td>{{s.LocalSouthPunjab}}</td>
+                        <td>{{s.ForeignSouthPunjab}}</td>
+                        <td>{{s.AllocationSouthPunjab}}</td>
+                        <td>{{s.LocalAllocation}}</td>
+                        <td>{{s.ForeignAllocation}}</td>
+                        <td>{{s.Allocation}}</td>
+                        <td>{{s.LocalRevisedAllocation}}</td>
+                        <td>{{s.ForeignRevisedAllocation}}</td>
+                        <td>{{s.RevisedAllocation}}</td>
+                        <td>{{s.ReleaseByPDD}}</td>
+                        <td>{{s.ReleaseReceivedbyAD}}</td>
+                        <td>{{s.SpendingRelease}}</td>
+                        <td>{{s.ControllngRelease}}</td>
+                        <td>{{s.UtilizationPifra}}</td>
+                        <td>{{s.Utilization}}</td>
+                        <td>{{s.UtilCont}}</td>
+                        <td>{{s.UtilRevAlloc}}</td>
+                        <td>{{s.SectorID}}</td>
+                        <td>{{s.SectorOrder}}</td>
+                        <td>{{s.SectorName}}</td>
+                        <td>{{s.SchemeType}}</td>
+                        <td>{{s.SchemeSubType}}</td>
+                        <td>{{s.AcToBeCredited}}</td>
+                        <td></td>
+                        <td>{{s.ApprovalForum}}</td>
+                        <td>{{s.AA}}</td>
+                        <td>{{s.TS}}</td>
+                        <td>{{s.ExecutionAgency}}</td>
+                        <td>{{s.SponsoringAgency}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- <div class="card">
+    <div class="card-header">
+
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <div class="btn-group" style="margin-top: 15px;">
+                    <button class="btn btn-lg btn-secondary " style="background-color: darkgreen;"
+                        (click)="setActive('btn1')" type="button">Ongoing :&nbsp; &nbsp; {{adpCounts.ongoing}}</button>
+                    <button class="btn btn-lg btn-secondary" (click)="setActive('btn2')" type="button">New :&nbsp;
+                        &nbsp;
+                        {{adpCounts.new}}</button>
+                    <button class="btn btn-lg btn-secondary" (click)="setActive('btn3')" type="button">Other :&nbsp;
+                        &nbsp;
+                        {{adpCounts.other}}</button>
+                    <button class="btn btn-lg btn-secondary" (click)="setActive('btn4')" type="button">Total Count
+                        :&nbsp;
+                        &nbsp;
+                        {{adpCounts.totalCount}}</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <form id="searchForm">
+
+                    <div class="form-group">
+                        <div class="input-group float-right" id="filterAll">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                            <input type="text" class="form-control" name="searchString"
+                                placeholder="Search any keyword..." [(ngModel)]="searchString">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+
+
+        <button class="btn btn-primary btn-success btn-air-success pull-left"
+            style="margin-bottom: 15px; margin-top: 25px; " type="submit" (click)="exportexcel()"><span><i
+                    class="fa fa-download text-white "></i></span>
+            Export to Excel</button>
+
+        <div class="table-responsive" style="margin-top: 25px;" [hidden]="adpDetailsList.length == 0">
+            <table class="table table-bordered table-striped " style="width: 100%;" id="reportTable">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>Division</th>
+                        <th>District</th>
+                        <th>Scheme</th>
+                        <th>Financial Year</th>
+                        <th>Estimated Cost</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of adpDetailsList | filterAll: searchString let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.division_Name}}</td>
+                        <td>{{s.dist_Name}}</td>
+                        <td>{{s.scheme_Name}}</td>
+                        <td>{{s.financial_year}}</td>
+                        <td>{{s.estimated_Cost}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+</div> -->

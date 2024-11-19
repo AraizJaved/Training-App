@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="https://unpkg.com/@progress/kendo-theme-default@latest/dist/all.css" />
+
+
+
+<div class="container">
+    <kendo-chart [seriesColors]="['#4F81BD', '#C0504D']">
+    <kendo-chart-legend  position="top"></kendo-chart-legend>
+
+      <kendo-chart-axis-defaults>
+        <kendo-chart-axis-defaults-labels format="">
+        </kendo-chart-axis-defaults-labels>
+      </kendo-chart-axis-defaults>
+
+      <!-- <kendo-chart-tooltip format="{0:c}"></kendo-chart-tooltip> -->
+      <kendo-chart-tooltip format="{}"></kendo-chart-tooltip>
+          <kendo-chart-series>
+              <kendo-chart-series-item
+                  *ngFor="let item of detailSeries"
+                  [data]="item.items" [name]="item.value"
+                  field="value" categoryField="service"
+                  type="column">
+              </kendo-chart-series-item>
+         </kendo-chart-series>
+         <kendo-chart-legend  position="bottom"></kendo-chart-legend>
+<kendo-chart-category-axis>
+    <kendo-chart-category-axis-item>
+        <kendo-chart-category-axis-item-labels [rotation]="-45"></kendo-chart-category-axis-item-labels>
+    </kendo-chart-category-axis-item>
+</kendo-chart-category-axis>
+</kendo-chart> 
+
+</div>

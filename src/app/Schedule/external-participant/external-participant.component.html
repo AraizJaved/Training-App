@@ -1,0 +1,296 @@
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Participant Management >> Add External/Other Participants</h5>
+              <!-- <p>All HR data in this training module is fetched through an integrated HRMIS system. An external candidate, that does not exist in HRMIS, is added in the training module’ local database via this section.
+                Please click on the “add participant” button to add details of the person.</p> -->
+            </div>
+            <div class="col-md-1">
+              <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+            </div>
+          </div>
+        </div>
+        <form [formGroup]="RegisterForm" class="form theme-form">
+          <div class="card-body">
+            <div class="row" *ngIf="this.IsError">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <span style="color: red"><strong></strong>{{ this.Message }}</span>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="title">Name <span style="color: red">*</span></label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="name" type="text"
+                    class="form-control" id="Name" required placeholder="" />
+                  <div *ngIf="this.RegisterForm.controls.name.value  == ''" class="text text-danger">
+                    Name is Required
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="FatherName">Father Name</label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="fatherName"
+                    type="text" class="form-control" id="FatherName" required placeholder="" required />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="CNIC">
+                    CNIC (without dashes)<span style="color: red">*</span>
+                  </label>
+                  <input maxlength="13" style="border: 1px solid #9eb7cf" type="text" class="form-control" id="CNIC"
+                    required placeholder="" pattern='[0-9]+' formControlName="cnic"
+                     />
+                  <div *ngIf="this.RegisterForm.controls.cnic.value == ''" class="text text-danger">
+                    CNIC is Required
+                  </div>
+                  <div *ngIf="this.RegisterForm.controls.cnic.errors?.pattern" style="color: red;">
+                    Invalid Cnic.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="title">Department</label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="department"
+                    type="text" class="form-control" id="Department" required placeholder="" />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Email">Email</label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="email"
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" type="text" class="form-control"
+                    id="Email" required placeholder="" />
+
+                </div>
+                <div *ngIf="this.RegisterForm.controls.email.errors?.pattern" style="color: red;">
+                  Invalid Email Address.
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Mobile No">
+                    Mobile No<span style="color: red">*</span>
+                  </label>
+                  <input maxlength="11" type="text" style="border: 1px solid #9eb7cf" class="form-control" id="MobileNo"
+                    required placeholder="" pattern='[0-9]+' formControlName="mobileNo"
+                     />
+                  <div *ngIf="this.RegisterForm.controls.mobileNo.value == ''" class="text text-danger">
+                    Mobile No. is Required
+                  </div>
+                  <div *ngIf="this.RegisterForm.controls.mobileNo.errors?.pattern" style="color: red;">
+                    Invalid Mobile No.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Participant Type">
+                    Participant trainingTypeName
+                  </label>
+
+                  <select style="border: 1px solid #9eb7cf" id="ParticipantType"
+                    formControlName="trainingTypeName" required class="form-control">
+                    <option selected value="">--Select Participant Type--</option>
+
+                    <option value="Trainer">Trainer</option>
+                    <option value="Trainee">Trainee</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Working Place">
+                    Working Place
+                  </label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="workingPlace"
+                    type="text" class="form-control" id="WorkingPlace" required placeholder="" required />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Participant Type">
+                    Job Title/Cadre
+                  </label>
+
+                  <select style="border: 1px solid #9eb7cf" id="cadreTitle"
+                    formControlName="cadre" required class="form-control">
+                    <option selected value="">--Select Job Title/Cadre--</option>
+
+                    <option [value]="s.name" *ngFor="let s of cadreList">{{s.name}}</option>
+                    <!-- <option value="Trainer">LHW</option>
+                  <option value="Trainee">LHV</option>
+                  <option value="Trainee">MO</option>
+                  <option value="Trainee">WMO</option>
+                  <option value="Trainee">Mid Wife</option>
+                  <option value="Trainee">Nurse</option>
+                  <option value="Trainee">Provincial MNE Officer</option>
+                  <option value="Trainee">District MNE Officer</option> -->
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label for="Profession
+                ">
+                    Profession
+
+                  </label>
+                  <input style="border: 1px solid #9eb7cf" formControlName="profession"
+                    type="text" class="form-control" id="JobTitle" required placeholder="" />
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group" style="margin-top: -13px;">
+                  <label for="Qualification">
+                    Qualification
+                    <!-- <span
+                    style="color: red"
+                    class="btn btn-link"
+                    (click)="AddQualification()"
+                    ><i class="fa fa-plus"></i> Qualification</span
+                  > -->
+                  </label>
+
+                  <select style="border: 1px solid #9eb7cf" formControlName="qualification"
+                    id="meetingVenue" required class="form-control">
+                    <option selected value="">--Select Qualification--</option>
+
+                    <option *ngFor="let index of this.Qualification" [ngValue]="index.qualification">
+                      {{ index.qualification }}
+                    </option>
+                  </select>
+                  <!-- <ng-multiselect-dropdown
+                                        [placeholder]="'Select Chairmanship of'"
+                                        [settings]="dropdownSettingsOrg"
+                                        [data]="MeetingOrganizer"
+                                        formControlName="this.RegisterForm.controls.meetingOrganizer"
+                                        (onSelect)="onItemSelect($event)"
+                                        (onSelectAll)="onSelectAll($event)"
+                                    
+                                      > 
+                                      </ng-multiselect-dropdown>-->
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <label for="ContactType">Division
+                </label>
+                <select style="border: 1px solid #9eb7cf"
+                  id="Division" required class="form-control" formControlName="division"
+                  (change)="dropdownValueChanged($event, 'Div')">
+                  <option value="" disabled selected>Select Division</option>
+
+                  <option *ngFor="let index of divisions" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="ContactType">District
+                </label>
+                <select style="border: 1px solid #9eb7cf" id="District" required class="form-control"
+                  formControlName="district" (change)="dropdownValueChanged($event, 'Dis')">
+                  <option selected value="">Select District</option>
+
+                  <option *ngFor="let index of this.districts" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="ContactType">Tehsil
+                </label>
+                <select style="border: 1px solid #9eb7cf" id="Tehsil" required class="form-control"
+                  formControlName="tehsil" (change)="dropdownValueChanged($event, 'Teh')">
+                  <option selected value="">Tehsil</option>
+
+                  <option *ngFor="let index of this.tehsils" [ngValue]="index.code">
+                    {{ index.name }}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-10"></div>
+              <div class="col-md-2" style="margin-top: 4%">
+                <div class="form-group">
+                  <button *ngIf="EventObj == null" class="btn btn-success" (click)="AddExternalparticipant()">
+                    Add
+                  </button>
+                  <button *ngIf="EventObj != null" class="btn btn-success" (click)="submit()">
+                    submit
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <H4 *ngIf="EventObj == null" style="color: green; margin-top: 5%">Participants</H4>
+        <div *ngIf="EventObj == null" class="row">
+          <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+            <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+            <table class="table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th scope="col" colspan="1"><strong>Sr No</strong></th>
+                  <th scope="col" colspan="3"><strong>Name</strong></th>
+                  <th scope="col" colspan="3"><strong>Father Name</strong></th>
+                  <th scope="col" colspan="5"><strong>CNIC</strong></th>
+                  <th scope="col" colspan="5">
+                    <strong>Participant Type </strong>
+                  </th>
+                  <th scope="col" colspan="5"><strong>Mobile No </strong></th>
+                  <th scope="col" colspan="5">
+                    <strong>Working Place</strong>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let s of this.ExternalParticipants; let i = index">
+                  <td colspan="1">{{ i + 1 }}</td>
+                  <td colspan="3">{{ s.Name }}</td>
+                  <td colspan="3">{{ s.FatherName }}</td>
+                  <td colspan="5">{{ s.CNIC }}</td>
+                  <td colspan="5">{{ s.ParticipantType }}</td>
+                  <td colspan="5">{{ s.MobileNo }}</td>
+                  <td colspan="5">{{ s.WorkingPlace }}</td>
+                </tr>
+              </tbody>
+            </table>
+            <br />
+            <div class="row" *ngIf="this.ExternalParticipants.length > 0">
+              <div class="col-md-5"></div>
+              <div class="col-md-4">
+                <button class="btn btn-info" (click)="OnSubmit()">Submit</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

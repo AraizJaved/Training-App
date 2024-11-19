@@ -1,0 +1,69 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card" style="margin-top: 2%;">
+        <div class="card-header" style="    border-bottom: 4px solid #229106;">
+          <h5>Summary Track</h5>
+
+        </div>
+
+        <div class="card-body">
+          <div class="loader" *ngIf="loading"></div>
+          <div class="row">
+            <div class="col-md-10">
+              <div class="row">
+                <div class="col-md-12">
+                  <h5>Type : <span style="font-size: 16px;">{{Summery.applicationTypeName}}</span></h5>
+                </div>
+                <div class="col-md-12">
+                  <h5>Title : <span style="font-size: 16px;
+                            text-decoration: underline;">{{Summery.dispatchSubject}}</span></h5>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2">
+              <span *ngIf="attachments.length == 0">No Attachment Available</span>
+              <div *ngFor="let dataItem of attachments">
+                <img style="cursor: pointer;" width="75px" src="../../../assets/images/pdf-icon.png"
+                  (click)="openFile(dataItem.UploadPath)" alt="">
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive" style="margin-top: 25px;" [hidden]="track.length == 0">
+            <table class="table table-bordered table-striped " style="width: 100%;" id="reportTable">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th colspan="3" style="text-align: center;">Tracking Info</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dataItem of track| filterAll: searchString let rowIndex = index">
+
+                  <td>{{dataItem.dateTime | date : 'dd-MM-yyyy'}}</td>
+                  <td>{{dataItem.dateTime | date : 'hh:mm a'}}</td>
+                  <td>
+                    <span *ngIf="dataItem.fromOfficer_Id == 1 && rowIndex == 0">
+                      {{dataItem.fromOfficerDesignation}}
+                    </span>
+                  </td>
+                  <td>
+                    <i class="fa fa-long-arrow-right text-success" aria-hidden="true"></i>
+                  </td>
+                  <td>
+                    <span>
+                      {{dataItem.toOfficerDesignation}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>

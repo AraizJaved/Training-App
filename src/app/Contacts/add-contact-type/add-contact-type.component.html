@@ -1,0 +1,132 @@
+<!-- Container-fluid starts -->
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+
+    
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Add Contact Type</h5>
+                </div>
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+                    
+                           
+                              <div class="form-group">
+                                <label for="company">Department<span style="color: red;" >*</span></label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="getDepartment(this.RegisterForm.controls.company.value)" id="company" required
+                                        class="form-control "
+                                        formControlName="company">
+                                        
+                                  <option selected value="">--Select Department--</option>
+                                  <option *ngFor="let index of this.Company" [ngValue]="index.id">
+                                    {{ index.name }}
+                    
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.company.value==''"
+                                        class="text text-danger">
+                                        Department is required.
+                                    </div>
+                              </div>
+                            </div>
+                         
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="department">Wing</label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="getCategory(this.RegisterForm.controls.department.value)" id="department" required
+                                        class="form-control "
+                                        formControlName="department">
+                                     
+                                  <option  selected value="">--Select Wing--</option>
+                                  <option *ngFor="let index of this.Department" [ngValue]="index.id">
+                                    {{ index.name }}
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.department.value==''"
+                                class="text text-danger">
+                                Wing is required.
+                            </div>
+                              </div>
+                    
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="category">Category</label>
+                                  <select style="border: 1px solid #9eb7cf;"
+                                   id="category" required
+                                          class="form-control "
+                                          formControlName="category">
+                                       
+                                    <option  selected value="">--Select Category--</option>
+                                    <option *ngFor="let index of this.Category" [ngValue]="index.id">
+                                      {{ index.name }}
+                                    </option>
+                                  </select>
+                                  <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.category.value==''"
+                                  class="text text-danger">
+                                  Category is required.
+                              </div>
+                                </div>
+                    
+                              </div>
+                    
+                    
+                    
+                    
+                           
+                    
+                           
+                    
+                          </div>
+                        <div class="row">
+
+
+
+                           
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="designation">Designation<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="designation"
+                                        class="form-control" id="designation" required placeholder="">
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.designation.value==''"
+                                        class="text text-danger">
+                                        Designation is required.
+                                    </div>
+                                </div>
+                            </div>
+                           
+                           
+                        </div>
+                       
+                        <div class="row">
+                            
+                      
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

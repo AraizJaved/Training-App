@@ -1,0 +1,121 @@
+<div class="card" style="margin-top: 1%">
+    <br>
+    <br>
+    
+     <div class="row" >
+        
+      <div class="col-md-6">
+       
+      </div>
+      
+         <div class="col-md-2" >
+             <app-back-button   style="margin-left: 170px;"></app-back-button> 
+         </div>
+     </div> 
+     <div class="row">
+         <div class="col-xl-12 col-sm-12">
+           <div class="card" style="height: 100%; ">
+           
+             <div class="card-body ">
+      <input type="text" class="form-control search-field col-md-3" placeholder="Search Here" [(ngModel)]="searchText">
+             <br/>
+                 <div class="table-responsive"  >
+                     <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;">
+                         <thead>
+                             <tr>
+                               <th colspan="1">Sr#</th>
+     
+                                 
+                                 
+                                 <th colspan="4">Title</th>
+                                 <th colspan="1">Date From</th>
+                                 <th colspan="1">Date To</th>
+                                 <th colspan="1">Venue</th>
+                                 <th colspan="1">Status</th>
+
+                                 <th colspan="2">Action</th>
+                             </tr>
+                         </thead>
+                         <tbody> 
+                         
+                             <tr *ngFor="let s of ScheduleList | paginate: config  | searchFilter: searchText  let i = index"  >
+                               <td colspan="1">{{i+1}}</td>
+                                 
+                               
+                                 <td colspan="4">{{s.title }}</td>
+                            
+                                 <td colspan="1">{{s.startDate | date :'short' }}</td>
+                                 <td colspan="1">{{s.endDate | date :'short' }}</td>
+                                 
+                                 <td colspan="1">{{s.venue}}</td>
+                                 <td colspan="1">{{s.participantStatus}}</td>
+                                 <td colspan="2" >
+                                  
+                                   <!-- <button *ngIf="this.isAdmin || this.DailyEngagementAdd" style="margin-left: 10px;" class="fa fa-info btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="UpdateDailyEngagement(s.id)"> </button></td>
+                                 <td colspan="1" > -->
+                                  <button 
+                                  class="fa fa-eye btn btn-success btn-air-success btn-lg"
+                                  (click)="showSchedule(s)"
+                                  
+                                ></button>
+                                   
+                                  <button  class="btn btn-info" style="margin-left: 30px"    
+                                  (click)="ChangeStatus(s,'Approved')"
+                                  *ngIf="s.participantStatus!='Approved'"
+                                 
+                                >
+                                  <i class="fa fa-plus"></i>
+                                  Accept
+                                </button>
+                                <button  class="btn btn-danger" style="margin-left: 30px"
+                                (click)="ChangeStatus(s,'Reject')"
+                                *ngIf="s.participantStatus!='Reject'"
+                                
+                              >
+                                <i class="fa fa-plus"></i>
+                               Reject
+                              </button>
+                                                </td>
+                             </tr>
+                         </tbody>
+         
+                     </table>
+         
+                 </div>
+               </div>
+     
+               <div class="row">
+                  <div  class="col-lg-2">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <label>Tasks Per Page</label>
+                 <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px;width: 5pc;"
+                   [(ngModel)]="config.itemsPerPage">
+              
+                   <option [value]="5000" >All</option>
+                   <option  [value]="10" selected>10</option>
+                   <option  [value]="50">50</option>
+                   <option  [value]="100">100</option>
+                   <option  [value]="250">250</option>
+                   <option  [value]="500">500</option>
+                   <option  [value]="1000">1000</option>
+                 </select>
+                 </div> 
+               </div> 
+             </div> 
+                 <div  class="col-lg-10">
+                   <div class="card" style="height: 100%; ">
+                     <div class="card-header">
+                   <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+                   (pageBoundsCorrection)="onPageBoundsCorrection($event)"  style="letter-spacing: 5px;
+                   font-size: 20px;text-align: center;"></pagination-controls>
+                 </div>
+               </div>
+             </div>
+               </div>
+           </div>
+          
+         </div>
+       </div>
+     </div>
+     

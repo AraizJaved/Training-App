@@ -1,0 +1,151 @@
+<!-- <div class="container-fluid">
+  <div class="row">
+  
+    <div class="col-xl-12">
+      <div class="card" >
+        <div class="card-header">
+          <h5>Form Filled Locations</h5>
+        </div>
+        
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+           
+              <div class="form-group">
+                  <label for="FormType">Form Type</label>
+                  <select id="FormType" name="formType" [(ngModel)]="this.formType" required class="form-control btn-pill">
+                    <option value="">
+                      All Forms
+                    </option>
+                      <option *ngFor="let index of this.FormType" value={{index.id}}>
+                          {{ index.name }}
+                      </option>
+                  </select>
+                 
+              </div>
+          
+          </div>
+            <div class="col-md-4">
+           
+              <div class="form-group">
+                  <label for="DistrictType">District Type</label>
+                  <select id="DistrictType" name="districtType" [(ngModel)]="this.districtType" required class="form-control btn-pill">
+                    <option value="">
+                      All Districts
+                    </option>
+                      <option *ngFor="let index of this.DistrictType" value={{index.code}}>
+                          {{ index.name }}
+                      </option>
+                  </select>
+                 
+              </div>
+          
+          </div>
+          <div style="margin-top: 10px;" class="form-row d-flex justify-content-end"> 
+            <div class="col-md-4 ">
+              <button  (click)="getFormsByLocation()" class="btn btn-primary float-right d-flex justify-content-end" style="margin-top: 21px;" >Search</button>
+            </div>
+           </div>
+         
+          </div>
+          <div class="map-js-height">
+            <agm-map [latitude]="lat_m2" [longitude]="lng_m2"  [zoom]="zoom_m2" [disableDefaultUI]="false"
+              [zoomControl]="false" >
+              <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.long"
+                 [iconUrl]="m.icon" [draggable]="true" (mouseOver)="onMouseOver(infoWindow,m)" (mouseOut)="onMouseOut(infoWindow,m)">
+                <agm-info-window #infoWindow>
+                  <div class="row">
+                    <div class="col-md-6">
+                      <strong><b>Form Name:</b></strong>
+                      <br/>
+                      <strong><b>Indicator Name:</b></strong>
+                      <br/>
+                      <strong><b>Location:</b></strong>
+                      <br/>
+                    </div>
+                    <div class="col-md-6">
+                    {{this.FormName}}
+                    <br/>
+                  {{this.IndicatorName}}
+                  <br/>
+                  {{this.Location}}
+                  <br/>
+                </div>
+                </div>
+                </agm-info-window>
+              </agm-marker>
+            </agm-map>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<div class="container-fluid mt-3">
+  <div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-header">
+        <h5>Forms List</h5>
+      </div>
+      <div class="card-body">
+        
+      
+        <div class="table-responsive mt-2">
+          <ngx-datatable
+            class="bootstrap striped"
+            [loadingIndicator]="isLoading"
+            [rows]="this.dataGridService.dataList"
+            columnMode="force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [offset]="this.dataGridService.filterObject.pageNumber - 1"
+            [scrollbarH]="true"
+            rowHeight="auto"
+            [reorderable]="true"
+            [count]="this.dataGridService.filterObject.totalRecords"
+            [limit]="this.dataGridService.filterObject.size"
+            [externalPaging]="true"
+            (page)="setPage($event)"
+            #datatableComponent
+          >
+            <ngx-datatable-column name="Sr#" [width]="70" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ ((this.dataGridService.filterObject.pageNumber - 1) * 10) + (rowIndex + 1) }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Form Name" [width]="70" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ row.formName }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Indicator Name" [width]="70" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ row.indicatorName }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Location" [width]="70" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ row.name }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Answer" [width]="70" [resizeable]="false">
+              <ng-template let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                {{ row.answer }}
+              </ng-template>
+            </ngx-datatable-column>
+
+          
+
+          </ngx-datatable>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div> -->

@@ -1,0 +1,96 @@
+<div class="card">
+    <div class="card-header">
+
+        <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+        </ngx-loading>
+
+        <!-- <form class="form theme-form" [formGroup]="CRRSummaryForm">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="From">From Date</label>
+                        <input class="form-control " formControlName="From" type="date" name="From">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="To">To Date</label>
+                        <input class="form-control " formControlName="To" type="date" name="To">
+                    </div>
+
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-primary btn-success btn-air-success " type="submit"
+                        style="margin-left: 60px; margin-top: 27px;" (click)="getCrrSummary()"><span><i
+                                class="fa fa-check text-white "></i></span>
+                        Search</button>
+                </div>
+
+
+            </div>
+        </form> -->
+
+        <form id="searchForm">
+            <div class="row ">
+                <div class="col-md-8"> </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <div class="input-group float-right" id="filterAll">
+                            <div class="input-group-addon"><i class="glyphicon glyphicon-search"></i></div>
+                            <input type="text" class="form-control" name="searchString"
+                                placeholder="Search any keyword..." [(ngModel)]="searchString">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </form>
+
+        <div class="row">
+            <div class="col-md-6">
+                <button class="btn btn-primary btn-success btn-air-success pull-left" style="margin-bottom: 15px; "
+                    type="submit" (click)="exportexcel()"><span><i class="fa fa-download text-white "></i></span>
+                    Export to Excel</button>
+            </div>
+            <div class="col-md-6 mt-2" style="text-align-last: right;">
+                <h5>
+                    {{procurementList.length}} Records Total
+                </h5>
+            </div>
+        </div>
+        <div class="table-responsive" style="margin-top: 25px;  " [hidden]="procurementList.length == 0">
+            <table class="table table-bordered table-striped " id="reportTable" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>Sr.</th>
+                        <th>User Detail</th>
+                        <th>Procurements Initiated</th>
+                        <th>Contract Awarded</th>
+                        <th>Procurements In Process</th>
+                        <th>Not Awarded</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of procurementList  | filterAll: searchString let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{s.userDetail}}</td>
+                        <td class="checkcursor" (click)="getDeatil(s.id,0)">{{s.procurement_Total_Entries}}</td>
+                        <td class="checkcursor" (click)="getDeatil(s.id,2)">{{s.awarded}}</td>
+                        <td class="checkcursor" (click)="getDeatil(s.id,1)">{{s.in_Process}}</td>
+                        <td class="checkcursor" (click)="getDeatil(s.id,3)">{{s.not_Awarded}}</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+
+    </div>
+</div>

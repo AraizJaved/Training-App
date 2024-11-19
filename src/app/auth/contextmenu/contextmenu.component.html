@@ -1,0 +1,11 @@
+<div
+  class="contextmenu"
+  [ngStyle]="{ 'left.px': x, 'top.px': y }"
+  [ngClass]="{ 'd-none': !isShow }"
+>
+  <ng-content></ng-content>
+  <!-- <a class="dropdown-item contextmenu"
+   (mousedown)="onLock($event)" style="left:-250px;top:-173px;">Edit</a> -->
+  <!-- <a class="dropdown-item contextmenu"
+   (mousedown)="onUnLock($event)">UnLock</a> -->
+</div>

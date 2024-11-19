@@ -1,0 +1,128 @@
+<div *ngIf="type === 'DWUnits'">
+    <div class="card">
+
+        <div class="card1-body">
+            <div class="tab-pane fade show" id="home" role="tabpanel" aria-labelledby="home">
+
+                <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                        <div class="card" style="height: 100%; margin-top: 20px;">
+                            <div class="card-header">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h5>Procurements</h5>
+
+                                    </div>
+                                    <div class="col-md-6" style="text-align-last: right;">
+                                        <app-back-button></app-back-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body" style="padding: 0%;">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <app-procurement></app-procurement>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="type === 'DWDistrictsProcurement'">
+    <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel" aria-labelledby="epiStoreMonitoring">
+
+        <div class="row">
+            <div class="col-xl-12 col-sm-12">
+                <div class="card" style="height: 100%; margin-top: 20px;">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>District Procurements</h5>
+
+                            </div>
+                            <div class="col-md-6" style="text-align-last: right;">
+                                <app-back-button></app-back-button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body" style="padding: 0%;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <app-district-count></app-district-count>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="type === 'HealthCouncil'">
+    <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel" aria-labelledby="epiStoreMonitoring">
+
+        <div class="row">
+            <div class="col-xl-12 col-sm-12">
+                <div class="card" style="height: 100%; margin-top: 20px;">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Health Council</h5>
+
+                            </div>
+                            <div class="col-md-6" style="text-align-last: right;">
+                                <app-back-button></app-back-button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body" style="padding: 0%;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <app-health-council></app-health-council>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="type === 'OutSourcingProcurements'">
+    <div class="tab-pane fade show" id="modules.ModuleName" role="tabpanel" aria-labelledby="epiStoreMonitoring">
+
+        <div class="row">
+            <div class="col-xl-12 col-sm-12">
+                <div class="card" style="height: 100%; margin-top: 20px;">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>Outsourcing Procurements</h5>
+
+                            </div>
+                            <div class="col-md-6" style="text-align-last: right;">
+                                <app-back-button></app-back-button>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body" style="padding: 0%;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <app-out-sourcing></app-out-sourcing>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

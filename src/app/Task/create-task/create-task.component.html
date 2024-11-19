@@ -1,0 +1,184 @@
+<!-- Container-fluid starts -->
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Create Task</h5>
+                </div>
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="title">Title<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="title"
+                                        class="form-control" id="title" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.title.value==''"
+                                        class="text text-danger">
+                                        Title is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="assignTo">Assign To<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="assignTo" required
+                                        class="form-control " formControlName="assignTo">
+
+                                        <option *ngFor="let index of this.AssignTo" [ngValue]="index.id">
+                                            {{ index.name }}
+
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                        class="text text-danger">
+                                        AssignTo is required.
+                                    </div>
+                                </div> -->
+                               
+                            <!-- </div> -->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Assign To<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select Assign To'"
+                                    [settings]="dropdownSettings"
+                                    [data]="AssignTo"
+                                    [formControl]="this.RegisterForm.controls.assignTo"
+                                    (onSelect)="onItemSelectAssignTo($event)"
+                                    (onSelectAll)="onSelectAllAssignTo($event)"
+                                    (onDeSelect)="onItemDeSelectAssignTo($event)"
+                                    (onDeSelectAll)="onItemDeSelectAssignToAll()"
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.assignTo.value==''"
+                                        class="text text-danger">
+                                        Task Assingnee  is required.
+                                    </div>
+                                </div>
+
+                                
+                            </div>
+                       
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Cc<span style="color: red;">*</span></label>
+                                
+                                    <ng-multiselect-dropdown
+                                    [placeholder]="'Select Task Cc'"
+                                    [settings]="dropdownSettings"
+                                    [data]="TaskCC"
+                                    [formControl]="this.RegisterForm.controls.taskCc"
+                                    (onSelect)="onItemSelect($event)"
+                                    (onSelectAll)="onSelectAll($event)"
+                                  >
+                                  </ng-multiselect-dropdown>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.taskCc.value==''"
+                                        class="text text-danger">
+                                       Task Cc is required.
+                                    </div> -->
+                                </div>
+
+                                
+                            </div>
+                            <!-- //{{RegisterForm.controls.taskCc.value | json}} -->
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="description">Description<span style="color: red;">*</span></label>
+                                <textarea  type="text" rows="4" cols="100" style="border: 1px solid #9eb7cf;" 
+                                formControlName="description" class="form-control" id="description" required
+                                placeholder="" ></textarea>
+
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.description.value==''"
+                                    class="text text-danger">
+                                    Description is required.
+                                </div>
+                                <!-- <div *ngIf="this.RegisterForm.controls.description.errors?.pattern">
+                                    User name not valid.
+                               </div>  -->
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                           
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="dueDate">Due Date<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="date" [min]='minDate'  formControlName="dueDate"
+                                        class="form-control" id="dueDate" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.dueDate.value==''"
+                                        class="text text-danger">
+                                        Due Date is required.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="priority">Priority<span style="color: red;">*</span></label>
+                                    <select style="border: 1px solid #9eb7cf;" id="priority" required
+                                        class="form-control " formControlName="priority">
+
+                                        <option *ngFor="let index of this.Priority" [ngValue]="index.name">
+                                            {{ index.name }}
+
+                                        </option>
+                                    </select>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.priority.value==''"
+                                        class="text text-danger">
+                                        Priority is required.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="attachment">Attachment</label>
+                                    <input (change)="onFileChange($event)" style="border: 1px solid #9eb7cf;"
+                                        type="file" multiple name="attachment" class="form-control" id="attachment" required
+                                        placeholder="" required>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.attachment.value==''"
+                                        class="text text-danger">
+                                        Attachment is required.
+                                    </div> -->
+                                </div>
+                            </div>
+
+<div  class="col-md-12">
+
+    <br>  <br>
+    <div class="progress" *ngIf="progress">
+      <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+  </div>
+  <br>
+</div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Submit</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

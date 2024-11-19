@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,GAAG,AAAA,OAAO,CAAC,MAAM,CAAC;EAChB,QAAQ,EAAE,mBAAmB;CAC9B;;AAED,AAAA,MAAM,CAAC;EACL,aAAa,EAAE,sBAAsB;CACtC",
+    "sources": [
+        "university.component.scss"
+    ],
+    "names": [],
+    "file": "university.component.css"
+}

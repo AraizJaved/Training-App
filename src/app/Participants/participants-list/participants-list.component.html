@@ -1,0 +1,305 @@
+<div class="card" style="margin-top: 1%">
+  <div class="row">
+    <div class="col-xl-12 col-sm-12">
+      <div class="card" style="height: 100%">
+        <div class="card-header" style="border-bottom: 4px solid #229106">
+
+          <div class="row">
+            <div class="col-md-11">
+              <h5>Participant Management >> Participant Training Score</h5>
+              <p>Mark scores of individual trainees in this section. Following information is captured in this section.
+                <br />
+                1. Training Score (manually entered)
+                <br />
+                2. Training Status (manually entered)
+                <br />
+                3. Training Attendance (populated from the attendance module)
+                <br />
+
+                Please select the training and enter relevant details
+              </p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-3"></div>
+
+
+
+            <div class="col-md-6" *ngIf="this.ScheduleList.length>0">
+              <div class="form-group">
+                <label for="title">Training<span style="color: red">*</span></label>
+                <search-dropdown (ngModelChange)="dropdownValueChanged($event)" [items]="this.ScheduleList"
+                  [size]="'small'" [img]="'product'" [label]="'title'" [uid]="'id'" [(ngModel)]="trainingId">
+                </search-dropdown>
+
+              </div>
+            </div>
+
+            <div class="col-md-2">
+              <button class="btn btn-success round-circle" style="margin-top: 26px;" (click)="openFile()">
+                <i class="fa fa-info-circle"></i>
+                <!-- Downlaod -->
+              </button>
+            </div>
+
+            <!-- <div class="col-md-6">
+              <div class="form-group">
+                <label for="ContactType">Training<span style="color: red">*</span>
+                </label>
+
+                <select style="border: 1px solid #9eb7cf" id="trainingId" required class="form-control"
+                  [(ngModel)]="trainingId" (change)="dropdownValueChanged($event)">
+                  <option selected [ngValue]="0">
+                    -- Select Training Schedule--
+                  </option>
+
+                  <option *ngFor="let index of this.ScheduleList" [ngValue]="index.id">
+                    {{ index.title }}
+                  </option>
+                </select>
+              </div>
+            </div> -->
+          </div>
+
+          <div class="row" *ngIf="showBody">
+            <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+              <!-- <h3>{{this.EventObj.PatientName}} - <small class="ng-class: this.EventObj.CurrentStatus == 'Confirmed' ? 'text-danger' : '';">{{this.EventObj.CurrentStatus}}</small> <small class="pull-right" ng-if="CreationDate">{{this.EventObj.CreationDate | date: 'dd/MM/yyyy hh:mm a'}}</small></h3> -->
+              <table class="table table-bordered mb-0" ng-init="loadPatient()">
+                <thead>
+                  <tr>
+                    <th scope="col" colspan="1"><strong>Title</strong></th>
+                    <th scope="col" colspan="5">
+                      {{ this.ScheduleDto?.title }}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th scope="col" colspan="1"><strong>Venue</strong></th>
+                    <th scope="col" colspan="5">
+                      {{ this.ScheduleDto?.venue }}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th scope="col" colspan="1">
+                      <strong>Start Date</strong>
+                    </th>
+                    <th scope="col" colspan="5">
+                      {{ this.ScheduleDto?.startDate | date : "short" }}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th scope="col" colspan="1"><strong>End Date</strong></th>
+                    <th scope="col" colspan="5">
+                      {{ this.ScheduleDto?.endDate | date : "short" }}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th scope="col" colspan="1">
+                      <strong>Departments</strong>
+                    </th>
+                    <th scope="col" colspan="5">
+                      {{ this.ScheduleDto?.departments }}
+                    </th>
+                  </tr>
+
+                  <tr>
+                    <th scope="col"><strong>Description</strong></th>
+                    <th colspan="5">{{ this.ScheduleDto?.description }}</th>
+                  </tr>
+
+                  <!-- <tr>
+        
+                            <th scope="col" colspan="1"><strong>Schedule</strong></th>
+                          
+                            <th scope="col"colspan="2"><button class="fa fa-edit  btn  btn-success btn-air-success btn-lg" (click)="showTaskDetailModelList(this.EventObj)">
+                                Add Schedule
+                                      </button> </th>
+                        </tr> -->
+                </thead>
+              </table>
+            </div>
+          </div>
+
+          <div class="row" *ngIf="showBody">
+            <div class="col-md-2">
+              <H4 style="color: #4466f2; margin-top: 5%">Trainee</H4>
+            </div>
+
+          </div>
+          <ngb-tabset (tabChange)="onSelectChange($event)" *ngIf="isShowModal">
+            <ngb-tab title="Training Score">
+              <ng-template ngbTabContent>
+                <div class="row" *ngIf="showBody">
+                  <div>
+                    <button class="btn btn-success" style="margin-top: 5% " (click)="showTotalmarks()">
+                      Total Score
+                    </button>
+                  </div>
+                  <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                    <table class="table table-bordered mb-0" id="myTable">
+                      <thead>
+                        <tr>
+                          <th scope="col" colspan="1"><strong>Sr No</strong></th>
+
+                          <th scope="col" colspan="3"><strong>CNIC</strong></th>
+
+                          <th scope="col" colspan="5"><strong>Name</strong></th>
+                          <th scope="col" colspan="5"><strong>Status</strong></th>
+                          <th scope="col" colspan="5">
+                            <strong>Pre-Training Score</strong>
+                          </th>
+                          <th scope="col" colspan="5">
+                            <strong>Post-Training Score</strong>
+                          </th>
+                          <th scope="col" colspan="5"><strong>Total Marks</strong></th>
+                          <th scope="col" colspan="5"><strong>Pre-Training %</strong></th>
+                          <th scope="col" colspan="5"><strong>Post-Training %</strong></th>
+                          <th scope="col" colspan="5"><strong>Action</strong></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="
+                            let s of this.ScheduleDto?.traineeList;
+                            let i = index
+                          ">
+                          <td colspan="1">{{ i + 1 }}</td>
+                          <td colspan="3">{{ s.cnic }}</td>
+                          <td colspan="5">{{ s.name }}</td>
+                          <td colspan="5" [ngStyle]="{
+                            color:
+                              s.attendanceStatus == 'No Status'
+                                ? 'blue'
+                                : s.attendanceStatus == 'Present'
+                                ? 'green'
+                                : s.attendanceStatus == 'Absent'
+                                ? 'Red'
+                                : 'Black'
+                          }">
+                            {{ s.attendanceStatus }}
+                          </td>
+                          <td colspan="5">
+                            <input id="{{ i }}-{{ 1 }}" type="text" class="form-control" name="searchString"
+                              placeholder="Enter" value={{s?.obtainMarksBeforeTrainig}} />
+                          </td>
+                          <td colspan="5">
+                            <input id="{{ i }}-{{ 2 }}" type="text" class="form-control" name="searchString"
+                              placeholder="Enter" value={{s?.obtainMarksAfterTraining}} />
+                          </td>
+                          <td colspan="5">{{this.totalMarks}}</td>
+                          <td colspan="5">
+                            <p id={{i}}{{s?.cnic}}>
+                              {{((s?.obtainMarksBeforeTrainig/this.totalMarks)*100).toFixed(2)}}%
+                            </p>
+                          </td>
+                          <td colspan="5">
+                            <p id={{i}}{{s?.cnic}}{{1}}>
+                              {{((s?.obtainMarksAfterTraining/this.totalMarks)*100).toFixed(2)}}%
+                            </p>
+                          </td>
+                          <td colspan="5">
+                            <button id="{{ i }}" class="btn btn-info" style="margin-left: 30px"
+                              *ngIf="s.status == 'Ready For Request' || s.status.includes('Replace')" (click)="saveData(i, s)">
+                              Save
+                            </button>
+                            <button id="{{ i }}{{ s.name }}" class="btn btn-success" style="margin-left: 30px"
+                              *ngIf="s.status == 'Ready For Request' || s.status.includes('Replace')" (click)="editData(i, s)">
+                              Edit
+                            </button>
+                          </td>
+
+                          {{
+                          hideEditButton(i, s)
+                          }}
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab title="Training Status">
+              <ng-template ngbTabContent>
+                <div class="row" *ngIf="showBody">
+                  <div class="tab-pane pt-3 active show" id="patient-1" role="tabpanel">
+                    <table class="table table-bordered mb-0">
+                      <thead>
+                        <tr>
+                          <th scope="col" colspan="1"><strong>Sr No</strong></th>
+
+                          <th scope="col" colspan="3"><strong>CNIC</strong></th>
+
+                          <th scope="col" colspan="5"><strong>Name</strong></th>
+                          <th scope="col" colspan="5"><strong>Status</strong></th>
+                          <th scope="col" colspan="5">
+                            <strong>Training Status</strong>
+                          </th>
+                          <th scope="col" colspan="5"><strong>Action</strong></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr id="sdsadsd" *ngFor="
+                            let s of this.ScheduleDto?.traineeList;
+                            let i = index
+                          ">
+                          <td colspan="1">{{ i + 1 }}</td>
+                          <td colspan="3">{{ s.cnic }}</td>
+                          <td colspan="5">{{ s.name }}</td>
+                          <td colspan="5" [ngStyle]="{
+                              color:
+                                s.attendanceStatus == 'No Status'
+                                  ? 'blue'
+                                  : s.attendanceStatus == 'Present'
+                                  ? 'green'
+                                  : s.attendanceStatus == 'Absent'
+                                  ? 'Red'
+                                  : 'Black'
+                            }">
+                            {{ s.attendanceStatus }}
+                          </td>
+                          <td colspan="5" *ngIf="s.attendanceStatus === 'Absent'">
+                            <b>Not Completed</b>
+                          </td>
+
+
+                          <td colspan="5" *ngIf="s.attendanceStatus !== 'Absent'">
+                            <select *ngIf="s.participantTrainingStatus == null" id="{{i}}-training"
+                              style="border: 1px solid #9eb7cf" id="trainingId" required class="form-control">
+                              <option selected [ngValue]="0">
+                                -- Select Training Status--
+                              </option>
+
+                              <option *ngFor="let index of this.trainingCategories" [ngValue]="index.title">
+                                {{ index.title }}
+                              </option>
+                            </select>
+
+                            <b *ngIf="s.participantTrainingStatus != null">{{s.participantTrainingStatus}}</b>
+                            <b id="{{i}}-Status"></b>
+                          </td>
+
+
+                          <td colspan="5">
+                            <button id="{{ i }}" class="btn btn-info" style="margin-left: 30px"
+                              *ngIf="s.status == 'Ready For Request' || s.status.includes('Replace')" (click)="saveTraining(i,s)">
+                              Save
+                            </button>
+                          </td>
+                          <!-- {{
+                            setTrainingStatus(i, s)
+                          }} -->
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

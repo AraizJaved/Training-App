@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC,KAAK,CAAC,EAAE,AAAA,YAAa,CAAA,GAAG,EAAE;EACrC,gBAAgB,EAAE,OACtB;CAAC;;AAED,AAAA,YAAY,EAAE,EAAE,EAAE,EAAE,CAAC;EACjB,MAAM,EAAE,GAAG,CAAC,KAAK,CAAC,OAAkB;CACvC",
+    "sources": [
+        "main-card-child.component.scss"
+    ],
+    "names": [],
+    "file": "main-card-child.component.css"
+}

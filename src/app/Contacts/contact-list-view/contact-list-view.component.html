@@ -1,0 +1,275 @@
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="card" style="margin-top: 1%">
+ <br>
+ <br>
+
+  <div class="row" >
+      <div class="col-md-9" *ngIf="this.isContactAdd ==true || this.isAdmin"  >
+          <button class="btn btn-success " style="margin-left: 42px;" (click)="AddTask()" >
+              <i class="fa fa-plus " ></i>
+             Contact
+          </button>
+
+      
+          <button *ngIf="this.isContactAdd ==true || this.isAdmin"  class="btn btn-success " style="margin-left: 16px;" (click)="AddContactType()"  >
+            <i class="fa fa-plus " ></i>
+           Designation
+        </button>
+
+
+
+        <button
+        class="btn btn-success"
+        style="margin-left: 16px; " type="submit"
+        (click)="exportexcel()" *ngIf="this.isAdmin ==true || this.isContactAdd==true "><i
+                class="fa fa-download text-white "></i>
+        Export to Excel</button>
+        
+      </div>
+      
+      <div class="col-md-2" >
+          <app-back-button   style="margin-left: 137px;"></app-back-button> 
+      </div>
+  </div>
+  <div class="row"> 
+    
+  <div class="col-lg-10" >
+    <div class="card" style="height: 100%; ">
+      <form [formGroup]="RegisterForm" class="form theme-form">
+        <div class="card-header">
+        <div class="row">
+          
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="company">Department<span style="color: red;" >*</span></label>
+              <select style="border: 1px solid #9eb7cf;"
+                      (change)="getDepartment(this.RegisterForm.controls.company.value)" id="company" required
+                      class="form-control "
+                      formControlName="company">
+                      
+                <option selected value="0">--Select Department--</option>
+                <option *ngFor="let index of this.Company" [ngValue]="index.id">
+                  {{ index.name }}
+                </option>
+              </select>
+            </div>
+          </div>
+       
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="department">Wing</label>
+              <select style="border: 1px solid #9eb7cf;"
+                      (change)="getCategory(this.RegisterForm.controls.department.value)" id="department" required
+                      class="form-control "
+                      formControlName="department">
+                   
+                <option  selected value="0">--Select Wing--</option>
+                <option *ngFor="let index of this.Department" [ngValue]="index.id">
+                  {{ index.name }}
+                </option>
+              </select>
+             
+            </div>
+
+          </div>
+          <div class="col-md-3">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select style="border: 1px solid #9eb7cf;"
+                        (change)="getContactDesignation(this.RegisterForm.controls.category.value)" id="category" required
+                        class="form-control "
+                        formControlName="category">
+                     
+                  <option  selected value="0">--Select Category--</option>
+                  <option *ngFor="let index of this.Category" [ngValue]="index.id">
+                    {{ index.name }}
+                  </option>
+                </select>
+               
+              </div>
+
+            </div>
+
+            <div class="col-md-3">
+              <form [formGroup]="FilterForm">
+              <div class="form-group">
+                
+                <label for="Filter"><br></label>
+                   
+                   
+                      
+                            <button  class="form-control btn "  (click)="FilterTasks()" style="background: lightgray; margin-top: 28px;"><i class="fa fa-search"></i> 
+                              Filter
+                            </button>
+                         
+                       
+                       
+                
+                   
+                   
+           
+               
+               
+              </div>
+            </form>
+
+            </div>
+
+         
+
+        </div>
+        </div>
+      </form>
+
+    <!--<form [formGroup]="FilterForm">
+      <div class="card-header">
+       
+          <div class="row">
+         <div class="col-md-4" >
+              <div class="form-group"  >
+                <label
+                  style="margin-top: 30px; margin-left: 10px"
+                  for="contactDesignation"
+                  >Select Designation </label>
+                <select
+                  id="contactDesignation"
+                  formControlName="contactDesignation"
+                  required
+                  class="form-control"
+                  style="
+                    border: 1px solid #9eb7cf;
+                    margin-left: 10px;
+                    margin-bottom: 20px; " >
+
+                  <option [value]="0"selected>All</option>
+                  <option *ngFor="let index of  this.contactDesignation" [value]="index.id">
+                    {{ index.name }}</option>
+                </select>
+               
+              </div>
+            </div> 
+          
+            <div class="col-md-2" style="margin-top: 10px">
+              <div class="form-group">
+                <button  class="form-control btn "  (click)="FilterTasks()" style="background: lightgray; margin-top: 10px;"><i class="fa fa-search"></i> 
+                  Filter
+                </button>
+              </div>
+            </div>
+           
+          </div>
+         //<h5 style="text-align: right;">Filtered Records: {{this.rows.length}}</h5> 
+        </div>
+       
+     </form>-->
+  </div>
+  </div>
+  </div>
+  <div class="row">
+      <div class="col-xl-12 col-sm-12">
+        <div class="card" style="height: 100%; ">
+        
+          <div class="card-body">
+          
+              <div class="table-responsive"  >
+                  <table class="table table-bordered table-striped table-hover" id="reportTable" style="width: 100%;">
+                      <thead>
+                          <tr>
+                            <th colspan="1">Sr#</th>
+  
+
+                              <!-- <th colspan="1">Contact Id</th> -->
+                              <th colspan="1">Profile Pic</th>
+
+                              <th colspan="1">Name</th>
+                              <!-- <th colspan="1">Email</th> -->
+                              <th colspan="1">Mobile No</th>
+                              <th colspan="1">Designation</th>
+                              <th colspan="1">Category</th>
+                              <th colspan="1">Wing</th>
+                              <th colspan="1">Department</th>
+                           
+                              <th colspan="1">Tehsil</th>
+                              <!-- <th colspan="1">Division</th> -->
+                              <th colspan="1">District</th>
+                             
+                              <th colspan="1">Edit</th>
+                              <th colspan="1">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody> 
+                          <tr *ngFor="let s of rows | paginate: config  let i = index"  >
+                           <td colspan="1">{{i+1}}</td> 
+
+                            <td colspan="1"><img src="{{GetLink(s.profilePic)}}" style="    width: 60px;
+                              height: 60px;"/></td>
+                              <!-- <td colspan="1">{{s.id}}</td> -->
+
+                            
+                              <td colspan="1">{{s.name }}</td>
+                         
+                              <!-- <td colspan="1">{{s.email }}</td> -->
+                              <td colspan="1">{{s.mobileNo }}</td>
+                              <td colspan="1">{{s.designationIdName }}</td>
+                              <td colspan="1">{{s.categoryIdName }}</td>
+                              <td colspan="1">{{s.departmentIdName }}</td>
+                              <td colspan="1">{{s.companyIdName }}</td>
+                           
+                              <td colspan="1">{{s.tehsil}} </td>
+                           <!-- <td colspan="1">{{s.division}}</td>            -->
+                <td colspan="1">{{s.district}}</td>
+               
+                
+              <td colspan="1" >
+
+                <button *ngIf="this.isContactAdd|| this.isAdmin"  class="fa fa-info  btn  btn-success btn-air-success btn-lg" (click)="OnUpdateContact(s.id)">
+                </button>
+                              <td colspan="1" >
+
+                                              <button *ngIf="this.isContactDelete || this.isAdmin" style="margin-left: 10px;" class="fa fa-trash btn-danger btn  btn-primary btn-air-success btn-lg"  (click)="onDelete(s.id)">
+                                              </button></td>
+                              
+                          </tr>
+                      </tbody>
+      
+                  </table>
+      
+              </div>
+            </div>
+  
+            <div class="row">
+               <div  class="col-lg-2">
+                <div class="card" style="height: 100%; ">
+                  <div class="card-header">
+                <label>Contacts Per Page</label>
+              <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px;width: 5pc;"
+                [(ngModel)]="config.itemsPerPage">
+           
+                <option [value]="5000" >All</option>
+                <option  [value]="10" selected>10</option>
+                <option  [value]="50">50</option>
+                <option  [value]="100">100</option>
+                <option  [value]="250">250</option>
+                <option  [value]="500">500</option>
+                <option  [value]="1000">1000</option>
+              </select>
+              </div> 
+            </div> 
+          </div> 
+              <div  class="col-lg-10">
+                <div class="card" style="height: 100%; ">
+                  <div class="card-header">
+                <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+                (pageBoundsCorrection)="onPageBoundsCorrection($event)"  style="letter-spacing: 5px;
+                font-size: 20px;text-align: center;"></pagination-controls>
+              </div>
+            </div>
+          </div>
+            </div>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+  

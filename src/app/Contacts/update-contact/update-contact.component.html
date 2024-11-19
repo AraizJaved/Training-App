@@ -1,0 +1,276 @@
+<!-- Container-fluid starts -->
+<!-- Container-fluid starts -->
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }">
+</ngx-loading>
+<div class="container-fluid">
+    <div class="row">
+        
+        <div class="col-sm-12">
+            <button type="button" #closebutton class="close" (click)="onClose()" data-dismiss="modal">&times;</button>
+            <div class="card" style="margin-top: 2%;">
+                <div class="card-header" style="    border-bottom: 4px solid #229106;">
+                    <h5>Update Contact</h5>
+                </div>
+
+                <form [formGroup]="RegisterForm" class="form theme-form">
+                    <div class="card-body">
+
+                        <div class="row">
+                            <div class="col-md-6">
+
+                           
+                              <div class="form-group">
+                                <label for="company">Department<span style="color: red;" >*</span></label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="getDepartment(this.RegisterForm.controls.company.value)" id="company" required
+                                        class="form-control "
+                                        formControlName="company">
+                                        
+                                  <option selected value="">--Select Department--</option>
+                                  <option *ngFor="let index of this.Company" [ngValue]="index.id">
+                                    {{ index.name }}
+            
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.company.value==''"
+                                        class="text text-danger">
+                                        Department is required.
+                                    </div>
+                              </div>
+                            </div>
+                         
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="department">Wing</label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="getCategory(this.RegisterForm.controls.department.value)" id="department" required
+                                        class="form-control "
+                                        formControlName="department">
+                                     
+                                  <option  selected value="">--Select Wing--</option>
+                                  <option *ngFor="let index of this.Department" [ngValue]="index.id">
+                                    {{ index.name }}
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.department.value==''"
+                                class="text text-danger">
+                                Wing is required.
+                            </div>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="category">Category</label>
+                                  <select style="border: 1px solid #9eb7cf;"
+                                          (change)="getDesignation(this.RegisterForm.controls.category.value)" id="category" required
+                                          class="form-control "
+                                          formControlName="category">
+                                       
+                                    <option  selected value="">--Select Category--</option>
+                                    <option *ngFor="let index of this.Category" [ngValue]="index.id">
+                                      {{ index.name }}
+                                    </option>
+                                  </select>
+                                  <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.category.value==''"
+                                  class="text text-danger">
+                                  Category is required.
+                              </div>
+                                </div>
+              
+                              </div>
+
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="designation">Designation<span style="color: red;" >*</span></label>
+                                  <select style="border: 1px solid #9eb7cf;"
+                                           id="designation" required
+                                          class="form-control "
+                                          formControlName="designation">
+                                          
+                                    <option selected value="" >--Select Designation Type--</option>
+                                    <option *ngFor="let index of this.Designation" [ngValue]="index.id">
+                                      {{ index.name }}
+              
+                                    </option>
+                                  </select>
+                                  <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.designation.value==''"
+                                  class="text text-danger">
+                                  Designation is required.
+                              </div>
+                                </div>
+                         
+                              </div>
+            
+                           
+            
+                          </div>
+                         
+                        <div class="row">
+                           
+                           
+                            
+                           
+                        </div>
+                   
+                        <div class="row">
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="name">Name<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="name"
+                                        class="form-control" id="name" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.name.value==''"
+                                        class="text text-danger">
+                                        Name is required.
+                                    </div>
+                                </div>
+                            </div>
+                           
+
+                            
+                            <!-- <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="department">Type<span style="color: red;">*</span></label>
+                                    <input style="border: 1px solid #9eb7cf;" type="text" formControlName="department"
+                                        class="form-control" id="department" required placeholder="" required>
+                                    <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.department.value==''"
+                                        class="text text-danger">
+                                        Type is required.
+                                    </div>
+                                </div>
+                            </div> -->
+                       
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input style="border: 1px solid #9eb7cf;" type="email" formControlName="email"
+                                        class="form-control" id="email"  placeholder="" >
+                                  
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                               
+                                  <label for="mobileNo">Mobile No<span style="color: red;">*</span></label>
+                                  <input style="border: 1px solid #9eb7cf;" type="text" onkeyup="this.value=this.value.replace(/[^0-9]/g, '');"  formControlName="mobileNo"
+                                      class="form-control" id="mobileNo"  minlength="11"   maxlength="11" required placeholder="e.g 03100000000" >
+                                  <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.mobileNo.value=='' || this.RegisterForm.controls.mobileNo.errors"
+                                      class="text text-danger">
+                                      Mobile No is required.
+                                  </div>
+                                  <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.mobileNo.errors"
+                                      class="text text-danger">
+                                      Mobile No is invalid.
+                                  </div> -->
+                              </div>
+                          </div>
+                        </div>
+                     
+
+                        <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="division">Division<span style="color: red;" >*</span></label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="onChange(this.RegisterForm.controls.division.value)" id="division" required
+                                        class="form-control "
+                                        formControlName="division">
+                                        
+                                  <option selected value="">--Select Division--</option>
+                                  <option *ngFor="let index of this.Division" [ngValue]="index.code">
+                                    {{ index.name }}
+            
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.division.value==''"
+                                class="text text-danger">
+                               Division is required.
+                            </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="district">District</label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                        (change)="onChange(this.RegisterForm.controls.district.value)" id="district" required
+                                        class="form-control "
+                                        formControlName="district">
+                                     
+                                  <option  selected value="">--Select District--</option>
+                                  <option *ngFor="let index of this.District" [ngValue]="index.code">
+                                    {{ index.name }}
+                                  </option>
+                                </select>
+                                <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.district.value==''"
+                                  class="text text-danger">
+                                  District is required.
+                              </div>
+                              </div>
+            
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group">
+                                <label for="tehsil">Tehsil</label>
+                                <select style="border: 1px solid #9eb7cf;"
+                                 id="tehsil" required
+                                        class="form-control "
+                                        formControlName="tehsil">
+                                     
+                                  <option selected value="">--Select Tehsil--</option>
+                                  <option *ngFor="let index of this.Tehsil" [ngValue]="index.code">
+                                    {{ index.name }}
+                                  </option>
+                                </select>
+                                <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.tehsil.value==''"
+                                class="text text-danger">
+                                Tehsil is required.
+                            </div> -->
+                            <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.tehsil.value==''"
+                            class="text text-danger">
+                            Tehsil is required.
+                        </div>
+                              </div>
+                            </div>
+            
+                           
+            
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="attachment">Profile Pic</label>
+                                    <input (change)="onFileChange($event)" style="border: 1px solid #9eb7cf;"
+                                        type="file" multiple name="attachment" class="form-control" id="attachment" required
+                                        placeholder="" required>
+                                    <!-- <div *ngIf="this.parentSubmitted && this.RegisterForm.controls.attachment.value==''"
+                                        class="text text-danger">
+                                        Attachment is required.
+                                    </div> -->
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            
+                      
+
+                            <div class="col-md-6"> 
+                                <div class="form-group">
+                                    <button style="margin-top: 3%; margin-left: 87%;" type="submit" (click)="onSubmit()"
+                                        class=" mr-1   btn  btn-primary btn-air-success btn-lg">Update</button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>

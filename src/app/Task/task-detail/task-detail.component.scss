@@ -1,0 +1,13 @@
+.NoBorder{
+    border: none !important;
+}
+
+.NoBorder:focus{
+    border: none !important;
+    box-shadow: none !important;
+}
+
+
+.card .card-body {
+    padding: 15px !important ;
+}

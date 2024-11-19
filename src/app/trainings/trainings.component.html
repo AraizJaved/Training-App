@@ -1,0 +1,105 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card" style="margin-top: 2%">
+                <div class="card-header" style="border-bottom: 4px solid #229106">
+
+                    <div class="row">
+                        <div class="col-md-11">
+                            <h5>{{title}}</h5>
+                        </div>
+                        <div class="col-md-1">
+                            <i type="button" class="fa fa-close" aria-label="Close" (click)="CloseModal()"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xl-12 col-sm-12">
+                        <br />
+
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="text" class="form-control search-field col-md-12" placeholder="Search Here"
+                                    [(ngModel)]="searchText" />
+                            </div>
+                            <div class="col-md-3">
+                                <button class="btn btn-primary btn-success btn-air-success pull-left"
+                                    style="margin-bottom: 15px; " type="submit"
+                                    (click)="exportToExcel(this.EventObj, title + ' Report')"><span><i
+                                            class="fa fa-download text-white "></i></span>
+                                    Export to Excel
+                                </button>
+                            </div>
+                        </div>
+
+                        <br />
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-hover" id="TrainingreportTable"
+                                style="width: 100%">
+                                <thead>
+                                    <tr>
+                                        <th colspan="1">Sr#</th>
+                                        <th colspan="4">Title</th>
+                                        <th colspan="4">Training Type</th>
+                                        <th colspan="4">Training Level</th>
+                                        <th colspan="4">Training Category</th>
+                                        <th colspan="4">Cadre</th>
+                                        <th colspan="4">Departments</th>
+
+                                        <th *ngIf="id == 2" colspan="4">Start Date</th>
+                                        <th *ngIf="id == 2" colspan="4">End Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="
+                            let s of EventObj
+                              | paginate : config
+                              | searchFilter : searchText;
+                            let i = index
+                          ">
+                                        <td colspan="1">{{ i + 1 }}</td>
+                                        <td colspan="4">{{ s.title }}</td>
+                                        <td colspan="4">{{ s.trainingType }}</td>
+                                        <!-- <td colspan="4">{{ s.trainingType == null ? '-' : s.trainingType }}</td> -->
+                                        <td colspan="4">{{ s.trainingLevel }}</td>
+                                        <td colspan="4">{{ s.traingCategore }}</td>
+                                        <td colspan="4">{{ s.cadre }}</td>
+                                        <td colspan="4">{{ s.departments }}</td>
+
+                                        <!-- <td colspan="4">{{ 5 }}</td> -->
+                                        <td *ngIf="id == 2" colspan="4">{{ s?.startDate == null? s.StartDateTime:s?.startDate | date:
+                                            'dd/MM/yyyy' }}</td>
+                                        <td *ngIf="id == 2" colspan="4">{{ s?.endDate == null?s.EndDateTime:s?.endDate | date:
+                                            'dd/MM/yyyy' }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3">
+            <select id="Status" class="form-control" style="border: 1px solid #9eb7cf; margin-bottom: 20px; width: 5pc"
+                [(ngModel)]="config.itemsPerPage">
+                <option [value]="5000">All</option>
+                <option [value]="10" selected>10</option>
+                <option [value]="50">50</option>
+                <option [value]="100">100</option>
+                <option [value]="250">250</option>
+                <option [value]="500">500</option>
+                <option [value]="1000">1000</option>
+            </select>
+
+        </div>
+        <div class="col-lg-7 col-md-7">
+
+            <pagination-controls [id]="config.id" (pageChange)="onPageChange($event)"
+                (pageBoundsCorrection)="onPageBoundsCorrection($event)"
+                style="letter-spacing: 5px; font-size: 20px; text-align: center"></pagination-controls>
+
+        </div>
+    </div>
