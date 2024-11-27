@@ -69,6 +69,7 @@ export class LoginComponent implements OnInit {
     debugger
     this.UserLoginDTO.UserName = this.loginForm.controls.email.value;
     this.UserLoginDTO.Password = this.loginForm.controls.password.value;
+    debugger
     this.authService.SignIn(this.UserLoginDTO).subscribe(
       (response) => {
 

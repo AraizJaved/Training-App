@@ -17,6 +17,7 @@ import { AddMeetingVenueComponent } from '../add-meeting-venue/add-meeting-venue
 import { PaginationInstance } from 'ngx-pagination';
 import { AddExistingTrainingComponent } from '../add-existing-training/add-existing-training.component';
 import { Router } from '@angular/router';
+import { log } from 'fullcalendar';
 declare var require
 const Swal = require('sweetalert2')
 @Component({
@@ -34,6 +35,7 @@ export class EventCalenderViewComponent implements OnInit {
   isMeetingManagementView: boolean
   isMeetingManagementAdd: boolean
   isMeetingManagementDelete: boolean
+  canDelete:boolean
   isEdit: boolean = false
   text = '';
   isAdmin: boolean
@@ -67,7 +69,7 @@ export class EventCalenderViewComponent implements OnInit {
     this.FilterDTO.recordStatus = true;
 
     let self = this;
-    console.log(self);
+    console.log("This: ",self);
     this.defaultConfigurations = {
       editable: true,
       eventLimit: true,
@@ -240,10 +242,17 @@ export class EventCalenderViewComponent implements OnInit {
 
 
   ngOnInit(): void {
+    debugger
 
     this.FilterForm = this.formBuilder.group({
       EventType: ["", Validators.required],
     });
+
+    const canBeDeleted = JSON.parse(localStorage.getItem('currentUser')).user
+    if(canBeDeleted.canDelete== 1)
+      this.canDelete =true;
+    else false;
+    
 
     this.isEventManagement = true
     var a = JSON.parse(localStorage.getItem('currentUser')).userrole.filter(x => x.name == 'EventManagement');
@@ -406,6 +415,8 @@ export class EventCalenderViewComponent implements OnInit {
 
         (data) => {
           debugger
+          console.log("getfilteredevent ", data);
+          
 
 
           this.eventData = data.result;
