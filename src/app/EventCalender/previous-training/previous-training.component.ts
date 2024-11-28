@@ -66,6 +66,7 @@ export class PreviousTrainingComponent implements OnInit {
     currentPage: 1
   };
   eventsOrignal = [];
+  canBeDeleted: boolean;
   constructor(
     private readonly router: Router,
     private modalService: NgbModal,
@@ -251,6 +252,7 @@ export class PreviousTrainingComponent implements OnInit {
   ngOnInit(): void {
 
 
+    this.canBeDeleted = this.registerService.canDelete
     this.GetScheduleList(this.text);
 
     //this.DeletedFilterEvent();

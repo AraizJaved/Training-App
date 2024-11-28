@@ -32,6 +32,7 @@ export class ViewScheduleDetailsComponent implements OnInit {
   parentSubmitted = false;
   private subs = new Subscription();
   participantStatusDto: ParticipantStatusDto = new ParticipantStatusDto();
+  canBeDeleted: boolean;
 
 
   constructor(public activeModal: NgbActiveModal, private modalService: NgbModal, public datepipe: DatePipe,
@@ -40,8 +41,8 @@ export class ViewScheduleDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     debugger
+    this.canBeDeleted = this.registerService.canDelete
     console.log("event", this.EventObj);
-
   }
 
   showTaskDetailModelList(data) {

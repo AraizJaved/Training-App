@@ -178,7 +178,7 @@
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.participantType }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.mobileNo }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.workingPlace }}</td>
-                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" ><button class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,1)"><i class="fa fa-trash"></i> </button></td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" ><button  *ngIf="canBeDeleted" class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,1)"><i class="fa fa-trash"></i> </button></td>
                       <!-- <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainer'" >{{ s.designationName }}</td> -->
                     </tr>
                   </tbody>
@@ -213,7 +213,7 @@
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.participantType }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.mobileNo }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" >{{ s.workingPlace }}</td>
-                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" ><button class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,2)"><i class="fa fa-trash"></i> </button></td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5" *ngIf="this.s.participantType=='Trainee'" ><button *ngIf="canBeDeleted" class="btn btn-danger mr-3 my-1" (click)="onDeleteExternal(s,2)"><i class="fa fa-trash"></i> </button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -256,7 +256,7 @@
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workingPlace }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workedPlaceAtTraining }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.designationName }}</td>
-                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button class="btn btn-danger mr-3 my-1" (click)="onDelete(s,1)"><i class="fa fa-trash"></i> </button>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button *ngIf="canBeDeleted" class="btn btn-danger mr-3 my-1" (click)="onDelete(s,1)"><i class="fa fa-trash"></i> </button>
                       </td>
                    
                     </tr>
@@ -298,7 +298,7 @@
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workingPlace }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.workedPlaceAtTraining }}</td>
                       <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5">{{ s.designationName }}</td>
-                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button class="btn btn-danger mr-3 my-1" (click)="onDelete(s,2)"><i class="fa fa-trash"></i> </button></td>
+                      <td style="border: 1px solid rgb(0, 0, 0); text-align: center;" colspan="5"><button *ngIf="canBeDeleted" class="btn btn-danger mr-3 my-1" (click)="onDelete(s,2)"><i class="fa fa-trash"></i> </button></td>
                     </tr>
                   </tbody>
                 </table>

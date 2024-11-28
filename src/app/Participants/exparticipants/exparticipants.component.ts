@@ -56,6 +56,7 @@ export class ExparticipantsComponent implements OnInit {
     itemsPerPage: 10,
     currentPage: 1
   };
+  canBeDeleted: boolean;
 
   constructor(private readonly registerService: RegisterService, private readonly toastr: ToastrService,
     private readonly router: Router, private modalService: NgbModal, private formBuilder: FormBuilder) { }
@@ -64,6 +65,7 @@ export class ExparticipantsComponent implements OnInit {
 
     //this.GetDailyEngagementPublicList();
 
+    this.canBeDeleted = this.registerService.canDelete
     // this.GetExParticipantList();
     this.GetExParticipantLists();
 

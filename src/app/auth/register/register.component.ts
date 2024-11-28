@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
     private readonly roleService: RoleService) { }
 
   ngOnInit(): void {
+    debugger
 
     this.id = this.activatedRoute.snapshot.queryParams.id;
     this.GetRoles()
@@ -52,7 +53,7 @@ export class RegisterComponent implements OnInit {
       password: ["", Validators.required],
       confirmPassword: ["", Validators.required],
       role: ["", Validators.required],
-      canDelete: ["", Validators.required]
+      canDelete: [0]
     });
 
 
@@ -76,6 +77,7 @@ export class RegisterComponent implements OnInit {
   }
 
   onSubmit() {
+    debugger
 
 
     this.parentSubmitted = true
@@ -108,14 +110,12 @@ export class RegisterComponent implements OnInit {
     this.RegisterDTO.fullName = this.RegisterForm.controls.fullName.value;
     this.RegisterDTO.designation = this.RegisterForm.controls.designation.value;
     this.RegisterDTO.canDelete = this.RegisterForm.controls.canDelete.value;
-    debugger
     this.RegisterDTO.role = this.RegisterForm.controls.role.value;
 
 
     this.subs.add(
       this.registerService.AddRegister(this.RegisterDTO).subscribe(
         (data) => {
-
           debugger
           this.loading = false;
 

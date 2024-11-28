@@ -35,7 +35,7 @@ export class EventCalenderViewComponent implements OnInit {
   isMeetingManagementView: boolean
   isMeetingManagementAdd: boolean
   isMeetingManagementDelete: boolean
-  canDelete:boolean
+  canBeDeleted:boolean
   isEdit: boolean = false
   text = '';
   isAdmin: boolean
@@ -248,10 +248,8 @@ export class EventCalenderViewComponent implements OnInit {
       EventType: ["", Validators.required],
     });
 
-    const canBeDeleted = JSON.parse(localStorage.getItem('currentUser')).user
-    if(canBeDeleted.canDelete== 1)
-      this.canDelete =true;
-    else false;
+    this.canBeDeleted = this.registerService.canDelete
+    console.log("candel- " , this.canBeDeleted);
     
 
     this.isEventManagement = true

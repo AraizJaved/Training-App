@@ -12,6 +12,5 @@ export class RegisterDTO {
     ucCode: number;
     userType: string;
     role: string;
-    canDelete: string;
+    canDelete: boolean;
 }
-
