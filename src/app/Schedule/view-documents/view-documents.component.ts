@@ -20,6 +20,7 @@ export class ViewDocumentsComponent implements OnInit {
   public temp = [];
   public files = [];
   private subs = new Subscription();
+  canBeDeleted: boolean;
   constructor(private modalService: NgbModal,
     private readonly folderService: FolderService,
     public registerService: RegisterService,
@@ -28,12 +29,14 @@ export class ViewDocumentsComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetFiles();
+    
+    this.canBeDeleted = this.registerService.canDelete
+
   }
 
 
   onDownloadFile(attachment: any) {
     debugger
-
 
     let fileName = attachment.split('/')[2];
     this.registerService.DownloadFile(fileName).subscribe((data) => {

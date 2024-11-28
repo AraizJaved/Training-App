@@ -28,6 +28,7 @@ export class RegisterService implements OnInit {
   public userData: any;
   public user: firebase.User;
   public showLoader: boolean = false;
+  public canDelete : boolean = this.initializeCanDelete()
 
   constructor(public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
@@ -38,6 +39,13 @@ export class RegisterService implements OnInit {
 
   }
 
+  private initializeCanDelete (): boolean{
+    const canBeDeleted = JSON.parse(localStorage.getItem('currentUser')).user
+    if(canBeDeleted.canDelete== 1)
+      return this.canDelete =true;
+    else return this.canDelete= false;
+  }
+  
 
   ngOnInit(): void { }
 

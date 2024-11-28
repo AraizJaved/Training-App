@@ -51,7 +51,7 @@
                                     <button class="fa fa-download btn-Info btn  btn-primary btn-air-success mx-2 my-1 "
                                         (click)="onDownloadFile(s.path)" target="_blank">&nbsp;
                                     </button>
-                                    <button class="btn btn-danger fa fa-trash mx-2 my-1" (click)="onDeleteFile(s.pkCode)">
+                                    <button *ngIf="canBeDeleted" class="btn btn-danger fa fa-trash mx-2 my-1" (click)="onDeleteFile(s.pkCode)">
                                     </button>
                                 </td>
                             </tr>

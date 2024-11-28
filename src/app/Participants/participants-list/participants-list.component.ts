@@ -74,7 +74,7 @@ export class ParticipantsListComponent implements OnInit {
     { title: "Partially Completed" },
     // { title: "Not Completed" }
   ]
-
+  
   constructor(private readonly registerService: RegisterService, private readonly toastr: ToastrService,
     private readonly router: Router, private modalService: NgbModal, private formBuilder: FormBuilder,
     private _config: NgbTabsetConfig) { }
@@ -83,6 +83,7 @@ export class ParticipantsListComponent implements OnInit {
 
     //this.GetDailyEngagementPublicList();
 
+    
 
     this.isLoading = true;
 

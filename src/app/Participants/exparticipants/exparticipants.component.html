@@ -92,9 +92,9 @@
               </button>
               {{" "}} -->
 
-              <button class="fa fa-pencil btn btn-secondary btn-air-success btn-lg mx-1 my-1" (click)="editTraining(s)">
+              <button  *ngIf="canBeDeleted" class="fa fa-pencil btn btn-secondary btn-air-success btn-lg mx-1 my-1" (click)="editTraining(s)">
               </button>
-              <button class="btn btn-danger mx-3 my-1" (click)="onDelete(s.id)">
+              <button *ngIf="canBeDeleted" class="btn btn-danger mx-3 my-1" (click)="onDelete(s.id)">
                 <i class="fa fa-trash"></i>
               </button>
 

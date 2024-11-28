@@ -83,9 +83,9 @@
         <td colspan="3">
           <button class="fa fa-eye btn btn-light btn-air-success btn-lg mx-3 my-1"
             (click)="showTaskDetailModelListView(s)"></button>
-          <button class="fa fa-pencil btn btn-secondary btn-air-success btn-lg mx-3 my-1" (click)="editTraining(s)">
+          <button *ngIf="canBeDeleted" class="fa fa-pencil btn btn-secondary btn-air-success btn-lg mx-3 my-1" (click)="editTraining(s)">
           </button>
-          <button class="fa fa-trash btn btn-danger btn-air-danger btn-lg mx-3 my-1" (click)="onDelete(s.id)">
+          <button  *ngIf="canBeDeleted" class="fa fa-trash btn btn-danger btn-air-danger btn-lg mx-3 my-1" (click)="onDelete(s.id)">
           </button>
         </td>
 
