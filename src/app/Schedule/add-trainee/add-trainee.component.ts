@@ -301,6 +301,7 @@ export class AddTraineeComponent implements OnInit {
   ngOnInit(): void {
 
 
+    debugger
 
     this.date = new Date();
     // document.getElementById("flexRadioDefault1").checked = true;
@@ -389,6 +390,7 @@ export class AddTraineeComponent implements OnInit {
 
     this.traineeList = []
     this.registerService.participantByCnic(this.RegisterForm.controls.personCnic.value).subscribe((res: any) => {
+      console.log('traineeList:', res)
       debugger
       if (res == false) {
         return this.toastr.info('External Participants (Personnel not registered in HRMIS)')

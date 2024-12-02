@@ -18,7 +18,7 @@ export class Config {
   }
 
   public static getServerUrl() {
-    return environment.production ? '' : 'https://localhost:50322'
+    return environment.production ? '' : 'https://localhost:56465'
     // return environment.production ? '' : 'http://116.58.20.67:1213'
     // return environment.production ? '' : 'http://172.16.7.228:4488'
   }
