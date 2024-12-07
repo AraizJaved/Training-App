@@ -116,10 +116,6 @@ export class AddTrainingScheduleComponent implements OnInit {
       District: ["", Validators.required],
       Tehsil: ["", Validators.required],
       IsVirtual: [false]
-
-
-
-
     });
 
   }

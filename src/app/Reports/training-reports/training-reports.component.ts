@@ -141,9 +141,6 @@ export class TrainingReportsComponent implements OnInit {
     this.getSupportedBy();
     this.showScheduleBody();
 
-
-
-
     let data = localStorage.getItem('params');
 
     if (data == '1') {
@@ -444,9 +441,6 @@ export class TrainingReportsComponent implements OnInit {
     this.isTrainee = false;
     this.FilterList = this.ScheduleList.filter(x => x.venueId == value);
     this.showFilterbody();
-
-
-
   }
 
   getTrainingLevel() {
@@ -565,9 +559,7 @@ export class TrainingReportsComponent implements OnInit {
 
 
         this.TrainingType = data.data;
-        console.log('@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@', data)
-        console.log('/////////////////////////////////////////////', this.TrainingType)
-
+        console.log('Training type data: ', data)
         return data;
       },
         (error) => {
@@ -712,6 +704,7 @@ export class TrainingReportsComponent implements OnInit {
     debugger
     this.subs.add(
       this.registerService.GetReport().subscribe((data) => {
+        console.log("showTrainingWiseReport, ", data)
 
         debugger
         this.FilterList = data.data.trainingWiseReportList;
@@ -725,7 +718,7 @@ export class TrainingReportsComponent implements OnInit {
         if (this.Designations.length > 0) {
           this.loading = false;
         }
-        console.log('-----------------------------------', data)
+        
         return data;
       },
         (error) => {
@@ -1126,12 +1119,11 @@ export class TrainingReportsComponent implements OnInit {
     this.subs.add(
       this.registerService.GetScheduleListReport(state).subscribe(
         (data) => {
-
           this.temp = [...data.result];
 
           this.ScheduleList = data.result;
 
-          console.log(this.ScheduleList)
+          console.log("Schedule List: ",this.ScheduleList)
           // this.loading = false;
 
           return data;

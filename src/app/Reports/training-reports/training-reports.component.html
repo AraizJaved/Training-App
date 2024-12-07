@@ -110,8 +110,7 @@
                                       [data]="MeetingOrganizer"
                                       [formControl]="this.RegisterForm.controls.meetingOrganizer"
                                       (onSelect)="onItemSelect($event)"
-                                      (onSelectAll)="onSelectAll($event)"
-                                  
+                                      (onSelectAll)="onSelectAll($event)"                                 
                                     > 
                                     </ng-multiselect-dropdown>-->
                     <!-- <div *ngIf="
@@ -345,7 +344,7 @@
                     <th colspan="4">Title</th>
                     <th colspan="4">Organized By</th>
                     <th colspan="4">Supported By</th>
-              <th colspan="1">Total Trainee</th>
+                    <th colspan="1">Total Trainee</th>
                     <th colspan="1">Total Trainer</th>
                     <th colspan="2">Action</th>
                   </tr>
@@ -362,7 +361,6 @@
                     <td colspan="4">{{ s.division }}</td>
                     <td colspan="4">{{ s.district }}</td>
                     <td colspan="4">{{ s.tehsil }}</td>
-
                     <td colspan="4">{{ s.title }}</td>
                     <td colspan="4">{{ s.organizedBy }}</td>
                     <td colspan="4">{{ s.supportedBy }}</td>
@@ -599,6 +597,5 @@
       </div>
     </div>
   </div>
-
 
 </div>
